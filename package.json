@@ -1,0 +1,23 @@
+{
+  "private": "true",
+  "name": "ardiffact",
+  "version": "0.1.0",
+  "description": "plugin based tool for diffing artifacts",
+  "repository": "git@github.com:oliwheeler/ardiffact.git",
+  "author": "Oliver Wheeler <olwheele@microsoft.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "lage build",
+    "test": "lage test"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "devDependencies": {
+    "lage": "^0.28.0",
+    "prettier": "^2.1.2",
+    "rimraf": "^3.0.2"
+  }
+}
