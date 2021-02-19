@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "chore: Bump TypeScript to ^4.1.5",
+  "packageName": "@ardiffact/azure-devops-commit-discovery",
+  "email": "olwheele@microsoft.com",
+  "dependentChangeType": "patch"
+}
