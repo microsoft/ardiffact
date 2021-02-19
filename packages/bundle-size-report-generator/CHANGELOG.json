@@ -1,0 +1,20 @@
+{
+  "name": "@ardiffact/bundle-size-report-generator",
+  "entries": [
+    {
+      "date": "Fri, 19 Feb 2021 02:56:41 GMT",
+      "tag": "@ardiffact/bundle-size-report-generator_v0.1.0",
+      "version": "0.1.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @ardiffact/bundle-size-differ to v0.1.0",
+            "author": "olwheele@microsoft.com",
+            "commit": "44c30aa99286a9a7c85515f37383c68fa920819d",
+            "package": "@ardiffact/bundle-size-report-generator"
+          }
+        ]
+      }
+    }
+  ]
+}

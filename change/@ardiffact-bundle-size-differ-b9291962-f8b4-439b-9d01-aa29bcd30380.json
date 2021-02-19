@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "test(bundle-size-differ): Rename test",
-  "packageName": "@ardiffact/bundle-size-differ",
-  "email": "olwheele@microsoft.com",
-  "dependentChangeType": "none"
-}
