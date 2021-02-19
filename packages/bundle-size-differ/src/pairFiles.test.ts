@@ -1,6 +1,6 @@
 import { FilePair, pairFiles } from "./pairFiles";
 
-test("getFilePairs", () => {
+test("get file pairs", () => {
   const pathsA = ["a/stat_1.json", "a/stat_2.json", "a/stat_3.json"];
   const pathsB = ["b/stat_1.json", "b/stat_3.json"];
   const pairs = pairFiles(pathsA, pathsB);
