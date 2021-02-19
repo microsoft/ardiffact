@@ -20,6 +20,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.GIT_TOKEN }}
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
@@ -39,3 +41,12 @@ jobs:
 
     - run: yarn install
     - run: yarn lage build test
+    - name: Set git user config
+      run: |
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+    - name: Publish packages
+      run: yarn beachball publish -y -n $NPM_TOKEN
+      env:
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+

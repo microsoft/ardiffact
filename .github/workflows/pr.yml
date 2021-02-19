@@ -38,4 +38,5 @@ jobs:
           ${{ runner.os }}-yarn-
 
     - run: yarn install
+    - run: yarn beachball check
     - run: yarn lage build test
