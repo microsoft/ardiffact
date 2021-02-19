@@ -1,0 +1,20 @@
+{
+  "name": "@ardiffact/azure-artifact-storage",
+  "entries": [
+    {
+      "date": "Fri, 19 Feb 2021 03:30:51 GMT",
+      "tag": "@ardiffact/azure-artifact-storage_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "chore: Bump @azure/storage-blob dependency",
+            "author": "olwheele@microsoft.com",
+            "commit": "bfe0f71ae473ec27d74ad22f84e7a137b5f4c480",
+            "package": "@ardiffact/azure-artifact-storage"
+          }
+        ]
+      }
+    }
+  ]
+}

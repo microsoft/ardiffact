@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "chore: Bump @azure/storage-blob dependency",
-  "packageName": "@ardiffact/azure-artifact-storage",
-  "email": "olwheele@microsoft.com",
-  "dependentChangeType": "patch"
-}
