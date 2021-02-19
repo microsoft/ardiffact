@@ -1,8 +1,16 @@
 # Change Log - @ardiffact/azure-artifact-storage
 
-This log was last generated on Fri, 19 Feb 2021 03:41:49 GMT and should not be manually modified.
+This log was last generated on Fri, 19 Feb 2021 04:10:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.0
+
+Fri, 19 Feb 2021 04:10:21 GMT
+
+### Minor changes
+
+- feat: export AzureBlobStorageConfig (olwheele@microsoft.com)
 
 ## 0.1.2
 

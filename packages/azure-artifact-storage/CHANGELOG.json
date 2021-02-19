@@ -2,6 +2,21 @@
   "name": "@ardiffact/azure-artifact-storage",
   "entries": [
     {
+      "date": "Fri, 19 Feb 2021 04:10:21 GMT",
+      "tag": "@ardiffact/azure-artifact-storage_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "feat: export AzureBlobStorageConfig",
+            "author": "olwheele@microsoft.com",
+            "commit": "90f481b5eafb94dcbcb6afca627716e9a9c73626",
+            "package": "@ardiffact/azure-artifact-storage"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 19 Feb 2021 03:41:49 GMT",
       "tag": "@ardiffact/azure-artifact-storage_v0.1.2",
       "version": "0.1.2",
