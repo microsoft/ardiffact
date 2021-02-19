@@ -20,7 +20,7 @@ export interface RemoteArtifact {
   url: string;
 }
 
-const TIMEOUT = 3 * 1000;
+const TIMEOUT = 3_000;
 
 const listArtifacts = async (
   config: AzureBlobStorageConfig,
