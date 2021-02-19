@@ -21,11 +21,11 @@ export interface ReportAssetData {
   isRemoved: boolean;
 }
 
-export function createReportData({
+export const createReportData = ({
   name,
   diffStats,
   comparisonToolUrl,
-}: FileDiffResultWithComparisonToolUrl): ReportData {
+}: FileDiffResultWithComparisonToolUrl): ReportData => {
   const largestDiffFirst = (a: { diff: number }, b: { diff: number }) =>
     b.diff - a.diff;
 
@@ -87,7 +87,7 @@ export function createReportData({
       .reduce((totalSize, asset) => (totalSize += asset.size), 0),
     comparisonToolUrl,
   };
-}
+};
 
 function uppercaseFirst(appName: string): string {
   const firstChar = first(appName);
