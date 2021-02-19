@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "style: simplify timeout",
-  "packageName": "@ardiffact/azure-artifact-storage",
-  "email": "olwheele@microsoft.com",
-  "dependentChangeType": "patch"
-}

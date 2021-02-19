@@ -1,8 +1,16 @@
 # Change Log - @ardiffact/azure-artifact-storage
 
-This log was last generated on Fri, 19 Feb 2021 04:10:21 GMT and should not be manually modified.
+This log was last generated on Fri, 19 Feb 2021 08:17:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.1
+
+Fri, 19 Feb 2021 08:17:25 GMT
+
+### Patches
+
+- style: simplify timeout (olwheele@microsoft.com)
 
 ## 0.2.0
 

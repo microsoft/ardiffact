@@ -2,6 +2,21 @@
   "name": "@ardiffact/azure-artifact-storage",
   "entries": [
     {
+      "date": "Fri, 19 Feb 2021 08:17:25 GMT",
+      "tag": "@ardiffact/azure-artifact-storage_v0.2.1",
+      "version": "0.2.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "style: simplify timeout",
+            "author": "olwheele@microsoft.com",
+            "commit": "62b2f260ca8db12d57cfed2d4c89fed85bb9a4f4",
+            "package": "@ardiffact/azure-artifact-storage"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 19 Feb 2021 04:10:21 GMT",
       "tag": "@ardiffact/azure-artifact-storage_v0.2.0",
       "version": "0.2.0",
