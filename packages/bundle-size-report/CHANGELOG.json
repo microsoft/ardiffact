@@ -1,6 +1,21 @@
 {
-  "name": "@ardiffact/bundle-size-report-generator",
+  "name": "@ardiffact/bundle-size-report",
   "entries": [
+    {
+      "date": "Fri, 19 Feb 2021 03:41:49 GMT",
+      "tag": "@ardiffact/bundle-size-report_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "chore: Bump TypeScript to ^4.1.5",
+            "author": "olwheele@microsoft.com",
+            "commit": "602bb3c84ae96d052759eb5673096292f9c61f2f",
+            "package": "@ardiffact/bundle-size-report"
+          }
+        ]
+      }
+    },
     {
       "date": "Fri, 19 Feb 2021 02:56:41 GMT",
       "tag": "@ardiffact/bundle-size-report-generator_v0.1.0",
