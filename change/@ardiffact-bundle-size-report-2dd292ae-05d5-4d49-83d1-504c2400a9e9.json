@@ -1,7 +1,0 @@
-{
-  "type": "major",
-  "comment": "Rename package",
-  "packageName": "@ardiffact/bundle-size-report",
-  "email": "olwheele@microsoft.com",
-  "dependentChangeType": "patch"
-}
