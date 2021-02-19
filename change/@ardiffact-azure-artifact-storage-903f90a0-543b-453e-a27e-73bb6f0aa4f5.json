@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "feat: export AzureBlobStorageConfig",
+  "packageName": "@ardiffact/azure-artifact-storage",
+  "email": "olwheele@microsoft.com",
+  "dependentChangeType": "patch"
+}

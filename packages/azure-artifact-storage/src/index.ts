@@ -1,5 +1,5 @@
-export { Config } from "./config";
-export {RemoteArtifact} from "./discover";
+export { Config, AzureBlobStorageConfig } from "./config";
+export { RemoteArtifact } from "./discover";
 export {
   getArtifacts,
   downloadArtifacts,
