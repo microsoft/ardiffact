@@ -1,8 +1,16 @@
 # Change Log - @ardiffact/azure-artifact-storage
 
-This log was last generated on Fri, 19 Feb 2021 08:17:25 GMT and should not be manually modified.
+This log was last generated on Thu, 25 Feb 2021 18:13:59 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.0
+
+Thu, 25 Feb 2021 18:13:59 GMT
+
+### Minor changes
+
+- feat: Make gzip optional (olwheele@microsoft.com)
 
 ## 0.2.1
 
