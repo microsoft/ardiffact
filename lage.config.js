@@ -5,4 +5,7 @@ module.exports = {
     lint: [],
   },
   npmClient: "yarn",
+  cacheOptions: {
+    environmentGlob: ["tsconfig.base.json"],
+  },
 };
