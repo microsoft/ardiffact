@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "feat: Make gzip optional",
+  "packageName": "@ardiffact/azure-artifact-storage",
+  "email": "olwheele@microsoft.com",
+  "dependentChangeType": "patch"
+}

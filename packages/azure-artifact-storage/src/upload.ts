@@ -6,7 +6,8 @@ import * as path from "path";
 export const uploadArtifacts = async (
   dirPath: string,
   prefix: string,
-  config: AzureBlobStorageConfig
+  config: AzureBlobStorageConfig,
+  gzip?: boolean
 ): Promise<void> => {
   prefix = prefix.trim();
   prefix = prefix.endsWith("/")
@@ -16,7 +17,7 @@ export const uploadArtifacts = async (
   const files = await fs.promises.readdir(dirPath);
   await Promise.all(
     files.map((file) =>
-      uploadFile(client, `${prefix}/${file}`, path.join(dirPath, file))
+      uploadFile(client, `${prefix}/${file}`, path.join(dirPath, file), gzip)
     )
   );
 };

@@ -5,15 +5,15 @@ import {
 } from "@azure/storage-blob";
 import { encodeHash } from "../checksum";
 import * as fs from "fs";
-import { pipeline, Readable } from "stream";
+import * as stream from "stream";
 import { createGunzip, createGzip } from "zlib";
 import { createHash } from "crypto";
 import { promisify } from "util";
 import { dirname } from "path";
-import { WritableStream, ReadableStream } from "memory-streams";
+import { WritableStream } from "memory-streams";
 import { AzureBlobStorageConfig } from "../config";
 
-const pipelineAsync = promisify(pipeline);
+const pipelineAsync = promisify(stream.pipeline);
 
 export const getArtifactPaths = async (
   containerClient: ContainerClient,
@@ -52,10 +52,11 @@ export const createStorageSharedKeyCredential = (config: {
 
 export const downloadToBuffer = async (
   containerClient: ContainerClient,
-  blobName: string
+  blobName: string,
+  gzip?: boolean
 ): Promise<Buffer> => {
   const memoryStream = new WritableStream();
-  await downloadToStream(containerClient, blobName, memoryStream);
+  await downloadToStream(containerClient, blobName, memoryStream, gzip);
   const buffer = memoryStream.toBuffer();
   return buffer;
 };
@@ -63,49 +64,44 @@ export const downloadToBuffer = async (
 export const downloadToFile = async (
   containerClient: ContainerClient,
   blobName: string,
-  path?: string
-): Promise<void> => {
+  path?: string,
+  gzip?: boolean
+): Promise<string> => {
   const downloadPath = path ?? blobName;
   await fs.promises.mkdir(dirname(downloadPath), { recursive: true });
   const downloadPathStream = fs.createWriteStream(downloadPath, {
     encoding: "utf8",
   });
-  await downloadToStream(containerClient, blobName, downloadPathStream);
-};
-
-export const uploadBuffer = async (
-  containerClient: ContainerClient,
-  blobName: string,
-  data: Buffer
-): Promise<void> => {
-  const readable = ReadableStream.from(data);
-  await uploadStream(containerClient, blobName, readable);
+  await downloadToStream(containerClient, blobName, downloadPathStream, gzip);
+  return downloadPath;
 };
 
 export const uploadFile = async (
   containerClient: ContainerClient,
   blobName: string,
-  filePath: string
+  filePath: string,
+  gzip?: boolean
 ): Promise<void> => {
   const readable = fs.createReadStream(filePath);
   console.info(`Uploading ${blobName}`);
-  await uploadStream(containerClient, blobName, readable);
-  console.info(`Uploaded ${blobName}`)
+  await uploadStream(containerClient, blobName, readable, gzip);
+  console.info(`Uploaded ${blobName}`);
 };
 
 const uploadStream = async (
   containerClient: ContainerClient,
   blobName: string,
-  readable: Readable
+  readable: stream.Readable,
+  gzip?: boolean
 ): Promise<void> => {
   const blobClient = containerClient.getBlockBlobClient(blobName);
   const contentHashStream = createHash("md5");
-  const gzipStream = createGzip();
+  const encodingStream = gzip ? createGzip() : new stream.PassThrough();
 
   await Promise.all([
-    pipelineAsync(readable, gzipStream),
-    pipelineAsync(gzipStream, contentHashStream),
-    blobClient.uploadStream(gzipStream),
+    pipelineAsync(readable, encodingStream),
+    pipelineAsync(encodingStream, contentHashStream),
+    blobClient.uploadStream(encodingStream),
   ]);
   const hash = new Uint8Array(contentHashStream.digest());
   await blobClient.setHTTPHeaders({
@@ -118,9 +114,11 @@ const uploadStream = async (
 const downloadToStream = async (
   containerClient: ContainerClient,
   blobName: string,
-  stream: NodeJS.WritableStream
+  writer: NodeJS.WritableStream,
+  gzip?: boolean
 ): Promise<void> => {
   const blobClient = containerClient.getBlobClient(blobName);
+  const encodingStream = gzip ? createGunzip() : new stream.PassThrough();
   const { contentMD5 } = await blobClient.getProperties();
   if (!contentMD5) {
     return Promise.reject(`MD5 hash does not exist for ${blobName}`);
@@ -132,7 +130,7 @@ const downloadToStream = async (
   }
   const contentHashStream = createHash("md5");
   await Promise.all([
-    pipelineAsync(blob.readableStreamBody, createGunzip(), stream),
+    pipelineAsync(blob.readableStreamBody, encodingStream, writer),
     pipelineAsync(blob.readableStreamBody, contentHashStream),
   ]);
   const contentHash = contentHashStream.digest("base64");

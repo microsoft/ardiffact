@@ -1,4 +1,4 @@
-import { AzureBlobStorageConfig, Config } from "./config";
+import { AzureBlobStorageConfig } from "./config";
 import {
   createContainerClient,
   createStorageSharedKeyCredential,
@@ -67,42 +67,58 @@ const generateArtifactSasTokens = async (
 };
 
 const getArtifacts = async (
-  config: Config
+  config: AzureBlobStorageConfig,
+  prefix: string,
+  filter?: string | string[],
+  gzip?: boolean
 ): Promise<{ name: string; artifact: Buffer }[]> => {
-  const containerClient = createContainerClient(config.azureBlobStorage);
+  const containerClient = createContainerClient(config);
   const targetNames = await getTargetArtifactNames(
     containerClient,
-    config.prefix,
-    config.filter
+    prefix,
+    filter
   );
 
   const artifacts = await Promise.all(
     targetNames.map(async (name) => {
-      const blobContents = await downloadToBuffer(containerClient, name);
+      const blobContents = await downloadToBuffer(containerClient, name, gzip);
       return { name: name, artifact: blobContents };
     })
   );
   return artifacts;
 };
 
-const downloadArtifacts = async (config: Config): Promise<void> => {
-  const containerClient = createContainerClient(config.azureBlobStorage);
+const downloadArtifacts = async (
+  config: AzureBlobStorageConfig,
+  prefix: string,
+  downloadDirectory?: string,
+  filter?: string | string[],
+  gzip?: boolean
+): Promise<{ name: string; path?: string }[]> => {
+  const containerClient = createContainerClient(config);
   const targetNames = await getTargetArtifactNames(
     containerClient,
-    config.prefix,
-    config.filter
+    prefix,
+    filter
   );
-  const downloadDirectory = config.downloadDirectory ?? process.cwd();
+  const dir = downloadDirectory ?? process.cwd();
 
-  await Promise.all(
+  const paths = await Promise.all(
     targetNames.map(async (name) => {
-      await fetchContents(
-        containerClient,
-        name,
-        path.join(downloadDirectory, path.basename(name))
-      );
+      const downloadPath = path.join(dir, path.basename(name));
+      try {
+        return {
+          name,
+          path: await downloadToFile(containerClient, name, downloadPath, gzip),
+        };
+      } catch (e: unknown) {
+        console.error(`Could not download: ${name} to ${downloadPath}`);
+        console.error(e);
+        return { name, path: undefined };
+      }
     })
   );
+  return paths;
 };
 
 const getTargetArtifactNames = async (
@@ -124,27 +140,6 @@ const getTargetArtifactNames = async (
       throw new Error(`Fetching artifacts timed out`);
     }
     throw e;
-  }
-};
-
-const fetchContents = async (
-  client: ContainerClient,
-  name: string,
-  path: string
-): Promise<void> => {
-  try {
-    console.info(`Downloading ${name}`);
-    await downloadToFile(client, name, path);
-    console.info(`Downloaded ${name}`);
-  } catch (e: unknown) {
-    console.error(`Could not download ${name}`);
-    if (e instanceof Error) {
-      console.error(e.name);
-      console.error(e.message);
-      console.error(e.stack);
-    } else {
-      console.error(e);
-    }
   }
 };
 
