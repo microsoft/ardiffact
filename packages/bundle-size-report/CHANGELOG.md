@@ -4,14 +4,6 @@ This log was last generated on Wed, 03 Mar 2021 14:30:07 GMT and should not be m
 
 <!-- Start content -->
 
-## 0.2.1
-
-Wed, 03 Mar 2021 14:30:07 GMT
-
-### Patches
-
-- Bump @ardiffact/bundle-size-differ to v0.2.0 (olwheele@microsoft.com)
-
 ## 0.2.0
 
 Wed, 03 Mar 2021 14:28:45 GMT

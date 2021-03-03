@@ -2,21 +2,6 @@
   "name": "@ardiffact/bundle-size-report",
   "entries": [
     {
-      "date": "Wed, 03 Mar 2021 14:30:07 GMT",
-      "tag": "@ardiffact/bundle-size-report_v0.2.1",
-      "version": "0.2.1",
-      "comments": {
-        "patch": [
-          {
-            "comment": "Bump @ardiffact/bundle-size-differ to v0.2.0",
-            "author": "olwheele@microsoft.com",
-            "commit": "d61584d1a586e51d28fbb8baadb0a26228c8dc1b",
-            "package": "@ardiffact/bundle-size-report"
-          }
-        ]
-      }
-    },
-    {
       "date": "Wed, 03 Mar 2021 14:28:45 GMT",
       "tag": "@ardiffact/bundle-size-report_v0.2.0",
       "version": "0.2.0",
