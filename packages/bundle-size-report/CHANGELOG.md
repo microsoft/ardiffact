@@ -1,8 +1,16 @@
 # Change Log - @ardiffact/bundle-size-report
 
-This log was last generated on Wed, 03 Mar 2021 15:28:31 GMT and should not be manually modified.
+This log was last generated on Wed, 03 Mar 2021 17:24:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.3
+
+Wed, 03 Mar 2021 17:24:44 GMT
+
+### Patches
+
+- Bump @ardiffact/bundle-size-differ to v0.2.1 (olwheele@microsoft.com)
 
 ## 0.2.2
 
