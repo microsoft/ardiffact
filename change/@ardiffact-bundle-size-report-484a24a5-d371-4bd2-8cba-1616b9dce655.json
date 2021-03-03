@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "feat(bundle-size-report): export getAppName",
+  "packageName": "@ardiffact/bundle-size-report",
+  "email": "olwheele@microsoft.com",
+  "dependentChangeType": "patch"
+}

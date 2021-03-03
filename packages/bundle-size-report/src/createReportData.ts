@@ -95,7 +95,7 @@ function uppercaseFirst(appName: string): string {
   return join("", [(firstChar || "").toLocaleUpperCase(), allOthers]);
 }
 
-function getAppName(filePath: string): string {
+export function getAppName(filePath: string): string {
   const fileName = path.parse(filePath).name;
   const [appName, variant] = fileName.split("_");
   const variantToShow = variant !== "default" ? `(${variant})` : undefined;
