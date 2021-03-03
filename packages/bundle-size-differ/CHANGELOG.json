@@ -2,6 +2,21 @@
   "name": "@ardiffact/bundle-size-differ",
   "entries": [
     {
+      "date": "Wed, 03 Mar 2021 14:30:07 GMT",
+      "tag": "@ardiffact/bundle-size-differ_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "feat(bundle-size-differ): export getFriendlyAssetName",
+            "author": "olwheele@microsoft.com",
+            "commit": "d61584d1a586e51d28fbb8baadb0a26228c8dc1b",
+            "package": "@ardiffact/bundle-size-differ"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 19 Feb 2021 03:41:49 GMT",
       "tag": "@ardiffact/bundle-size-differ_v0.1.1",
       "version": "0.1.1",
