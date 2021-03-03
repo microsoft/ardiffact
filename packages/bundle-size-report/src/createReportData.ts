@@ -95,11 +95,11 @@ function uppercaseFirst(appName: string): string {
   return join("", [(firstChar || "").toLocaleUpperCase(), allOthers]);
 }
 
-export function getAppName(filePath: string): string {
+export const getAppName = (filePath: string): string => {
   const fileName = path.parse(filePath).name;
   const [appName, variant] = fileName.split("_");
   const variantToShow = variant !== "default" ? `(${variant})` : undefined;
   const joinWords = compose(join(" "), filter(identity));
 
   return joinWords([uppercaseFirst(appName), variantToShow]);
-}
+};
