@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "style(bundle-size-differ): Use arrow function",
+  "packageName": "@ardiffact/bundle-size-differ",
+  "email": "olwheele@microsoft.com",
+  "dependentChangeType": "patch"
+}

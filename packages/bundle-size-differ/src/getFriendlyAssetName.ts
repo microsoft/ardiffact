@@ -12,9 +12,9 @@ export const getFriendlyAsset = (
   name: getFriendlyAssetName(asset),
 });
 
-export function getFriendlyAssetName(
+export const getFriendlyAssetName = (
   asset: Pick<Asset, "name" | "chunkNames" | "chunks">
-): string {
+): string => {
   // First try removing the hash manually from the file name.
   const name = asset.name;
   const nameWithoutHash = removeHashFromName(name);
@@ -30,13 +30,13 @@ export function getFriendlyAssetName(
   }
 
   return name;
-}
+};
 
 const hashRegex = /_([a-z0-9]{20})/;
 
 // TODO(mapol): We need a better way to identify a hash inside a filename
 // TODO(mapol): We need to make this function take into account the folder name. Once we do that we can remove the `ignoreDelveStringsFiles` function.
-export function removeHashFromName(name: string): string {
+export const removeHashFromName = (name: string): string => {
   const fileParts = upath.parse(name);
   // We could have filenames like .d.ts or .js.map
   const splitBySecondDotPart = fileParts.name.split(".");
@@ -66,4 +66,4 @@ export function removeHashFromName(name: string): string {
       .filter(identity)
       .join(".") + fileParts.ext
   );
-}
+};
