@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "style(bundle-size-report): Make getAppName an arrow function",
-  "packageName": "@ardiffact/bundle-size-report",
-  "email": "olwheele@microsoft.com",
-  "dependentChangeType": "patch"
-}

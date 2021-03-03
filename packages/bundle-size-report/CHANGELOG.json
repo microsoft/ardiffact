@@ -2,6 +2,21 @@
   "name": "@ardiffact/bundle-size-report",
   "entries": [
     {
+      "date": "Wed, 03 Mar 2021 15:28:31 GMT",
+      "tag": "@ardiffact/bundle-size-report_v0.2.2",
+      "version": "0.2.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "style(bundle-size-report): Make getAppName an arrow function",
+            "author": "olwheele@microsoft.com",
+            "commit": "72e62c2985c8fd9ed7f66838e0815396093cdd0a",
+            "package": "@ardiffact/bundle-size-report"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 03 Mar 2021 14:28:45 GMT",
       "tag": "@ardiffact/bundle-size-report_v0.2.0",
       "version": "0.2.0",

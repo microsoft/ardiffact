@@ -1,8 +1,16 @@
 # Change Log - @ardiffact/bundle-size-report
 
-This log was last generated on Wed, 03 Mar 2021 14:30:07 GMT and should not be manually modified.
+This log was last generated on Wed, 03 Mar 2021 15:28:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.2
+
+Wed, 03 Mar 2021 15:28:31 GMT
+
+### Patches
+
+- style(bundle-size-report): Make getAppName an arrow function (olwheele@microsoft.com)
 
 ## 0.2.0
 
