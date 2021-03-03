@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "feat(bundle-size-differ): export getFriendlyAssetName",
+  "packageName": "@ardiffact/bundle-size-differ",
+  "email": "olwheele@microsoft.com",
+  "dependentChangeType": "patch"
+}

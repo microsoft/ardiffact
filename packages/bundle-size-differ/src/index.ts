@@ -3,3 +3,4 @@ export {
   FileDiffResults,
   FileDiffResultWithComparisonToolUrl,
 } from "./diff";
+export { getFriendlyAssetName } from "./getFriendlyAssetName";
