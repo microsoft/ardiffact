@@ -2,6 +2,21 @@
   "name": "@ardiffact/bundle-size-report",
   "entries": [
     {
+      "date": "Thu, 04 Mar 2021 15:22:54 GMT",
+      "tag": "@ardiffact/bundle-size-report_v0.2.4",
+      "version": "0.2.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix: Export commonjs",
+            "author": "olwheele@microsoft.com",
+            "commit": "1ab3bc500f0cc2b32ae8d14c718ac9af85710ece",
+            "package": "@ardiffact/bundle-size-report"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 03 Mar 2021 17:24:44 GMT",
       "tag": "@ardiffact/bundle-size-report_v0.2.3",
       "version": "0.2.3",

@@ -2,6 +2,21 @@
   "name": "@ardiffact/bundle-size-differ",
   "entries": [
     {
+      "date": "Thu, 04 Mar 2021 15:22:54 GMT",
+      "tag": "@ardiffact/bundle-size-differ_v0.2.2",
+      "version": "0.2.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix: Export commonjs",
+            "author": "olwheele@microsoft.com",
+            "commit": "1ab3bc500f0cc2b32ae8d14c718ac9af85710ece",
+            "package": "@ardiffact/bundle-size-differ"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 03 Mar 2021 17:24:44 GMT",
       "tag": "@ardiffact/bundle-size-differ_v0.2.1",
       "version": "0.2.1",

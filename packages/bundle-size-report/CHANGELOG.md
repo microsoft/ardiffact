@@ -1,8 +1,16 @@
 # Change Log - @ardiffact/bundle-size-report
 
-This log was last generated on Wed, 03 Mar 2021 17:24:44 GMT and should not be manually modified.
+This log was last generated on Thu, 04 Mar 2021 15:22:54 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.4
+
+Thu, 04 Mar 2021 15:22:54 GMT
+
+### Patches
+
+- fix: Export commonjs (olwheele@microsoft.com)
 
 ## 0.2.3
 
