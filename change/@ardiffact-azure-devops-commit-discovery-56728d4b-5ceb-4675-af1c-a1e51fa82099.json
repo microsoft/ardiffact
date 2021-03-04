@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix: Export commonjs",
+  "packageName": "@ardiffact/azure-devops-commit-discovery",
+  "email": "olwheele@microsoft.com",
+  "dependentChangeType": "patch"
+}

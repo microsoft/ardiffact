@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix: Export commonjs",
+  "packageName": "@ardiffact/bundle-size-differ",
+  "email": "olwheele@microsoft.com",
+  "dependentChangeType": "patch"
+}
