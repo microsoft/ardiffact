@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "docs: Add markdown to docs/ directory",
-  "packageName": "@ardiffact/azure-devops-commit-discovery",
-  "email": "olwheele@microsoft.com",
-  "dependentChangeType": "patch"
-}

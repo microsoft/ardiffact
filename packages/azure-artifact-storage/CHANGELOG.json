@@ -2,6 +2,21 @@
   "name": "@ardiffact/azure-artifact-storage",
   "entries": [
     {
+      "date": "Fri, 12 Mar 2021 04:05:21 GMT",
+      "tag": "@ardiffact/azure-artifact-storage_v0.3.2",
+      "version": "0.3.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "docs: Add markdown to docs/ directory",
+            "author": "olwheele@microsoft.com",
+            "commit": "1837eca1499ce539c17a43a63aecd099b04e533f",
+            "package": "@ardiffact/azure-artifact-storage"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 04 Mar 2021 15:22:54 GMT",
       "tag": "@ardiffact/azure-artifact-storage_v0.3.1",
       "version": "0.3.1",
