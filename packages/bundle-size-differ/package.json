@@ -7,7 +7,8 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc --build --watch --preserveWatchOutput",
-    "test": "jest"
+    "test": "jest",
+    "docs": "api-extractor run --local --verbose"
   },
   "files": [
     "lib/**/*.js",
@@ -19,7 +20,8 @@
     "globby": "^11.0.2",
     "lodash": "^4.17.20",
     "upath": "^2.0.1",
-    "@mixer/webpack-bundle-compare": "^0.1.0"
+    "@mixer/webpack-bundle-compare": "^0.1.0",
+    "@ardiffact/azure-artifact-storage": "*"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.12.1",

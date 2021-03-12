@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "docs: Add markdown to docs/ directory",
+  "packageName": "@ardiffact/bundle-size-differ",
+  "email": "olwheele@microsoft.com",
+  "dependentChangeType": "patch"
+}

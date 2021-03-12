@@ -9,7 +9,8 @@
   "scripts": {
     "build": "lage build",
     "test": "lage test",
-    "change": "beachball change"
+    "change": "beachball change",
+    "gen-docs": "api-documenter markdown --input api/temp --output docs"
   },
   "workspaces": {
     "packages": [
@@ -20,6 +21,8 @@
     "lage": "^0.28.0",
     "prettier": "^2.1.2",
     "beachball": "^1.52.0",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "@microsoft/api-extractor": "^7.13.2",
+    "@microsoft/api-documenter": "^7.12.11"
   }
 }

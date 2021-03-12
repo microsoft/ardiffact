@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc --build --watch --preserveWatchOutput",
-    "test": "jest --passWithNoTests"
+    "test": "jest --passWithNoTests",
+    "docs": "api-extractor run --local --verbose"
   },
   "files": [
     "lib/**/*.js",

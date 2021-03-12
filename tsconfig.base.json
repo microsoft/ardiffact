@@ -8,6 +8,8 @@
     "sourceMap": true /* Generates corresponding '.map' file. */,
     "composite": true /* Enable project compilation */,
     "moduleResolution": "node",
+    "declaration": true,
+    "declarationMap": true,
 
     /* Strict Type-Checking Options */
     "strict": true /* Enable all strict type-checking options. */,

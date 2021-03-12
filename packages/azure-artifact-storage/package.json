@@ -7,7 +7,8 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc --build --watch --preserveWatchOutput",
-    "test": "jest"
+    "test": "jest",
+    "docs": "api-extractor run --local --verbose"
   },
   "files": [
     "lib/**/*.js",

@@ -15,7 +15,19 @@ export {
 } from "./diffAssets";
 import { generateComparisonAddress } from "./comparisonAddress";
 
-export const diff = async (
+/**
+ * Calculates the diff between two sets of bundle stats
+ *
+ * @param baselineDir - Directory containing webpack stat files of the baseline
+ * @param candidateDir - Directory containing webpack stat files of the candidate
+ * @param fileFilter - Optionally pass filter to omit certain files using {@link https://github.com/sindresorhus/globby#usage | globby} syntax
+ * @param filter - Filter out certain assets for the bundle size calculation
+ * @param remoteArtifactManifests - Either a path on disk to the serialized JSON manifest or the RemoteArtifact list manifest object itself
+ * @returns The diff object
+ *
+ * @public
+ */
+export async function diff(
   baselineDir: string,
   candidateDir: string,
   fileFilter?: string | string[],
@@ -25,7 +37,7 @@ export const diff = async (
     candidate: string | RemoteArtifact[];
     hostUrl: string;
   }
-): Promise<FileDiffResults> => {
+): Promise<FileDiffResults> {
   const [filesA, filesB] = await Promise.all(
     [baselineDir, candidateDir].map(
       async (dir) =>
@@ -64,7 +76,7 @@ export const diff = async (
     });
   }
   return diffs;
-};
+}
 
 const generateDiffs = async (
   filePairs: FilePair[],
