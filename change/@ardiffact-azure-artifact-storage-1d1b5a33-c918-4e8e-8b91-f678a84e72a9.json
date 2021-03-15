@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "docs: Check in more package docs",
-  "packageName": "@ardiffact/azure-artifact-storage",
-  "email": "olwheele@microsoft.com",
-  "dependentChangeType": "patch"
-}

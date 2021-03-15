@@ -1,8 +1,16 @@
 # Change Log - @ardiffact/bundle-size-differ
 
-This log was last generated on Fri, 12 Mar 2021 04:05:21 GMT and should not be manually modified.
+This log was last generated on Mon, 15 Mar 2021 09:39:28 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.4
+
+Mon, 15 Mar 2021 09:39:28 GMT
+
+### Patches
+
+- docs: Check in more package docs (olwheele@microsoft.com)
 
 ## 0.2.3
 
