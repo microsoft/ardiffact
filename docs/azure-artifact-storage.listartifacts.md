@@ -2,10 +2,23 @@
 
 [Home](./index.md) &gt; [@ardiffact/azure-artifact-storage](./azure-artifact-storage.md) &gt; [listArtifacts](./azure-artifact-storage.listartifacts.md)
 
-## listArtifacts variable
+## listArtifacts() function
 
 <b>Signature:</b>
 
 ```typescript
-listArtifacts: (config: AzureBlobStorageConfig, prefix: string, filter?: string | string[] | undefined) => Promise<string[]>
+declare function listArtifacts(config: AzureBlobStorageConfig, prefix: string, filter?: string | string[]): Promise<string[]>;
 ```
+
+## Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  config | [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) |  |
+|  prefix | string |  |
+|  filter | string \| string\[\] |  |
+
+<b>Returns:</b>
+
+Promise&lt;string\[\]&gt;
+

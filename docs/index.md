@@ -11,5 +11,5 @@
 |  [@ardiffact/azure-artifact-storage](./azure-artifact-storage.md) |  |
 |  [@ardiffact/azure-devops-commit-discovery](./azure-devops-commit-discovery.md) |  |
 |  [@ardiffact/bundle-size-differ](./bundle-size-differ.md) | A library for generating a diff object between two sets of webpack bundle stat files |
-|  [@ardiffact/bundle-size-report](./bundle-size-report.md) |  |
+|  [@ardiffact/bundle-size-report](./bundle-size-report.md) | A library for generating a markdown report for a bundle stats diff |
 

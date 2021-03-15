@@ -2,13 +2,28 @@
 
 [Home](./index.md) &gt; [@ardiffact/azure-artifact-storage](./azure-artifact-storage.md) &gt; [downloadArtifacts](./azure-artifact-storage.downloadartifacts.md)
 
-## downloadArtifacts variable
+## downloadArtifacts() function
 
 <b>Signature:</b>
 
 ```typescript
-downloadArtifacts: (config: AzureBlobStorageConfig, prefix: string, downloadDirectory?: string | undefined, filter?: string | string[] | undefined, gzip?: boolean | undefined) => Promise<{
+declare function downloadArtifacts(config: AzureBlobStorageConfig, prefix: string, downloadDirectory?: string, filter?: string | string[], gzip?: boolean): Promise<{
     name: string;
     path?: string;
-}[]>
+}[]>;
 ```
+
+## Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  config | [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) |  |
+|  prefix | string |  |
+|  downloadDirectory | string |  |
+|  filter | string \| string\[\] |  |
+|  gzip | boolean |  |
+
+<b>Returns:</b>
+
+Promise&lt;{ name: string; path?: string; }\[\]&gt;
+

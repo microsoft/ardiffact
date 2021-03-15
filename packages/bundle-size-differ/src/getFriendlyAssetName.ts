@@ -12,9 +12,14 @@ export const getFriendlyAsset = (
   name: getFriendlyAssetName(asset),
 });
 
-export const getFriendlyAssetName = (
+/** Returns a readable name of the asset
+ *
+ * @param asset - webpack stats asset
+ * @internal
+ */
+export function getFriendlyAssetName(
   asset: Pick<Asset, "name" | "chunkNames" | "chunks">
-): string => {
+): string {
   // First try removing the hash manually from the file name.
   const name = asset.name;
   const nameWithoutHash = removeHashFromName(name);
@@ -30,7 +35,7 @@ export const getFriendlyAssetName = (
   }
 
   return name;
-};
+}
 
 const hashRegex = /_([a-z0-9]{20})/;
 

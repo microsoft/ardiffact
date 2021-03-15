@@ -2,10 +2,23 @@
 
 [Home](./index.md) &gt; [@ardiffact/azure-artifact-storage](./azure-artifact-storage.md) &gt; [generateArtifactSasTokens](./azure-artifact-storage.generateartifactsastokens.md)
 
-## generateArtifactSasTokens variable
+## generateArtifactSasTokens() function
 
 <b>Signature:</b>
 
 ```typescript
-generateArtifactSasTokens: (config: AzureBlobStorageConfig, prefix: string, filter?: string | string[] | undefined) => Promise<RemoteArtifact[]>
+declare function generateArtifactSasTokens(config: AzureBlobStorageConfig, prefix: string, filter?: string | string[]): Promise<RemoteArtifact[]>;
 ```
+
+## Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  config | [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) |  |
+|  prefix | string |  |
+|  filter | string \| string\[\] |  |
+
+<b>Returns:</b>
+
+Promise&lt;[RemoteArtifact](./azure-artifact-storage.remoteartifact.md)<!-- -->\[\]&gt;
+

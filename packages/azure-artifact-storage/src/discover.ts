@@ -22,20 +22,20 @@ export interface RemoteArtifact {
 
 const TIMEOUT = 3_000;
 
-const listArtifacts = async (
+async function listArtifacts(
   config: AzureBlobStorageConfig,
   prefix: string,
   filter?: string | string[]
-): Promise<string[]> => {
+): Promise<string[]> {
   const containerClient = createContainerClient(config);
   return getTargetArtifactNames(containerClient, prefix, filter);
-};
+}
 
-const generateArtifactSasTokens = async (
+async function generateArtifactSasTokens(
   config: AzureBlobStorageConfig,
   prefix: string,
   filter?: string | string[]
-): Promise<RemoteArtifact[]> => {
+): Promise<RemoteArtifact[]> {
   const containerClient = createContainerClient(config);
   const targetNames = await getTargetArtifactNames(
     containerClient,
@@ -64,14 +64,14 @@ const generateArtifactSasTokens = async (
     )
   );
   return urls;
-};
+}
 
-const getArtifacts = async (
+async function getArtifacts(
   config: AzureBlobStorageConfig,
   prefix: string,
   filter?: string | string[],
   gzip?: boolean
-): Promise<{ name: string; artifact: Buffer }[]> => {
+): Promise<{ name: string; artifact: Buffer }[]> {
   const containerClient = createContainerClient(config);
   const targetNames = await getTargetArtifactNames(
     containerClient,
@@ -88,13 +88,13 @@ const getArtifacts = async (
   return artifacts;
 };
 
-const downloadArtifacts = async (
+async function downloadArtifacts(
   config: AzureBlobStorageConfig,
   prefix: string,
   downloadDirectory?: string,
   filter?: string | string[],
   gzip?: boolean
-): Promise<{ name: string; path?: string }[]> => {
+): Promise<{ name: string; path?: string }[]> {
   const containerClient = createContainerClient(config);
   const targetNames = await getTargetArtifactNames(
     containerClient,
@@ -119,7 +119,7 @@ const downloadArtifacts = async (
     })
   );
   return paths;
-};
+}
 
 const getTargetArtifactNames = async (
   client: ContainerClient,

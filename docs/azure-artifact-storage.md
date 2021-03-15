@@ -4,6 +4,15 @@
 
 ## azure-artifact-storage package
 
+## Functions
+
+|  Function | Description |
+|  --- | --- |
+|  [downloadArtifacts(config, prefix, downloadDirectory, filter, gzip)](./azure-artifact-storage.downloadartifacts.md) |  |
+|  [generateArtifactSasTokens(config, prefix, filter)](./azure-artifact-storage.generateartifactsastokens.md) |  |
+|  [getArtifacts(config, prefix, filter, gzip)](./azure-artifact-storage.getartifacts.md) |  |
+|  [listArtifacts(config, prefix, filter)](./azure-artifact-storage.listartifacts.md) |  |
+
 ## Interfaces
 
 |  Interface | Description |
@@ -15,9 +24,5 @@
 
 |  Variable | Description |
 |  --- | --- |
-|  [downloadArtifacts](./azure-artifact-storage.downloadartifacts.md) |  |
-|  [generateArtifactSasTokens](./azure-artifact-storage.generateartifactsastokens.md) |  |
-|  [getArtifacts](./azure-artifact-storage.getartifacts.md) |  |
-|  [listArtifacts](./azure-artifact-storage.listartifacts.md) |  |
 |  [uploadArtifacts](./azure-artifact-storage.uploadartifacts.md) |  |
 

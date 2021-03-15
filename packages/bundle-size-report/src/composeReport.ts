@@ -2,10 +2,16 @@ import { FileDiffResults } from "@ardiffact/bundle-size-differ";
 import { createDetailedReport, createNoChangeReport } from "./createReport";
 import { createReportData } from "./createReportData";
 
-export const createReport = (bundleStatsResults: FileDiffResults): string =>
-  ["## Bundle size report"]
+/**
+ *
+ * @param bundleStatsResults - Diff results created by {@link @ardiffact/bundle-size-differ#FileDiffResults} object
+ * @returns markdown report
+ */
+export function createReport(bundleStatsResults: FileDiffResults): string {
+  return ["## Bundle size report"]
     .concat(createTheReports(bundleStatsResults))
     .join("\n\n");
+}
 
 const createTheReports = (bundleStatsResults: FileDiffResults): string[] => {
   const reportDataWithDifference = bundleStatsResults.withDifferences.map(

@@ -2,10 +2,23 @@
 
 [Home](./index.md) &gt; [@ardiffact/bundle-size-report](./bundle-size-report.md) &gt; [createReport](./bundle-size-report.createreport.md)
 
-## createReport variable
+## createReport() function
 
 <b>Signature:</b>
 
 ```typescript
-createReport: (bundleStatsResults: FileDiffResults) => string
+export declare function createReport(bundleStatsResults: FileDiffResults): string;
 ```
+
+## Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  bundleStatsResults | [FileDiffResults](./bundle-size-differ.filediffresults.md) | Diff results created by [FileDiffResults](./bundle-size-differ.filediffresults.md) object |
+
+<b>Returns:</b>
+
+string
+
+markdown report
+

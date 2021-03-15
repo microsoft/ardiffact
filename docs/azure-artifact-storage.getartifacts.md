@@ -2,13 +2,27 @@
 
 [Home](./index.md) &gt; [@ardiffact/azure-artifact-storage](./azure-artifact-storage.md) &gt; [getArtifacts](./azure-artifact-storage.getartifacts.md)
 
-## getArtifacts variable
+## getArtifacts() function
 
 <b>Signature:</b>
 
 ```typescript
-getArtifacts: (config: AzureBlobStorageConfig, prefix: string, filter?: string | string[] | undefined, gzip?: boolean | undefined) => Promise<{
+declare function getArtifacts(config: AzureBlobStorageConfig, prefix: string, filter?: string | string[], gzip?: boolean): Promise<{
     name: string;
     artifact: Buffer;
-}[]>
+}[]>;
 ```
+
+## Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  config | [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) |  |
+|  prefix | string |  |
+|  filter | string \| string\[\] |  |
+|  gzip | boolean |  |
+
+<b>Returns:</b>
+
+Promise&lt;{ name: string; artifact: Buffer; }\[\]&gt;
+

@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "docs: Check in more package docs",
+  "packageName": "@ardiffact/bundle-size-report",
+  "email": "olwheele@microsoft.com",
+  "dependentChangeType": "patch"
+}

@@ -24,7 +24,7 @@ export declare function diff(baselineDir: string, candidateDir: string, fileFilt
 |  candidateDir | string | Directory containing webpack stat files of the candidate |
 |  fileFilter | string \| string\[\] | Optionally pass filter to omit certain files using [globby](https://github.com/sindresorhus/globby#usage) syntax |
 |  filter | string \| string\[\] | Filter out certain assets for the bundle size calculation |
-|  remoteArtifactManifests | { baseline: string \| [RemoteArtifact](./azure-artifact-storage.remoteartifact.md)<!-- -->\[\]; candidate: string \| [RemoteArtifact](./azure-artifact-storage.remoteartifact.md)<!-- -->\[\]; hostUrl: string; } | Either a path on disk to the serialized JSON manifest or the RemoteArtifact list manifest object itself |
+|  remoteArtifactManifests | { baseline: string \| [RemoteArtifact](./azure-artifact-storage.remoteartifact.md)<!-- -->\[\]; candidate: string \| [RemoteArtifact](./azure-artifact-storage.remoteartifact.md)<!-- -->\[\]; hostUrl: string; } | Either a path on disk to the serialized JSON manifest or the [RemoteArtifact](./azure-artifact-storage.remoteartifact.md) list manifest object itself |
 
 <b>Returns:</b>
 

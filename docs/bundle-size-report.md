@@ -4,10 +4,11 @@
 
 ## bundle-size-report package
 
-## Variables
+A library for generating a markdown report for a bundle stats diff
 
-|  Variable | Description |
+## Functions
+
+|  Function | Description |
 |  --- | --- |
-|  [createReport](./bundle-size-report.createreport.md) |  |
-|  [getAppName](./bundle-size-report.getappname.md) |  |
+|  [createReport(bundleStatsResults)](./bundle-size-report.createreport.md) |  |
 

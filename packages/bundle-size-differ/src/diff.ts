@@ -22,7 +22,8 @@ import { generateComparisonAddress } from "./comparisonAddress";
  * @param candidateDir - Directory containing webpack stat files of the candidate
  * @param fileFilter - Optionally pass filter to omit certain files using {@link https://github.com/sindresorhus/globby#usage | globby} syntax
  * @param filter - Filter out certain assets for the bundle size calculation
- * @param remoteArtifactManifests - Either a path on disk to the serialized JSON manifest or the RemoteArtifact list manifest object itself
+ * @param remoteArtifactManifests - Either a path on disk to the serialized JSON manifest or the
+ *                                  {@link @ardiffact/azure-artifact-storage#RemoteArtifact} list manifest object itself
  * @returns The diff object
  *
  * @public
