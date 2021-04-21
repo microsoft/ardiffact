@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "docs: Add repo information to packages",
-  "packageName": "@ardiffact/bundle-size-report",
-  "email": "olwheele@microsoft.com",
-  "dependentChangeType": "patch"
-}

@@ -2,6 +2,21 @@
   "name": "@ardiffact/bundle-size-differ",
   "entries": [
     {
+      "date": "Wed, 21 Apr 2021 14:46:32 GMT",
+      "tag": "@ardiffact/bundle-size-differ_v0.2.5",
+      "version": "0.2.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "docs: Add repo information to packages",
+            "author": "olwheele@microsoft.com",
+            "commit": "ea55f68d2b3da02c93286f3ddc57c909ff19db01",
+            "package": "@ardiffact/bundle-size-differ"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 15 Mar 2021 09:39:28 GMT",
       "tag": "@ardiffact/bundle-size-differ_v0.2.4",
       "version": "0.2.4",

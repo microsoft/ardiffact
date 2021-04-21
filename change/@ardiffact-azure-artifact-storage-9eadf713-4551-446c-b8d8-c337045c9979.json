@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "docs: Add repo information to packages",
-  "packageName": "@ardiffact/azure-artifact-storage",
-  "email": "olwheele@microsoft.com",
-  "dependentChangeType": "patch"
-}
