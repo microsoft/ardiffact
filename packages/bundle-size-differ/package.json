@@ -3,6 +3,11 @@
   "version": "0.2.4",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oliwheeler/ardiffact.git",
+    "directory": "packages/bundle-size-differ"
+  },
   "license": "MIT",
   "scripts": {
     "build": "tsc",
