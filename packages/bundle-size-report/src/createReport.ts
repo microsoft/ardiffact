@@ -53,14 +53,20 @@ const getDiff = (reportAssetData: ReportAssetData) => {
   return `<span style="${noWrapStyle}">${formattedDiff}</span>`;
 };
 
-const getPercentageAndIcon = (reportAssetData: ReportAssetData) => {
+const getPercentageAndIcon = (
+  reportAssetData: ReportAssetData,
+  minimumIncrease: number
+) => {
   const percentage = getPercentage(reportAssetData);
-  const icon = getEmoji(reportAssetData);
+  const icon = getEmoji(reportAssetData, minimumIncrease);
 
   return `<span style="${noWrapStyle}">${percentage} ${icon}</span>`;
 };
 
-export function createDetailedReport(reportData: ReportData): string {
+export function createDetailedReport(
+  reportData: ReportData,
+  minimumIncrease: number
+): string {
   if (reportData.totalDiff === 0) {
     return "";
   }
@@ -69,7 +75,8 @@ export function createDetailedReport(reportData: ReportData): string {
     ? `<a target="_blank" rel="noopener noreferrer" href="${reportData.comparisonToolUrl}">🔍</a>`
     : "";
   const deltaSizeMessage = `${getReducedOrIncreased(
-    reportData.totalDiff
+    reportData.totalDiff,
+    minimumIncrease
   )} total size by ${formatBytes(Math.abs(reportData.totalDiff))}`;
   const totalSizeMessage = `Total size: ${formatBytes(reportData.totalSize)}`;
   const prefix = `<summary><span style="font-size: 16px">${reportData.name} ${comparisonLink}</span><br><ul><li>${deltaSizeMessage}</li><li>${totalSizeMessage}</li></summary>`;
@@ -81,7 +88,7 @@ export function createDetailedReport(reportData: ReportData): string {
     const fileName = getFileName(reportAssetData);
     const size = getSize(reportAssetData);
     const diff = getDiff(reportAssetData);
-    const percentage = getPercentageAndIcon(reportAssetData);
+    const percentage = getPercentageAndIcon(reportAssetData, minimumIncrease);
 
     return `| ${fileName} | ${size} | ${diff} | ${percentage} |`;
   });
@@ -119,8 +126,13 @@ export function createNoChangeReport(reportData: ReportData[]): string {
   )}\n</details>`;
 }
 
-function getReducedOrIncreased(diffSize: number): string {
-  return diffSize > 0 ? "🔺 Increased" : "✅ Reduced";
+function getReducedOrIncreased(
+  diffSize: number,
+  minimumIncrease: number
+): string {
+  return diffSize > 0
+    ? (diffSize > minimumIncrease ? "🔺&nbsp;" : "") + "Increased"
+    : "✅&nbsp;Reduced";
 }
 
 function formatBytes(bytes: number, decimals: number = 2): string {
@@ -131,9 +143,12 @@ function formatBytes(bytes: number, decimals: number = 2): string {
   return inKb.toFixed(decimals) + " KB";
 }
 
-function getEmoji(reportAssetData: ReportAssetData): string {
+function getEmoji(
+  reportAssetData: ReportAssetData,
+  minimumIncrease: number
+): string {
   if (reportAssetData.isRemoved || reportAssetData.isAdded) {
     return "";
   }
-  return reportAssetData.isReduction ? "✅" : "🔺";
+  return reportAssetData.diff > minimumIncrease ? "🔺" : "✅";
 }

@@ -7,13 +7,13 @@ import { createReportData } from "./createReportData";
  * @param bundleStatsResults - Diff results created by {@link @ardiffact/bundle-size-differ#FileDiffResults} object
  * @returns markdown report
  */
-export function createReport(bundleStatsResults: FileDiffResults): string {
+export function createReport(bundleStatsResults: FileDiffResults, minimumIncrease: number = 0): string {
   return ["## Bundle size report"]
-    .concat(createTheReports(bundleStatsResults))
+      .concat(createTheReports(bundleStatsResults, minimumIncrease))
     .join("\n\n");
 }
 
-const createTheReports = (bundleStatsResults: FileDiffResults): string[] => {
+const createTheReports = (bundleStatsResults: FileDiffResults, minimumIncrease: number): string[] => {
   const reportDataWithDifference = bundleStatsResults.withDifferences.map(
     createReportData
   );
@@ -22,7 +22,7 @@ const createTheReports = (bundleStatsResults: FileDiffResults): string[] => {
   const withDifferences: string[] = [
     ...reportDataWithDifference.filter((row) => row.totalDiff !== 0),
     ...reportDataNewFiles.filter((row) => row.totalDiff !== 0),
-  ].map(createDetailedReport);
+  ].map(data => createDetailedReport(data, minimumIncrease));
 
   const withoutDifference: string = createNoChangeReport([
     ...reportDataWithDifference.filter((row) => row.totalDiff === 0),
