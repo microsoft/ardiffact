@@ -1,8 +1,16 @@
 # Change Log - @ardiffact/bundle-size-report
 
-This log was last generated on Wed, 21 Apr 2021 14:46:32 GMT and should not be manually modified.
+This log was last generated on Mon, 26 Apr 2021 14:11:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.0
+
+Mon, 26 Apr 2021 14:11:27 GMT
+
+### Minor changes
+
+- Allow specifying a minimum change size for incurring a red mark (asgramme@microsoft.com)
 
 ## 0.2.7
 

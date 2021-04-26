@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Allow specifying a minimum change size for incurring a red mark",
-  "packageName": "@ardiffact/bundle-size-report",
-  "email": "asgramme@microsoft.com",
-  "dependentChangeType": "patch"
-}
