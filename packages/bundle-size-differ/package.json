@@ -23,7 +23,7 @@
     "matcher": "^3.0.0",
     "multimatch": "^5.0.0",
     "globby": "^11.0.2",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "upath": "^2.0.1",
     "@mixer/webpack-bundle-compare": "^0.1.0",
     "@ardiffact/azure-artifact-storage": "*"
