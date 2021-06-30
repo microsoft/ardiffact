@@ -10,7 +10,7 @@
     "build": "lage build",
     "test": "lage test",
     "change": "beachball change",
-    "gen-docs": "api-documenter markdown --input api/temp --output docs"
+    "gen-docs": "lage docs --no-cache && api-documenter markdown --input api/temp --output docs"
   },
   "workspaces": {
     "packages": [

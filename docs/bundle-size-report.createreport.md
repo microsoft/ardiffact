@@ -7,7 +7,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function createReport(bundleStatsResults: FileDiffResults): string;
+export declare function createReport(bundleStatsResults: FileDiffResults, minimumIncrease?: number): string;
 ```
 
 ## Parameters
@@ -15,6 +15,7 @@ export declare function createReport(bundleStatsResults: FileDiffResults): strin
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  bundleStatsResults | [FileDiffResults](./bundle-size-differ.filediffresults.md) | Diff results created by [FileDiffResults](./bundle-size-differ.filediffresults.md) object |
+|  minimumIncrease | number |  |
 
 <b>Returns:</b>
 

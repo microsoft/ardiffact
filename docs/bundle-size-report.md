@@ -10,5 +10,5 @@ A library for generating a markdown report for a bundle stats diff
 
 |  Function | Description |
 |  --- | --- |
-|  [createReport(bundleStatsResults)](./bundle-size-report.createreport.md) |  |
+|  [createReport(bundleStatsResults, minimumIncrease)](./bundle-size-report.createreport.md) |  |
 
