@@ -15,7 +15,7 @@ export const getFriendlyAsset = (
 /** Returns a readable name of the asset
  *
  * @param asset - webpack stats asset
- * @internal
+ * @public
  */
 export function getFriendlyAssetName(
   asset: Pick<Asset, "name" | "chunkNames" | "chunks">
