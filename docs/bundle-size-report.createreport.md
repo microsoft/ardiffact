@@ -4,6 +4,8 @@
 
 ## createReport() function
 
+Generates a bundle size report from webpack bundle stats diff
+
 <b>Signature:</b>
 
 ```typescript
@@ -15,7 +17,7 @@ export declare function createReport(bundleStatsResults: FileDiffResults, minimu
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  bundleStatsResults | [FileDiffResults](./bundle-size-differ.filediffresults.md) | Diff results created by [FileDiffResults](./bundle-size-differ.filediffresults.md) object |
-|  minimumIncrease | number |  |
+|  minimumIncrease | number | number indicating the minimum size in bytes the bundle should increase with |
 
 <b>Returns:</b>
 

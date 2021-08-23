@@ -10,5 +10,6 @@ A library for generating a markdown report for a bundle stats diff
 
 |  Function | Description |
 |  --- | --- |
-|  [createReport(bundleStatsResults, minimumIncrease)](./bundle-size-report.createreport.md) |  |
+|  [createReport(bundleStatsResults, minimumIncrease)](./bundle-size-report.createreport.md) | Generates a bundle size report from webpack bundle stats diff |
+|  [getAppName(filePath)](./bundle-size-report.getappname.md) | Returns the app name from webpack bundle stats filepath |
 

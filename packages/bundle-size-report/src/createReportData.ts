@@ -98,7 +98,7 @@ function uppercaseFirst(appName: string): string {
 /**
  * Returns the app name from webpack bundle stats filepath
  * @param filePath - path to webpack bundle stats file
- * @returns - string App name from stat filepath
+ * @returns - App name from stat filepath
  * @public
  */
 export function getAppName(filePath: string): string {
