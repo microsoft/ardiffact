@@ -17,7 +17,7 @@ export declare function createReport(bundleStatsResults: FileDiffResults, minimu
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  bundleStatsResults | [FileDiffResults](./bundle-size-differ.filediffresults.md) | Diff results created by [FileDiffResults](./bundle-size-differ.filediffresults.md) object |
-|  minimumIncrease | number | number indicating the minimum size in bytes the bundle should increase with |
+|  minimumIncrease | number | number indicating the smallest increase in bytes that must be reported |
 
 <b>Returns:</b>
 
