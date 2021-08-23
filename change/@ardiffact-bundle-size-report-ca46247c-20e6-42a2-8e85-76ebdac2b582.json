@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "add documentation for getAppName method",
+  "packageName": "@ardiffact/bundle-size-report",
+  "email": "lkiniu@microsoft.com",
+  "dependentChangeType": "patch"
+}
