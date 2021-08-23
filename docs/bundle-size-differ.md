@@ -11,6 +11,7 @@ A library for generating a diff object between two sets of webpack bundle stat f
 |  Function | Description |
 |  --- | --- |
 |  [diff(baselineDir, candidateDir, fileFilter, filter, remoteArtifactManifests)](./bundle-size-differ.diff.md) | Calculates the diff between two sets of bundle stats |
+|  [getFriendlyAssetName(asset)](./bundle-size-differ.getfriendlyassetname.md) | Returns a readable name of the asset |
 
 ## Type Aliases
 
