@@ -25,4 +25,5 @@ export declare function uploadArtifacts(dirPath: string, prefix: string, config:
 
 Promise&lt;void&gt;
 
+void
 

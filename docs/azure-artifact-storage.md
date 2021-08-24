@@ -18,6 +18,6 @@
 
 |  Interface | Description |
 |  --- | --- |
-|  [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) |  |
-|  [RemoteArtifact](./azure-artifact-storage.remoteartifact.md) |  |
+|  [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) | Configuration interface used to create an instance of a Storage client |
+|  [RemoteArtifact](./azure-artifact-storage.remoteartifact.md) | Azure Blob Storage artifacts interface |
 
