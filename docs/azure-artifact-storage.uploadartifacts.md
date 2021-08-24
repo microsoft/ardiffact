@@ -4,6 +4,8 @@
 
 ## uploadArtifacts() function
 
+Uploads files in a specified folder to Azure Blob Storage
+
 <b>Signature:</b>
 
 ```typescript

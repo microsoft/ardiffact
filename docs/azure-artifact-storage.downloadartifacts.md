@@ -4,6 +4,8 @@
 
 ## downloadArtifacts() function
 
+Downloads artifacts from Azure Blob Storage container to the local file system
+
 <b>Signature:</b>
 
 ```typescript
@@ -17,13 +19,15 @@ declare function downloadArtifacts(config: AzureBlobStorageConfig, prefix: strin
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  config | [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) |  |
-|  prefix | string |  |
-|  downloadDirectory | string |  |
-|  filter | string \| string\[\] |  |
-|  gzip | boolean |  |
+|  config | [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) | The [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) used to create an instance of a Storage client |
+|  prefix | string | Prefix for the blob name in Azure Blob Storage |
+|  downloadDirectory | string | Local directory to download artifacts to |
+|  filter | string \| string\[\] | Globbing pattern to use to filter blobs |
+|  gzip | boolean | Whether to decompress the artifacts |
 
 <b>Returns:</b>
 
 Promise&lt;{ name: string; path?: string; }\[\]&gt;
+
+- List of names and paths to downloaded artifacts
 

@@ -80,6 +80,14 @@ async function generateArtifactSasTokens(
   return urls;
 }
 
+/**
+ * Loads artifacts from Azure Blob Storage into memory
+ * @param config - The {@link @ardiffact/azure-artifact-storage#AzureBlobStorageConfig} used to create an instance of a Storage client
+ * @param prefix - Prefix for the blob name in Azure Blob Storage
+ * @param filter - Globbing pattern to use to filter blobs
+ * @param gzip - Whether to decompress the artifacts
+ * @returns List of artifacts as Buffer objects
+ */
 async function getArtifacts(
   config: AzureBlobStorageConfig,
   prefix: string,
