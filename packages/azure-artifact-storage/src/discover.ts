@@ -15,6 +15,9 @@ import {
 } from "@azure/storage-blob";
 import { AbortController } from "@azure/abort-controller";
 
+/**
+ * Azure Blob Storage artifacts interface
+ */
 export interface RemoteArtifact {
   name: string;
   url: string;
@@ -28,6 +31,7 @@ const TIMEOUT = 3_000;
  * @param prefix - Prefix for the blob name in Azure Blob Storage
  * @param filter - Globbing pattern to use to filter blobs
  * @returns - A list of blobs inside an Azure Blob Storage container
+ * @public
  */
 async function listArtifacts(
   config: AzureBlobStorageConfig,
@@ -44,6 +48,7 @@ async function listArtifacts(
  * @param prefix - Prefix for the blob name in Azure Blob Storage
  * @param filter - Globbing pattern to use to filter blobs
  * @returns - A list of {@link @ardiffact/azure-artifact-storage#RemoteArtifact}
+ * @public
  */
 async function generateArtifactSasTokens(
   config: AzureBlobStorageConfig,
@@ -87,6 +92,7 @@ async function generateArtifactSasTokens(
  * @param filter - Globbing pattern to use to filter blobs
  * @param gzip - Whether to decompress the artifacts
  * @returns List of artifacts as Buffer objects
+ * @public
  */
 async function getArtifacts(
   config: AzureBlobStorageConfig,
@@ -118,6 +124,7 @@ async function getArtifacts(
  * @param filter - Globbing pattern to use to filter blobs
  * @param gzip - Whether to decompress the artifacts
  * @returns - List of names and paths to downloaded artifacts
+ * @public
  */
 async function downloadArtifacts(
   config: AzureBlobStorageConfig,

@@ -9,7 +9,7 @@ import * as path from "path";
  * @param prefix - Prefix to append to the file name which makes the blob name to be uploaded to Azure Blob Storage
  * @param config - The {@link @ardiffact/azure-artifact-storage#AzureBlobStorageConfig} object used to create an instance of a Storage client
  * @param gzip - Whether to compress the artifacts using Gzip
- * @returns
+ * @returns void
  * @public
  */
 export async function uploadArtifacts (

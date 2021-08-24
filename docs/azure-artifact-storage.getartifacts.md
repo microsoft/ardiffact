@@ -4,6 +4,8 @@
 
 ## getArtifacts() function
 
+Loads artifacts from Azure Blob Storage into memory
+
 <b>Signature:</b>
 
 ```typescript
@@ -17,12 +19,14 @@ declare function getArtifacts(config: AzureBlobStorageConfig, prefix: string, fi
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  config | [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) |  |
-|  prefix | string |  |
-|  filter | string \| string\[\] |  |
-|  gzip | boolean |  |
+|  config | [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) | The [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) used to create an instance of a Storage client |
+|  prefix | string | Prefix for the blob name in Azure Blob Storage |
+|  filter | string \| string\[\] | Globbing pattern to use to filter blobs |
+|  gzip | boolean | Whether to decompress the artifacts |
 
 <b>Returns:</b>
 
 Promise&lt;{ name: string; artifact: Buffer; }\[\]&gt;
+
+List of artifacts as Buffer objects
 
