@@ -4,6 +4,8 @@
 
 ## listArtifacts() function
 
+Returns a list blobs inside an Azure Blob Storage container
+
 <b>Signature:</b>
 
 ```typescript
@@ -14,11 +16,13 @@ declare function listArtifacts(config: AzureBlobStorageConfig, prefix: string, f
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  config | [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) |  |
-|  prefix | string |  |
-|  filter | string \| string\[\] |  |
+|  config | [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) | The [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) used to create an instance of a Storage client |
+|  prefix | string | Prefix for the blob name in Azure Blob Storage |
+|  filter | string \| string\[\] | Globbing pattern to use to filter blobs |
 
 <b>Returns:</b>
 
 Promise&lt;string\[\]&gt;
+
+- A list of blobs inside an Azure Blob Storage container
 

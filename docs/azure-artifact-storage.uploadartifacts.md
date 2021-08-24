@@ -14,14 +14,13 @@ export declare function uploadArtifacts(dirPath: string, prefix: string, config:
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  dirPath | string | directory path containing the artifacts to upload |
-|  prefix | string | prefix to append to the file name which makes the blob name to be uploaded to Azure Blob Storage |
-|  config | [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) | the [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) object used to create an instance of a Storage client |
-|  gzip | boolean | whether to compress the artifacts using Gzip |
+|  dirPath | string | Directory path containing the artifacts to upload |
+|  prefix | string | Prefix to append to the file name which makes the blob name to be uploaded to Azure Blob Storage |
+|  config | [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) | The [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) object used to create an instance of a Storage client |
+|  gzip | boolean | Whether to compress the artifacts using Gzip |
 
 <b>Returns:</b>
 
 Promise&lt;void&gt;
 
-empty Promise
 

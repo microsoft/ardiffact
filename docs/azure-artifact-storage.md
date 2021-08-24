@@ -9,9 +9,9 @@
 |  Function | Description |
 |  --- | --- |
 |  [downloadArtifacts(config, prefix, downloadDirectory, filter, gzip)](./azure-artifact-storage.downloadartifacts.md) |  |
-|  [generateArtifactSasTokens(config, prefix, filter)](./azure-artifact-storage.generateartifactsastokens.md) |  |
+|  [generateArtifactSasTokens(config, prefix, filter)](./azure-artifact-storage.generateartifactsastokens.md) | Returns a list of [RemoteArtifact](./azure-artifact-storage.remoteartifact.md) |
 |  [getArtifacts(config, prefix, filter, gzip)](./azure-artifact-storage.getartifacts.md) |  |
-|  [listArtifacts(config, prefix, filter)](./azure-artifact-storage.listartifacts.md) |  |
+|  [listArtifacts(config, prefix, filter)](./azure-artifact-storage.listartifacts.md) | Returns a list blobs inside an Azure Blob Storage container |
 |  [uploadArtifacts(dirPath, prefix, config, gzip)](./azure-artifact-storage.uploadartifacts.md) |  |
 
 ## Interfaces
