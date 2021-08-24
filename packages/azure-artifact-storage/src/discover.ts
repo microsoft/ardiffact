@@ -31,6 +31,13 @@ async function listArtifacts(
   return getTargetArtifactNames(containerClient, prefix, filter);
 }
 
+/**
+ * Returns a list of {@link @ardiffact/azure-artifact-storage#RemoteArtifact}
+ * @param config - The {@link @ardiffact/azure-artifact-storage#AzureBlobStorageConfig} used to create an instance of a Storage client
+ * @param prefix - Prefix to append to the file name which makes the blob name to be uploaded to Azure Blob Storage
+ * @param filter - Globbing pattern to use to filter blobs
+ * @returns - A list of {@link @ardiffact/azure-artifact-storage#RemoteArtifact}
+ */
 async function generateArtifactSasTokens(
   config: AzureBlobStorageConfig,
   prefix: string,

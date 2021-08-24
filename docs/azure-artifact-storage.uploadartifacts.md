@@ -2,10 +2,26 @@
 
 [Home](./index.md) &gt; [@ardiffact/azure-artifact-storage](./azure-artifact-storage.md) &gt; [uploadArtifacts](./azure-artifact-storage.uploadartifacts.md)
 
-## uploadArtifacts variable
+## uploadArtifacts() function
 
 <b>Signature:</b>
 
 ```typescript
-uploadArtifacts: (dirPath: string, prefix: string, config: AzureBlobStorageConfig, gzip?: boolean | undefined) => Promise<void>
+export declare function uploadArtifacts(dirPath: string, prefix: string, config: AzureBlobStorageConfig, gzip?: boolean): Promise<void>;
 ```
+
+## Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  dirPath | string | directory path containing the artifacts to upload |
+|  prefix | string | prefix to append to the file name which makes the blob name to be uploaded to Azure Blob Storage |
+|  config | [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) | the [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) object used to create an instance of a Storage client |
+|  gzip | boolean | whether to compress the artifacts using Gzip |
+
+<b>Returns:</b>
+
+Promise&lt;void&gt;
+
+empty Promise
+

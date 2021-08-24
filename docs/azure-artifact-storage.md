@@ -12,6 +12,7 @@
 |  [generateArtifactSasTokens(config, prefix, filter)](./azure-artifact-storage.generateartifactsastokens.md) |  |
 |  [getArtifacts(config, prefix, filter, gzip)](./azure-artifact-storage.getartifacts.md) |  |
 |  [listArtifacts(config, prefix, filter)](./azure-artifact-storage.listartifacts.md) |  |
+|  [uploadArtifacts(dirPath, prefix, config, gzip)](./azure-artifact-storage.uploadartifacts.md) |  |
 
 ## Interfaces
 
@@ -19,10 +20,4 @@
 |  --- | --- |
 |  [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) |  |
 |  [RemoteArtifact](./azure-artifact-storage.remoteartifact.md) |  |
-
-## Variables
-
-|  Variable | Description |
-|  --- | --- |
-|  [uploadArtifacts](./azure-artifact-storage.uploadartifacts.md) |  |
 
