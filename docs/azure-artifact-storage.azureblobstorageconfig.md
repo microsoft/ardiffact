@@ -4,6 +4,8 @@
 
 ## AzureBlobStorageConfig interface
 
+Configuration interface used to create an instance of a Storage client
+
 <b>Signature:</b>
 
 ```typescript

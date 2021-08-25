@@ -8,21 +8,16 @@
 
 |  Function | Description |
 |  --- | --- |
-|  [downloadArtifacts(config, prefix, downloadDirectory, filter, gzip)](./azure-artifact-storage.downloadartifacts.md) |  |
-|  [generateArtifactSasTokens(config, prefix, filter)](./azure-artifact-storage.generateartifactsastokens.md) |  |
-|  [getArtifacts(config, prefix, filter, gzip)](./azure-artifact-storage.getartifacts.md) |  |
-|  [listArtifacts(config, prefix, filter)](./azure-artifact-storage.listartifacts.md) |  |
+|  [downloadArtifacts(config, prefix, downloadDirectory, filter, gzip)](./azure-artifact-storage.downloadartifacts.md) | Downloads artifacts from Azure Blob Storage container to the local file system |
+|  [generateArtifactSasTokens(config, prefix, filter)](./azure-artifact-storage.generateartifactsastokens.md) | Returns a list of [RemoteArtifact](./azure-artifact-storage.remoteartifact.md) |
+|  [getArtifacts(config, prefix, filter, gzip)](./azure-artifact-storage.getartifacts.md) | Loads artifacts from Azure Blob Storage into memory |
+|  [listArtifacts(config, prefix, filter)](./azure-artifact-storage.listartifacts.md) | Returns a list blobs inside an Azure Blob Storage container |
+|  [uploadArtifacts(dirPath, prefix, config, gzip)](./azure-artifact-storage.uploadartifacts.md) | Uploads files in a specified folder to Azure Blob Storage |
 
 ## Interfaces
 
 |  Interface | Description |
 |  --- | --- |
-|  [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) |  |
-|  [RemoteArtifact](./azure-artifact-storage.remoteartifact.md) |  |
-
-## Variables
-
-|  Variable | Description |
-|  --- | --- |
-|  [uploadArtifacts](./azure-artifact-storage.uploadartifacts.md) |  |
+|  [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) | Configuration interface used to create an instance of a Storage client |
+|  [RemoteArtifact](./azure-artifact-storage.remoteartifact.md) | Azure Blob Storage artifacts interface |
 

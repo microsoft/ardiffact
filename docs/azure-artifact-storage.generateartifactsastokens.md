@@ -4,6 +4,8 @@
 
 ## generateArtifactSasTokens() function
 
+Returns a list of [RemoteArtifact](./azure-artifact-storage.remoteartifact.md)
+
 <b>Signature:</b>
 
 ```typescript
@@ -14,11 +16,13 @@ declare function generateArtifactSasTokens(config: AzureBlobStorageConfig, prefi
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  config | [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) |  |
-|  prefix | string |  |
-|  filter | string \| string\[\] |  |
+|  config | [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) | The [AzureBlobStorageConfig](./azure-artifact-storage.azureblobstorageconfig.md) used to create an instance of a Storage client |
+|  prefix | string | Prefix for the blob name in Azure Blob Storage |
+|  filter | string \| string\[\] | Globbing pattern to use to filter blobs |
 
 <b>Returns:</b>
 
 Promise&lt;[RemoteArtifact](./azure-artifact-storage.remoteartifact.md)<!-- -->\[\]&gt;
+
+- A list of [RemoteArtifact](./azure-artifact-storage.remoteartifact.md)
 

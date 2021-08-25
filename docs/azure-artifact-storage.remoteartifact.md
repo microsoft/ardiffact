@@ -4,6 +4,8 @@
 
 ## RemoteArtifact interface
 
+Azure Blob Storage artifacts interface
+
 <b>Signature:</b>
 
 ```typescript

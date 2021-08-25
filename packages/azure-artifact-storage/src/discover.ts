@@ -15,6 +15,9 @@ import {
 } from "@azure/storage-blob";
 import { AbortController } from "@azure/abort-controller";
 
+/**
+ * Azure Blob Storage artifacts interface
+ */
 export interface RemoteArtifact {
   name: string;
   url: string;
@@ -22,6 +25,14 @@ export interface RemoteArtifact {
 
 const TIMEOUT = 3_000;
 
+/**
+ * Returns a list blobs inside an Azure Blob Storage container
+ * @param config - The {@link @ardiffact/azure-artifact-storage#AzureBlobStorageConfig} used to create an instance of a Storage client
+ * @param prefix - Prefix for the blob name in Azure Blob Storage
+ * @param filter - Globbing pattern to use to filter blobs
+ * @returns - A list of blobs inside an Azure Blob Storage container
+ * @public
+ */
 async function listArtifacts(
   config: AzureBlobStorageConfig,
   prefix: string,
@@ -31,6 +42,14 @@ async function listArtifacts(
   return getTargetArtifactNames(containerClient, prefix, filter);
 }
 
+/**
+ * Returns a list of {@link @ardiffact/azure-artifact-storage#RemoteArtifact}
+ * @param config - The {@link @ardiffact/azure-artifact-storage#AzureBlobStorageConfig} used to create an instance of a Storage client
+ * @param prefix - Prefix for the blob name in Azure Blob Storage
+ * @param filter - Globbing pattern to use to filter blobs
+ * @returns - A list of {@link @ardiffact/azure-artifact-storage#RemoteArtifact}
+ * @public
+ */
 async function generateArtifactSasTokens(
   config: AzureBlobStorageConfig,
   prefix: string,
@@ -66,6 +85,15 @@ async function generateArtifactSasTokens(
   return urls;
 }
 
+/**
+ * Loads artifacts from Azure Blob Storage into memory
+ * @param config - The {@link @ardiffact/azure-artifact-storage#AzureBlobStorageConfig} used to create an instance of a Storage client
+ * @param prefix - Prefix for the blob name in Azure Blob Storage
+ * @param filter - Globbing pattern to use to filter blobs
+ * @param gzip - Whether to decompress the artifacts
+ * @returns List of artifacts as Buffer objects
+ * @public
+ */
 async function getArtifacts(
   config: AzureBlobStorageConfig,
   prefix: string,
@@ -88,6 +116,16 @@ async function getArtifacts(
   return artifacts;
 };
 
+/**
+ * Downloads artifacts from Azure Blob Storage container to the local file system
+ * @param config - The {@link @ardiffact/azure-artifact-storage#AzureBlobStorageConfig} used to create an instance of a Storage client
+ * @param prefix - Prefix for the blob name in Azure Blob Storage
+ * @param downloadDirectory - Local directory to download artifacts to
+ * @param filter - Globbing pattern to use to filter blobs
+ * @param gzip - Whether to decompress the artifacts
+ * @returns - List of names and paths to downloaded artifacts
+ * @public
+ */
 async function downloadArtifacts(
   config: AzureBlobStorageConfig,
   prefix: string,
