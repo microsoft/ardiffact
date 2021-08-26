@@ -74,7 +74,7 @@ declare interface FileToDiffDescriptor {
 /** Returns a readable name of the asset
  *
  * @param asset - webpack stats asset
- * @internal
+ * @public
  */
 export declare function getFriendlyAssetName(asset: Pick<Asset, "name" | "chunkNames" | "chunks">): string;
 

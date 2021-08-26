@@ -3,14 +3,9 @@ import { createDetailedReport, createNoChangeReport } from "./createReport";
 import { createReportData } from "./createReportData";
 
 /**
-<<<<<<< HEAD:packages/bundle-size-report/src/composeReport.ts
  * Generates a bundle size report from webpack bundle stats diff
- * @param bundleStatsResults - Diff results created by {@link @ardiffact/bundle-size-differ#FileDiffResults} object
- * @param minimumIncrease - number indicating the smallest increase in bytes that must be reported
-=======
- *
  * @param bundleStatsResults - Diff results created by {@link @microsoft/webpack-stats-differ#FileDiffResults} object
->>>>>>> d19b976 (change package names and scopes):packages/webpack-stats-report/src/composeReport.ts
+ * @param minimumIncrease - number indicating the smallest increase in bytes that must be reported
  * @returns markdown report
  */
 export function createReport(bundleStatsResults: FileDiffResults, minimumIncrease: number = 0): string {

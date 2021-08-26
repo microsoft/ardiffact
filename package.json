@@ -10,7 +10,8 @@
     "build": "lage build",
     "test": "lage test",
     "change": "beachball change",
-    "gen-docs": "lage docs --no-cache && api-documenter markdown --input api/temp --output docs"
+    "gen-docs": "lage docs --no-cache && api-documenter markdown --input api/temp --output docs",
+    "clean": "npx -q rimraf node_modules api packages/*/node_modules packages/*/lib packages/*/dist packages/*/tsconfig.tsbuildinfo"
   },
   "workspaces": {
     "packages": [
@@ -22,7 +23,7 @@
     "prettier": "^2.1.2",
     "beachball": "^1.52.0",
     "rimraf": "^3.0.2",
-    "@microsoft/api-extractor": "^7.13.2",
+    "@microsoft/api-extractor": "^7.18.6",
     "@microsoft/api-documenter": "^7.12.11"
   }
 }
