@@ -8,7 +8,7 @@ import {
 import { FilePair, pairFiles, pairRemoteArtifacts } from "./pairFiles";
 import * as fs from "fs";
 import globby from "globby";
-import { RemoteArtifact } from "@ardiffact/azure-artifact-storage";
+import { RemoteArtifact } from "@microsoft/azure-artifact-storage";
 export {
   FileDiffResultWithComparisonToolUrl,
   FileDiffResults,
@@ -23,7 +23,7 @@ import { generateComparisonAddress } from "./comparisonAddress";
  * @param fileFilter - Optionally pass filter to omit certain files using {@link https://github.com/sindresorhus/globby#usage | globby} syntax
  * @param filter - Filter out certain assets for the bundle size calculation
  * @param remoteArtifactManifests - Either a path on disk to the serialized JSON manifest or the
- *                                  {@link @ardiffact/azure-artifact-storage#RemoteArtifact} list manifest object itself
+ *                                  {@link @microsoft/azure-artifact-storage#RemoteArtifact} list manifest object itself
  * @returns The diff object
  *
  * @public

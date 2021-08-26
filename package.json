@@ -3,8 +3,8 @@
   "name": "ardiffact",
   "version": "0.1.0",
   "description": "plugin based tool for diffing artifacts",
-  "repository": "git@github.com:oliwheeler/ardiffact.git",
-  "author": "Oliver Wheeler <olwheele@microsoft.com>",
+  "repository": "https://github.com/microsoft/ardiffact.git",
+  "author": "Larry Kiniu <lkiniu@microsoft.com>",
   "license": "MIT",
   "scripts": {
     "build": "lage build",

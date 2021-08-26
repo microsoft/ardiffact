@@ -109,7 +109,7 @@
     /**
      * (REQUIRED) Whether to generate an API report.
      */
-    "enabled": false,
+    "enabled": true
 
     /**
      * The filename for the API report files.  It will be combined with "reportFolder" or "reportTempFolder" to produce
@@ -135,7 +135,7 @@
      * SUPPORTED TOKENS: <projectFolder>, <packageName>, <unscopedPackageName>
      * DEFAULT VALUE: "<projectFolder>/etc/"
      */
-    "reportFolder": "../../api/report"
+    // "reportFolder": "<projectFolder>/etc/",
 
     /**
      * Specifies the folder where the temporary report file is written.  The file name portion is determined by
@@ -181,7 +181,7 @@
     /**
      * (REQUIRED) Whether to generate the .d.ts rollup file.
      */
-    "enabled": false
+    "enabled": true
 
     /**
      * Specifies the output path for a .d.ts rollup file to be generated without any trimming.
