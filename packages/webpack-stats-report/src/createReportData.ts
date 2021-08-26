@@ -1,5 +1,5 @@
 import { concat } from "lodash";
-import { FileDiffResultWithComparisonToolUrl } from "@ardiffact/bundle-size-differ";
+import { FileDiffResultWithComparisonToolUrl } from "@microsoft/webpack-stats-differ";
 import { compose, filter, first, identity, join, tail } from "lodash/fp";
 import * as path from "path";
 

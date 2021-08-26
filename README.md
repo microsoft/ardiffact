@@ -17,8 +17,8 @@ Build all packages
 $ yarn lage build
 ```
 
-Build a single package _e.g build @ardiffact/azure-artifact-storage_
+Build a single package _e.g build @microsoft/azure-artifact-storage_
 
 ```sh
-$ yarn lage build --to @ardiffact/azure-artifact-storage
+$ yarn lage build --to @microsoft/azure-artifact-storage
 ```

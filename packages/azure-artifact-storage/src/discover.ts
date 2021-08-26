@@ -27,7 +27,7 @@ const TIMEOUT = 3_000;
 
 /**
  * Returns a list blobs inside an Azure Blob Storage container
- * @param config - The {@link @ardiffact/azure-artifact-storage#AzureBlobStorageConfig} used to create an instance of a Storage client
+ * @param config - The {@link @microsoft/azure-artifact-storage#AzureBlobStorageConfig} used to create an instance of a Storage client
  * @param prefix - Prefix for the blob name in Azure Blob Storage
  * @param filter - Globbing pattern to use to filter blobs
  * @returns - A list of blobs inside an Azure Blob Storage container
@@ -43,11 +43,11 @@ async function listArtifacts(
 }
 
 /**
- * Returns a list of {@link @ardiffact/azure-artifact-storage#RemoteArtifact}
- * @param config - The {@link @ardiffact/azure-artifact-storage#AzureBlobStorageConfig} used to create an instance of a Storage client
+ * Returns a list of {@link @microsoft/azure-artifact-storage#RemoteArtifact}
+ * @param config - The {@link @microsoft/azure-artifact-storage#AzureBlobStorageConfig} used to create an instance of a Storage client
  * @param prefix - Prefix for the blob name in Azure Blob Storage
  * @param filter - Globbing pattern to use to filter blobs
- * @returns - A list of {@link @ardiffact/azure-artifact-storage#RemoteArtifact}
+ * @returns - A list of {@link @microsoft/azure-artifact-storage#RemoteArtifact}
  * @public
  */
 async function generateArtifactSasTokens(
@@ -87,7 +87,7 @@ async function generateArtifactSasTokens(
 
 /**
  * Loads artifacts from Azure Blob Storage into memory
- * @param config - The {@link @ardiffact/azure-artifact-storage#AzureBlobStorageConfig} used to create an instance of a Storage client
+ * @param config - The {@link @microsoft/azure-artifact-storage#AzureBlobStorageConfig} used to create an instance of a Storage client
  * @param prefix - Prefix for the blob name in Azure Blob Storage
  * @param filter - Globbing pattern to use to filter blobs
  * @param gzip - Whether to decompress the artifacts
@@ -118,7 +118,7 @@ async function getArtifacts(
 
 /**
  * Downloads artifacts from Azure Blob Storage container to the local file system
- * @param config - The {@link @ardiffact/azure-artifact-storage#AzureBlobStorageConfig} used to create an instance of a Storage client
+ * @param config - The {@link @microsoft/azure-artifact-storage#AzureBlobStorageConfig} used to create an instance of a Storage client
  * @param prefix - Prefix for the blob name in Azure Blob Storage
  * @param downloadDirectory - Local directory to download artifacts to
  * @param filter - Globbing pattern to use to filter blobs

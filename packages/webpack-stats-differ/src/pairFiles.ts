@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import { basename } from "path";
-import { RemoteArtifact } from "@ardiffact/azure-artifact-storage";
+import { RemoteArtifact } from "@microsoft/azure-artifact-storage";
 export const getFileNames = (dirPath: string) => fs.promises.readdir(dirPath);
 
 export const pairFiles = (pathsA: string[], pathsB: string[]): FilePair[] => {

@@ -1,12 +1,12 @@
 {
-  "name": "@ardiffact/bundle-size-report",
+  "name": "@microsoft/webpack-stats-report",
   "version": "0.3.0",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/oliwheeler/ardiffact.git",
-    "directory": "packages/bundle-size-report"
+    "url": "https://github.com/microsoft/ardiffact.git",
+    "directory": "packages/webpack-stats-report"
   },
   "license": "MIT",
   "scripts": {
@@ -20,7 +20,7 @@
     "lib/**/*.d.ts"
   ],
   "dependencies": {
-    "@ardiffact/bundle-size-differ": "*",
+    "@microsoft/webpack-stats-differ": "*",
     "lodash": "^4.17.21"
   },
   "devDependencies": {

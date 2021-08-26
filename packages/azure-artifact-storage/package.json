@@ -1,11 +1,11 @@
 {
-  "name": "@ardiffact/azure-artifact-storage",
+  "name": "@microsoft/azure-artifact-storage",
   "version": "0.3.4",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/oliwheeler/ardiffact.git",
+    "url": "https://github.com/microsoft/ardiffact.git",
     "directory": "packages/azure-artifact-storage"
   },
   "license": "MIT",

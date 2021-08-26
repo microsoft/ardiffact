@@ -1,12 +1,12 @@
 {
-  "name": "@ardiffact/bundle-size-differ",
+  "name": "@microsoft/webpack-stats-differ",
   "version": "0.2.5",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/oliwheeler/ardiffact.git",
-    "directory": "packages/bundle-size-differ"
+    "url": "https://github.com/microsoft/ardiffact.git",
+    "directory": "packages/webpack-stats-differ"
   },
   "license": "MIT",
   "scripts": {
@@ -26,7 +26,7 @@
     "lodash": "^4.17.21",
     "upath": "^2.0.1",
     "@mixer/webpack-bundle-compare": "^0.1.0",
-    "@ardiffact/azure-artifact-storage": "*"
+    "@microsoft/azure-artifact-storage": "*"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.12.1",
