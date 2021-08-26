@@ -1,6 +1,21 @@
 {
-  "name": "@ardiffact/azure-artifact-storage",
+  "name": "@microsoft/azure-artifact-storage",
   "entries": [
+    {
+      "date": "Thu, 26 Aug 2021 10:52:17 GMT",
+      "tag": "@microsoft/azure-artifact-storage_v1.0.0",
+      "version": "1.0.0",
+      "comments": {
+        "major": [
+          {
+            "comment": "change organization scope and rename packages",
+            "author": "lkiniu@microsoft.com",
+            "commit": "8bda63fb19fcae56075bfd54eaf2be6efe28734e",
+            "package": "@microsoft/azure-artifact-storage"
+          }
+        ]
+      }
+    },
     {
       "date": "Wed, 21 Apr 2021 14:46:32 GMT",
       "tag": "@ardiffact/azure-artifact-storage_v0.3.4",

@@ -1,6 +1,29 @@
 {
-  "name": "@ardiffact/bundle-size-differ",
+  "name": "@microsoft/webpack-stats-differ",
   "entries": [
+    {
+      "date": "Thu, 26 Aug 2021 10:52:17 GMT",
+      "tag": "@microsoft/webpack-stats-differ_v1.0.0",
+      "version": "1.0.0",
+      "comments": {
+        "major": [
+          {
+            "comment": "change organization scope and rename packages",
+            "author": "lkiniu@microsoft.com",
+            "commit": "8bda63fb19fcae56075bfd54eaf2be6efe28734e",
+            "package": "@microsoft/webpack-stats-differ"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @microsoft/azure-artifact-storage to v1.0.0",
+            "author": "lkiniu@microsoft.com",
+            "commit": "8bda63fb19fcae56075bfd54eaf2be6efe28734e",
+            "package": "@microsoft/webpack-stats-differ"
+          }
+        ]
+      }
+    },
     {
       "date": "Wed, 21 Apr 2021 14:46:32 GMT",
       "tag": "@ardiffact/bundle-size-differ_v0.2.5",

@@ -1,6 +1,29 @@
 {
-  "name": "@ardiffact/bundle-size-report",
+  "name": "@microsoft/webpack-stats-report",
   "entries": [
+    {
+      "date": "Thu, 26 Aug 2021 10:52:17 GMT",
+      "tag": "@microsoft/webpack-stats-report_v1.0.0",
+      "version": "1.0.0",
+      "comments": {
+        "major": [
+          {
+            "comment": "change organization scope and rename packages",
+            "author": "lkiniu@microsoft.com",
+            "commit": "8bda63fb19fcae56075bfd54eaf2be6efe28734e",
+            "package": "@microsoft/webpack-stats-report"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @microsoft/webpack-stats-differ to v1.0.0",
+            "author": "lkiniu@microsoft.com",
+            "commit": "8bda63fb19fcae56075bfd54eaf2be6efe28734e",
+            "package": "@microsoft/webpack-stats-report"
+          }
+        ]
+      }
+    },
     {
       "date": "Mon, 26 Apr 2021 14:11:27 GMT",
       "tag": "@ardiffact/bundle-size-report_v0.3.0",

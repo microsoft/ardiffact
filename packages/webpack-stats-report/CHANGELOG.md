@@ -1,8 +1,20 @@
-# Change Log - @ardiffact/bundle-size-report
+# Change Log - @microsoft/webpack-stats-report
 
-This log was last generated on Mon, 26 Apr 2021 14:11:27 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Aug 2021 10:52:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.0
+
+Thu, 26 Aug 2021 10:52:17 GMT
+
+### Major changes
+
+- change organization scope and rename packages (lkiniu@microsoft.com)
+
+### Patches
+
+- Bump @microsoft/webpack-stats-differ to v1.0.0 (lkiniu@microsoft.com)
 
 ## 0.3.0
 

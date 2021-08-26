@@ -1,8 +1,20 @@
-# Change Log - @ardiffact/bundle-size-differ
+# Change Log - @microsoft/webpack-stats-differ
 
-This log was last generated on Wed, 21 Apr 2021 14:46:32 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Aug 2021 10:52:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.0
+
+Thu, 26 Aug 2021 10:52:17 GMT
+
+### Major changes
+
+- change organization scope and rename packages (lkiniu@microsoft.com)
+
+### Patches
+
+- Bump @microsoft/azure-artifact-storage to v1.0.0 (lkiniu@microsoft.com)
 
 ## 0.2.5
 

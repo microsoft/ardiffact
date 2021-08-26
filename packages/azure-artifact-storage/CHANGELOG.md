@@ -1,8 +1,16 @@
-# Change Log - @ardiffact/azure-artifact-storage
+# Change Log - @microsoft/azure-artifact-storage
 
-This log was last generated on Wed, 21 Apr 2021 14:46:32 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Aug 2021 10:52:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.0
+
+Thu, 26 Aug 2021 10:52:17 GMT
+
+### Major changes
+
+- change organization scope and rename packages (lkiniu@microsoft.com)
 
 ## 0.3.4
 

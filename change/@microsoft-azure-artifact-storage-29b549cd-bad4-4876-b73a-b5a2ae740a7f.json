@@ -1,7 +1,0 @@
-{
-  "type": "major",
-  "comment": "change organization scope and rename packages",
-  "packageName": "@microsoft/azure-artifact-storage",
-  "email": "lkiniu@microsoft.com",
-  "dependentChangeType": "patch"
-}

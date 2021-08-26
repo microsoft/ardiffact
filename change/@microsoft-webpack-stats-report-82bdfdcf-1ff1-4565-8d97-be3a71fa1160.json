@@ -1,7 +1,0 @@
-{
-  "type": "major",
-  "comment": "change organization scope and rename packages",
-  "packageName": "@microsoft/webpack-stats-report",
-  "email": "lkiniu@microsoft.com",
-  "dependentChangeType": "patch"
-}
