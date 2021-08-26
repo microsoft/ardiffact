@@ -4,6 +4,8 @@
 
 ## azure-artifact-storage package
 
+A library for interacting with Azure Blob Storage
+
 ## Functions
 
 |  Function | Description |

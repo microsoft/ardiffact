@@ -8,7 +8,7 @@
 
 |  Package | Description |
 |  --- | --- |
-|  [@microsoft/azure-artifact-storage](./azure-artifact-storage.md) |  |
+|  [@microsoft/azure-artifact-storage](./azure-artifact-storage.md) | A library for interacting with Azure Blob Storage |
 |  [@microsoft/webpack-stats-differ](./webpack-stats-differ.md) | A library for generating a diff object between two sets of webpack bundle stat files |
 |  [@microsoft/webpack-stats-report](./webpack-stats-report.md) | A library for generating a markdown report for a bundle stats diff |
 
