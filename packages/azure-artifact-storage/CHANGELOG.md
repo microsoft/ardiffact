@@ -1,8 +1,16 @@
 # Change Log - @microsoft/azure-artifact-storage
 
-This log was last generated on Thu, 26 Aug 2021 10:52:17 GMT and should not be manually modified.
+This log was last generated on Fri, 27 Aug 2021 11:13:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.1
+
+Fri, 27 Aug 2021 11:13:57 GMT
+
+### Patches
+
+- add README.md, LICENSE.txt, CONTRIBUTING.md and CODE_OF_CONDUCT.md to ardiffact packages (lkiniu@microsoft.com)
 
 ## 1.0.0
 
