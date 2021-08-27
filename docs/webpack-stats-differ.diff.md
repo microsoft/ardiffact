@@ -28,7 +28,5 @@ export declare function diff(baselineDir: string, candidateDir: string, fileFilt
 
 <b>Returns:</b>
 
-Promise&lt;[FileDiffResults](./webpack-stats-differ.filediffresults.md)<!-- -->&gt;
-
-The diff object
+Promise&lt;[FileDiffResults](./webpack-stats-differ.filediffresults.md)<!-- -->&gt; The diff object
 
