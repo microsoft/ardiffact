@@ -1,5 +1,4 @@
 import * as fs from "fs";
-import * as zlib from "zlib";
 import { chain } from 'stream-chain';
 import { parser } from 'stream-json';
 import { streamObject } from 'stream-json/streamers/StreamObject';
@@ -10,7 +9,6 @@ export const customJsonParser = (filePath: string): Promise<{ [key: string]: any
         const result: { [key:string]: any } = {}
         const pipeline = chain([
             fs.createReadStream(filePath),
-            zlib.createGunzip(),
             parser(),
             streamObject(),
         ]);
