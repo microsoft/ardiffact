@@ -2,6 +2,21 @@
   "name": "@microsoft/webpack-stats-differ",
   "entries": [
     {
+      "date": "Fri, 28 Apr 2023 16:36:53 GMT",
+      "tag": "@microsoft/webpack-stats-differ_v1.0.2",
+      "version": "1.0.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add custom JSON parser",
+            "author": "rnjuguna@microsoft.com",
+            "commit": "bd8cfece9f3ebe6401d387d8e1cecf18378e25e5",
+            "package": "@microsoft/webpack-stats-differ"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 27 Aug 2021 11:13:57 GMT",
       "tag": "@microsoft/webpack-stats-differ_v1.0.1",
       "version": "1.0.1",

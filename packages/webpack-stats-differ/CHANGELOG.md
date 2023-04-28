@@ -1,8 +1,16 @@
 # Change Log - @microsoft/webpack-stats-differ
 
-This log was last generated on Fri, 27 Aug 2021 11:13:57 GMT and should not be manually modified.
+This log was last generated on Fri, 28 Apr 2023 16:36:53 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.2
+
+Fri, 28 Apr 2023 16:36:53 GMT
+
+### Patches
+
+- Add custom JSON parser (rnjuguna@microsoft.com)
 
 ## 1.0.1
 

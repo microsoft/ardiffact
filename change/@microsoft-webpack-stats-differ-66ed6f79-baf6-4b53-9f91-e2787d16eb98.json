@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add custom JSON parser",
-  "packageName": "@microsoft/webpack-stats-differ",
-  "email": "rnjuguna@microsoft.com",
-  "dependentChangeType": "patch"
-}
