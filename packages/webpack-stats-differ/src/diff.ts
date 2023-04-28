@@ -14,6 +14,7 @@ export {
   FileDiffResults,
 } from "./diffAssets";
 import { generateComparisonAddress } from "./comparisonAddress";
+import { customJsonParser } from "./customJsonParser";
 
 /**
  * Calculates the diff between two sets of bundle stats
@@ -160,9 +161,8 @@ const getRemoteArtifactsManifest = async (
 const getWebpackStatJSON = async (
   filePath: string
 ): Promise<WebpackStatsJson> => {
-  const data = await fs.promises.readFile(filePath, { encoding: "utf-8" });
   try {
-    const parsed: WebpackStatsJson = JSON.parse(data);
+    const parsed: WebpackStatsJson = customJsonParser(filePath) as unknown as WebpackStatsJson;
     return parsed;
   } catch (e: unknown) {
     throw new Error(`Cannot parse webpack state file ${filePath}: ${e}`);
