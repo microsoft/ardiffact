@@ -2,6 +2,7 @@ import { identity } from "lodash/fp";
 import { Stats } from "webpack";
 import { WebpackAssetStat } from "./diffAssets";
 import * as upath from "upath";
+import { suiteUxAssetNameRegex } from "./matchesPattern";
 
 export type Asset = Exclude<Stats.ToJsonOutput["assets"], undefined>[number];
 
@@ -22,6 +23,10 @@ export function getFriendlyAssetName(
 ): string {
   // First try removing the hash manually from the file name.
   const name = asset.name;
+
+  let match = asset.name.match(suiteUxAssetNameRegex);
+  if (match) return match[1];
+
   const nameWithoutHash = removeHashFromName(name);
   if (nameWithoutHash !== name) {
     return nameWithoutHash;
