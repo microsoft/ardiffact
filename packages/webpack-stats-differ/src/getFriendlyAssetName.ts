@@ -61,7 +61,7 @@ export const removeHashFromName = (name: string): string => {
     const cleanSecondPart =
     secondDotPart && // Check if secondDotPart is truthy
     hashRegex.test(secondDotPart) // If it's truthy, check if it matches the hashRegex
-      ? secondDotPart + secondDotPart.replace(hashRegex, "") // If it matches, concatenate secondDotPart with the matched pattern removed from it using the replace() method
+      ? secondDotPart.replace(hashRegex, "") // If it matches, set the matched pattern removed from it using the replace() method
       : thirdDotPart // If it doesn't match, check if thirdDotPart is truthy
       ? secondDotPart + "." + thirdDotPart.replace(hashRegex, "") // If it's truthy, concatenate secondDotPart with a period and thirdDotPart with any matched pattern in thirdDotPart replaced with an empty string
       : secondDotPart; // If neither condition is met, set cleanSecondPart to secondDotPart
