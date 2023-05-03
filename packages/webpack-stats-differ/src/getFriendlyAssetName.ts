@@ -2,7 +2,6 @@ import { identity } from "lodash/fp";
 import { Stats } from "webpack";
 import { WebpackAssetStat } from "./diffAssets";
 import * as upath from "upath";
-import { suiteUxAssetNameRegex } from "./matchesPattern";
 
 export type Asset = Exclude<Stats.ToJsonOutput["assets"], undefined>[number];
 
@@ -23,10 +22,6 @@ export function getFriendlyAssetName(
 ): string {
   // First try removing the hash manually from the file name.
   const name = asset.name;
-
-  let match = asset.name.match(suiteUxAssetNameRegex);
-  if (match) return match[1];
-
   const nameWithoutHash = removeHashFromName(name);
   if (nameWithoutHash !== name) {
     return nameWithoutHash;
@@ -49,9 +44,10 @@ const hashRegex = /_([a-z0-9]{20})/;
 export const removeHashFromName = (name: string): string => {
   const fileParts = upath.parse(name);
   // We could have filenames like .d.ts or .js.map
-  const splitBySecondDotPart = fileParts.name.split(".");
-  const firstNamePart = splitBySecondDotPart[0];
-  const secondDotPart = splitBySecondDotPart[1];
+  const splitByDotPart = fileParts.name.split(".");
+  const firstNamePart = splitByDotPart[0];
+  const secondDotPart = splitByDotPart[1];
+  const thirdDotPart = splitByDotPart[2];
   // Remove hash
   const otherParts = firstNamePart.split("_");
 
@@ -60,11 +56,20 @@ export const removeHashFromName = (name: string): string => {
     otherParts[otherParts.length - 1].length !== 20
   ) {
     // Search uses a hash in the secondDotPart e.g. search_init.min_7ba0dc2ea2246e82e8a5.js
+    // Oneshell uses a hash in the fourth part e.g. suiteux.shell.bootstrapper.d5a8a72572eca5ebbdd9.js
+
+    const cleanSecondPart =
+    secondDotPart && // Check if secondDotPart is truthy
+    hashRegex.test(secondDotPart) // If it's truthy, check if it matches the hashRegex
+      ? secondDotPart + secondDotPart.replace(hashRegex, "") // If it matches, concatenate secondDotPart with the matched pattern removed from it using the replace() method
+      : thirdDotPart // If it doesn't match, check if thirdDotPart is truthy
+      ? secondDotPart + "." + thirdDotPart.replace(hashRegex, "") // If it's truthy, concatenate secondDotPart with a period and thirdDotPart with any matched pattern in thirdDotPart replaced with an empty string
+      : secondDotPart; // If neither condition is met, set cleanSecondPart to secondDotPart
 
     return (
       [
         otherParts.join("_"),
-        secondDotPart && secondDotPart.replace(hashRegex, ""),
+        cleanSecondPart, 
       ]
         .filter(identity)
         .join(".") + fileParts.ext
