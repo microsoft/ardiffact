@@ -1,6 +1,5 @@
 import { Stats } from "webpack";
 import { WebpackAssetStat } from "./diffAssets";
-import * as upath from "upath";
 
 export type Asset = Exclude<Stats.ToJsonOutput["assets"], undefined>[number];
 
@@ -21,9 +20,9 @@ export function getFriendlyAssetName(
 ): string {
   // First try removing the hash manually from the file name.
   const name = asset.name;
-  const modifiedFileName = cleanFileName(name);
-  if (modifiedFileName !== name) {
-    return modifiedFileName;
+  const nameWithoutHash = removeHashFromName(name);
+  if (nameWithoutHash !== name) {
+    return nameWithoutHash;
   }
 
   // Try using the chunk names from the asset data instead.
@@ -36,12 +35,7 @@ export function getFriendlyAssetName(
   return name;
 }
 
-const removeHashFromName = (name: string): string => {
-  return name.replace(/([_.][a-z0-9]{20})(?:\b)/, "");
-};
-
-const cleanFileName = (name: string): string => {
-  const fileParts = upath.parse(name);
-  const baseName = fileParts.name;
-  return removeHashFromName(baseName) + fileParts.ext;
+//Removes a hash from a given filename and returns the base name
+export const removeHashFromName = (name: string): string => {
+  return name.replace(/^.*[\/]|([_.][a-z0-9]{20})(?:\b)/g, "");
 };
