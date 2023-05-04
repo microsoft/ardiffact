@@ -1,4 +1,3 @@
-import { identity } from "lodash/fp";
 import { Stats } from "webpack";
 import { WebpackAssetStat } from "./diffAssets";
 import * as upath from "upath";
