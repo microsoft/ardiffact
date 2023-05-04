@@ -1,7 +1,5 @@
-import { identity } from "lodash/fp";
 import { Stats } from "webpack";
 import { WebpackAssetStat } from "./diffAssets";
-import * as upath from "upath";
 
 export type Asset = Exclude<Stats.ToJsonOutput["assets"], undefined>[number];
 
@@ -37,38 +35,7 @@ export function getFriendlyAssetName(
   return name;
 }
 
-const hashRegex = /_([a-z0-9]{20})/;
-
-// TODO(mapol): We need a better way to identify a hash inside a filename
-// TODO(mapol): We need to make this function take into account the folder name. Once we do that we can remove the `ignoreDelveStringsFiles` function.
+//Removes a hash from a given filename and returns the base name
 export const removeHashFromName = (name: string): string => {
-  const fileParts = upath.parse(name);
-  // We could have filenames like .d.ts or .js.map
-  const splitBySecondDotPart = fileParts.name.split(".");
-  const firstNamePart = splitBySecondDotPart[0];
-  const secondDotPart = splitBySecondDotPart[1];
-  // Remove hash
-  const otherParts = firstNamePart.split("_");
-
-  if (
-    otherParts.length === 1 ||
-    otherParts[otherParts.length - 1].length !== 20
-  ) {
-    // Search uses a hash in the secondDotPart e.g. search_init.min_7ba0dc2ea2246e82e8a5.js
-
-    return (
-      [
-        otherParts.join("_"),
-        secondDotPart && secondDotPart.replace(hashRegex, ""),
-      ]
-        .filter(identity)
-        .join(".") + fileParts.ext
-    );
-  }
-
-  return (
-    [otherParts.slice(0, -1).join("_"), secondDotPart]
-      .filter(identity)
-      .join(".") + fileParts.ext
-  );
+  return name.replace(/^.*[\/]|([_.][a-z0-9]{20})(?:\b)/g, "");
 };
