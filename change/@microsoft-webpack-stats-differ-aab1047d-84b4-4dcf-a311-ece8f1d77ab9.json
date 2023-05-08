@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "clean up the code",
+  "packageName": "@microsoft/webpack-stats-differ",
+  "email": "derricknjeru@microsoft.com",
+  "dependentChangeType": "patch"
+}

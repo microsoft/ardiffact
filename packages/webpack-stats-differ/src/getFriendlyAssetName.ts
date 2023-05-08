@@ -1,5 +1,6 @@
 import { Stats } from "webpack";
 import { WebpackAssetStat } from "./diffAssets";
+import { hashRegex } from "./matchesPattern";
 
 export type Asset = Exclude<Stats.ToJsonOutput["assets"], undefined>[number];
 
@@ -37,5 +38,5 @@ export function getFriendlyAssetName(
 
 //Removes a hash from a given filename and returns the base name
 export const removeHashFromName = (name: string): string => {
-  return name.replace(/^.*[\/]|([_.][a-z0-9]{20})(?:\b)/g, "");
+  return name.replace(hashRegex, "");
 };
