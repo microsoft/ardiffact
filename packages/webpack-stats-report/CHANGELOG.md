@@ -1,8 +1,16 @@
 # Change Log - @microsoft/webpack-stats-report
 
-This log was last generated on Fri, 28 Apr 2023 16:36:53 GMT and should not be manually modified.
+This log was last generated on Mon, 08 May 2023 08:05:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.3
+
+Mon, 08 May 2023 08:05:08 GMT
+
+### Patches
+
+- Bump @microsoft/webpack-stats-differ to v1.0.3 (derricknjeru@microsoft.com)
 
 ## 1.0.2
 
