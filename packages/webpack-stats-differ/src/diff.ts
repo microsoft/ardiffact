@@ -92,13 +92,18 @@ const generateDiffs = async (
   useWorkers?: boolean
 ): Promise<FileDiffResults> => {
   let results: GenerateDiffAsyncResult[] = [];
-  if (!useWorkers) {
-    results = await Promise.all(
-      filePairs.map((pair) => getFileDiffResult({ pair, filter }))
-    );
+  const numOfCpus = os.cpus().length;
+  const numOfWorkers = useWorkers ? Math.ceil(numOfCpus * 0.75) : 1;
+  const start = Date.now();
+  console.log(
+    `Started diffing for ${filePairs.length} bundle pairs using ${numOfWorkers} workers`
+  );
+  if (numOfWorkers <= 1) {
+    for (const pair of filePairs) {
+      const result = await getFileDiffResult({ pair, filter });
+      results.push(result);
+    }
   } else {
-    const numOfCpus = os.cpus().length;
-    const numOfWorkers = Math.ceil(numOfCpus * 0.75);
     let pairIndex = 0;
     const diffImageWorker = async () => {
       const worker = new Worker(`${__dirname}/generateDiffsAsync.js`);
@@ -112,7 +117,6 @@ const generateDiffs = async (
         await new Promise((resolve) => {
           worker.once("message", (result: GenerateDiffAsyncResult) => {
             results.push(result);
-
             resolve(undefined);
           });
 
@@ -127,6 +131,7 @@ const generateDiffs = async (
     const buckets = new Array(numOfWorkers).fill(1);
     await Promise.all(buckets.map(diffImageWorker));
   }
+  console.log(`Diffing done in ${Date.now() - start} ms`);
   return {
     withDifferences: results
       .filter((pairResult) => pairResult.type === "changed")
