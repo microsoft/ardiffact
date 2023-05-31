@@ -1,12 +1,13 @@
 import {
-  diffAssets,
   FileDiffResult,
   FileDiffResults,
+  FileDiffResultWithComparisonToolUrl,
   FileToDiffDescriptor,
-  WebpackStatsJson,
 } from "./diffAssets";
+import { Worker } from "worker_threads";
 import { FilePair, pairFiles, pairRemoteArtifacts } from "./pairFiles";
 import * as fs from "fs";
+import * as os from "os";
 import globby from "globby";
 import { RemoteArtifact } from "@microsoft/azure-artifact-storage";
 export {
@@ -14,7 +15,11 @@ export {
   FileDiffResults,
 } from "./diffAssets";
 import { generateComparisonAddress } from "./comparisonAddress";
-import { customJsonParser } from "./customJsonParser";
+import {
+  GenerateDiffAsyncResult,
+  GetFileDiffOptions,
+  getFileDiffResult,
+} from "./generateDiffsAsync";
 
 /**
  * Calculates the diff between two sets of bundle stats
@@ -38,7 +43,8 @@ export async function diff(
     baseline: string | RemoteArtifact[];
     candidate: string | RemoteArtifact[];
     hostUrl: string;
-  }
+  },
+  useWorkers?: boolean
 ): Promise<FileDiffResults> {
   const [filesA, filesB] = await Promise.all(
     [baselineDir, candidateDir].map(
@@ -51,7 +57,7 @@ export async function diff(
   );
 
   const paired = pairFiles(filesA, filesB);
-  const diffs = await generateDiffs(paired, filter);
+  const diffs = await generateDiffs(paired, filter, useWorkers);
   if (remoteArtifactManifests) {
     const remoteArtifactA = instanceOfRemoteArtifact(
       remoteArtifactManifests.baseline
@@ -82,67 +88,57 @@ export async function diff(
 
 const generateDiffs = async (
   filePairs: FilePair[],
-  filter?: string[] | string
+  filter?: string[] | string,
+  useWorkers?: boolean
 ): Promise<FileDiffResults> => {
-  const withDiffs: {
-    base: string;
-    candidate: string;
-    name: string;
-  }[] = new Array<{ base: string; candidate: string; name: string }>();
-  const removedFiles: { removed: string; name: string }[] = new Array<{
-    removed: string;
-    name: string;
-  }>();
-  const newFiles: { newFile: string; name: string }[] = new Array<{
-    newFile: string;
-    name: string;
-  }>();
-  filePairs.forEach((pair) => {
-    if (pair.baseline && pair.candidate) {
-      withDiffs.push({
-        base: pair.baseline,
-        candidate: pair.candidate,
-        name: pair.name,
-      });
-    } else if (pair.candidate) {
-      newFiles.push({ newFile: pair.candidate, name: pair.name });
-    } else if (pair.baseline) {
-      removedFiles.push({ removed: pair.baseline, name: pair.name });
-    }
-  });
-  const diffs = new Array<FileDiffResult>();
-  for (const wd of withDiffs) {
-    try {
-      const [parsedBase, parsedCandidate] = await Promise.all(
-        [wd.base, wd.candidate].map(getWebpackStatJSON)
-      );
-      diffs.push({
-        diffStats: diffAssets(parsedBase, parsedCandidate, filter),
-        name: wd.name,
-      });
-    } catch (e: unknown) {
-      console.log(e);
-    }
+  let results: GenerateDiffAsyncResult[] = [];
+  if (!useWorkers) {
+    results = await Promise.all(
+      filePairs.map((pair) => getFileDiffResult({ pair, filter }))
+    );
+  } else {
+    const numOfCpus = os.cpus().length;
+    const numOfWorkers = Math.ceil(numOfCpus * 0.75);
+    let pairIndex = 0;
+    const diffImageWorker = async () => {
+      const worker = new Worker(`${__dirname}/generateDiffsAsync.js`);
+
+      const generateDiffOptions: GetFileDiffOptions = {
+        pair: null,
+        filter,
+      };
+
+      while ((generateDiffOptions.pair = filePairs[pairIndex++])) {
+        await new Promise((resolve) => {
+          worker.once("message", (result: GenerateDiffAsyncResult) => {
+            results.push(result);
+
+            resolve(undefined);
+          });
+
+          worker.postMessage(generateDiffOptions);
+        });
+      }
+
+      worker.terminate();
+      return;
+    };
+
+    const buckets = new Array(numOfWorkers).fill(1);
+    await Promise.all(buckets.map(diffImageWorker));
   }
-  const added = new Array<FileDiffResult>();
-  for (const nw of newFiles) {
-    try {
-      const parsedFile = await getWebpackStatJSON(nw.newFile);
-      added.push({
-        diffStats: diffAssets({ assets: [] }, parsedFile, filter),
-        name: nw.name,
-      });
-    } catch (e: unknown) {
-      console.log(e);
-    }
-  }
-  const removed = removedFiles.map(
-    (f): FileToDiffDescriptor => ({ name: f.name, baselinePath: f.removed })
-  );
   return {
-    withDifferences: diffs,
-    removedFiles: removed,
-    newFiles: added,
+    withDifferences: results
+      .filter((pairResult) => pairResult.type === "changed")
+      .map(
+        (pairResult) => pairResult.result as FileDiffResultWithComparisonToolUrl
+      ),
+    newFiles: results
+      .filter((pairResult) => pairResult.type === "added")
+      .map((pairResult) => pairResult.result as FileDiffResult),
+    removedFiles: results
+      .filter((pairResult) => pairResult.type === "removed")
+      .map((pairResult) => pairResult.result as FileToDiffDescriptor),
   };
 };
 
@@ -155,17 +151,6 @@ const getRemoteArtifactsManifest = async (
     return parsed;
   } catch (e: unknown) {
     throw new Error(`Cannot parse remote artifact manifest ${filePath}: ${e}`);
-  }
-};
-
-const getWebpackStatJSON = async (
-  filePath: string
-): Promise<WebpackStatsJson> => {
-  try {
-    const parsed: WebpackStatsJson = customJsonParser(filePath) as unknown as WebpackStatsJson;
-    return parsed;
-  } catch (e: unknown) {
-    throw new Error(`Cannot parse webpack state file ${filePath}: ${e}`);
   }
 };
 
