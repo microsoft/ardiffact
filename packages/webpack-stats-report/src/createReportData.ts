@@ -9,6 +9,7 @@ export interface ReportData {
   totalSize: number;
   assets: ReportAssetData[];
   comparisonToolUrl?: string;
+  ownedBy?: string[]
 }
 
 export interface ReportAssetData {
@@ -25,6 +26,7 @@ export const createReportData = ({
   name,
   diffStats,
   comparisonToolUrl,
+  ownedBy
 }: FileDiffResultWithComparisonToolUrl): ReportData => {
   const largestDiffFirst = (a: { diff: number }, b: { diff: number }) =>
     b.diff - a.diff;
@@ -86,6 +88,7 @@ export const createReportData = ({
       .concat(assets)
       .reduce((totalSize, asset) => (totalSize += asset.size), 0),
     comparisonToolUrl,
+    ownedBy
   };
 };
 

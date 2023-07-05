@@ -3,7 +3,7 @@ import { basename } from "path";
 import { RemoteArtifact } from "@microsoft/azure-artifact-storage";
 export const getFileNames = (dirPath: string) => fs.promises.readdir(dirPath);
 
-export const pairFiles = (pathsA: string[], pathsB: string[]): FilePair[] => {
+export const pairFiles = (pathsA: string[], pathsB: string[], owners: Map<string, string[]> | undefined): FilePair[] => {
   const [aMap, bMap] = [pathsA, pathsB].map(
     (paths) => new Map(paths.map((p) => [basename(p), p]))
   );
@@ -11,7 +11,7 @@ export const pairFiles = (pathsA: string[], pathsB: string[]): FilePair[] => {
     ...new Set(pathsA.concat(pathsB).map((p) => basename(p))),
   ];
   return allFilesNames.map(
-    (name): FilePair => ({ name, baseline: aMap.get(name), candidate: bMap.get(name) })
+    (name): FilePair => ({ name, baseline: aMap.get(name), candidate: bMap.get(name), ownedBy: owners?.get(name) || [] })
   );
 };
 
@@ -34,4 +34,5 @@ export type FilePair = {
   name: string;
   baseline?: Path;
   candidate?: Path;
+  ownedBy?: string[];
 };

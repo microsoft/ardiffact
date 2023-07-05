@@ -38,7 +38,8 @@ export async function diff(
     baseline: string | RemoteArtifact[];
     candidate: string | RemoteArtifact[];
     hostUrl: string;
-  }
+  },
+  bundleStatsOwners?:Map<string, string[]>
 ): Promise<FileDiffResults> {
   const [filesA, filesB] = await Promise.all(
     [baselineDir, candidateDir].map(
@@ -50,7 +51,7 @@ export async function diff(
     )
   );
 
-  const paired = pairFiles(filesA, filesB);
+  const paired = pairFiles(filesA, filesB, bundleStatsOwners);
   const diffs = await generateDiffs(paired, filter);
   if (remoteArtifactManifests) {
     const remoteArtifactA = instanceOfRemoteArtifact(
@@ -88,24 +89,43 @@ const generateDiffs = async (
     base: string;
     candidate: string;
     name: string;
-  }[] = new Array<{ base: string; candidate: string; name: string }>();
+    ownedBy?: string[];
+  }[] = new Array<{ base: string; candidate: string; name: string, ownedBy?: string[] }>();
   const removedFiles: { removed: string; name: string }[] = new Array<{
     removed: string;
     name: string;
   }>();
-  const newFiles: { newFile: string; name: string }[] = new Array<{
+  const newFiles: { newFile: string; name: string, ownedBy?: string[] }[] = new Array<{
     newFile: string;
     name: string;
+    ownedBy?: string[];
   }>();
   filePairs.forEach((pair) => {
     if (pair.baseline && pair.candidate) {
-      withDiffs.push({
+      let withDiff: {
+        base: string;
+        candidate: string;
+        name: string;
+        ownedBy?: string[];
+      } = {
         base: pair.baseline,
         candidate: pair.candidate,
         name: pair.name,
-      });
+      }
+      if(pair.ownedBy){
+        withDiff.ownedBy = pair.ownedBy
+      }
+      withDiffs.push(withDiff);
     } else if (pair.candidate) {
-      newFiles.push({ newFile: pair.candidate, name: pair.name });
+      let withDiff: {
+        newFile: string;
+        name: string;
+        ownedBy?: string[];
+      } = {newFile: pair.candidate, name: pair.name }
+      if(pair.ownedBy){
+        withDiff.ownedBy = pair.ownedBy
+      }
+      newFiles.push(withDiff);
     } else if (pair.baseline) {
       removedFiles.push({ removed: pair.baseline, name: pair.name });
     }
@@ -119,6 +139,7 @@ const generateDiffs = async (
       diffs.push({
         diffStats: diffAssets(parsedBase, parsedCandidate, filter),
         name: wd.name,
+        ownedBy: wd.ownedBy
       });
     } catch (e: unknown) {
       console.log(e);
@@ -131,6 +152,7 @@ const generateDiffs = async (
       added.push({
         diffStats: diffAssets({ assets: [] }, parsedFile, filter),
         name: nw.name,
+        ownedBy: nw.ownedBy
       });
     } catch (e: unknown) {
       console.log(e);

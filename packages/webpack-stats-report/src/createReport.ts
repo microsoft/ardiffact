@@ -63,9 +63,26 @@ const getPercentageAndIcon = (
   return `<span style="${noWrapStyle}">${percentage} ${icon}</span>`;
 };
 
+const shouldAtMention = (
+  reportData: ReportData,
+  atMentionThreshold: number
+) => {
+  return reportData.assets.some((reportAssetData) =>{
+    if (reportAssetData.isRemoved) {
+      return false;
+    }
+    const refSize = reportAssetData.size - reportAssetData.diff;
+    const percentage = (100 / refSize) * Math.abs(reportAssetData.diff);
+  
+    return percentage >= atMentionThreshold;
+  });
+  
+}
+
 export function createDetailedReport(
   reportData: ReportData,
-  minimumIncrease: number
+  minimumIncrease: number,
+  atMentionThreshold: number
 ): string {
   if (reportData.totalDiff === 0) {
     return "";
@@ -79,7 +96,8 @@ export function createDetailedReport(
     minimumIncrease
   )} total size by ${formatBytes(Math.abs(reportData.totalDiff))}`;
   const totalSizeMessage = `Total size: ${formatBytes(reportData.totalSize)}`;
-  const prefix = `<summary><span style="font-size: 16px">${reportData.name} ${comparisonLink}</span><br><ul><li>${deltaSizeMessage}</li><li>${totalSizeMessage}</li></summary>`;
+  const ownersMessage = reportData.ownedBy?.map((owner) => `@${owner}`).join(" ") || "";
+  const prefix = `<summary><span style="font-size: 16px">${reportData.name} ${comparisonLink}</span><br><ul><li>${deltaSizeMessage}</li><li>${totalSizeMessage}</li>${shouldAtMention(reportData,atMentionThreshold) ? `<li>${ownersMessage}</li>` : ``}</summary>`;
 
   const header = "\n| Asset name | Size | Diff | |";
   const headerSeparator = "|---|---|---|---|";
