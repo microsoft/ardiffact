@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "at mention asset owners if chunk sizes increase above a certain threshold",
-  "packageName": "@microsoft/webpack-stats-report",
-  "email": "lkiniu@microsoft.com",
-  "dependentChangeType": "patch"
-}
