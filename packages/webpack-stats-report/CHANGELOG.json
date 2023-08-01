@@ -2,6 +2,21 @@
   "name": "@microsoft/webpack-stats-report",
   "entries": [
     {
+      "date": "Tue, 01 Aug 2023 12:24:50 GMT",
+      "tag": "@microsoft/webpack-stats-report_v1.1.1",
+      "version": "1.1.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Improved report formatting",
+            "author": "71752651+unpervertedkid@users.noreply.github.com",
+            "commit": "8268c757c53463af2640040ccbc948fdc6e9219f",
+            "package": "@microsoft/webpack-stats-report"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 05 Jul 2023 15:39:16 GMT",
       "tag": "@microsoft/webpack-stats-report_v1.1.0",
       "version": "1.1.0",
