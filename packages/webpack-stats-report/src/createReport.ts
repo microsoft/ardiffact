@@ -23,7 +23,7 @@ const getPercentage = (reportAssetData: ReportAssetData) => {
   const percentage = (100 / refSize) * Math.abs(reportAssetData.diff);
 
   if (reportAssetData.isIncrease) {
-    return percentage > 20 ? `<b>+${percentage.toFixed(2)}%</b>` : `+${percentage.toFixed(2)}%`;
+    return percentage > 5 ? `<b>+${percentage.toFixed(2)}%</b>` : `+${percentage.toFixed(2)}%`;
   }
 
   if (reportAssetData.isReduction) {
@@ -101,7 +101,7 @@ export function createDetailedReport(
   const prefix = `<summary><span style="font-size: 16px">  ${comparisonLink} ${reportData.name} ${deltaSizeMessage} to ${totalSizeMessage} ${shouldAtMention(reportData,atMentionThreshold) ? `${ownersMessage}` : ``}</span> </summary>`;
   
   
-  const shouldTableBeExpanded = percentageChange >= 20;
+  const shouldTableBeExpanded = percentageChange >= 5;
 
   const header = "\n| Asset name | Size | Diff | Percentage change | ";
   const headerSeparator = "|---|---|---|---|";
