@@ -44,6 +44,7 @@ export async function diff(
     candidate: string | RemoteArtifact[];
     hostUrl: string;
   },
+  bundleStatsOwners?:Map<string, string[]> | undefined,
   useWorkers?: boolean
 ): Promise<FileDiffResults> {
   const [filesA, filesB] = await Promise.all(
@@ -56,7 +57,7 @@ export async function diff(
     )
   );
 
-  const paired = pairFiles(filesA, filesB);
+  const paired = pairFiles(filesA, filesB, bundleStatsOwners);
   const diffs = await generateDiffs(paired, filter, useWorkers);
   if (remoteArtifactManifests) {
     const remoteArtifactA = instanceOfRemoteArtifact(

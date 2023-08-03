@@ -23,7 +23,7 @@ const getPercentage = (reportAssetData: ReportAssetData) => {
   const percentage = (100 / refSize) * Math.abs(reportAssetData.diff);
 
   if (reportAssetData.isIncrease) {
-    return `+${percentage.toFixed(2)}%`;
+    return percentage > 5 ? `<b>+${percentage.toFixed(2)}%</b>` : `+${percentage.toFixed(2)}%`;
   }
 
   if (reportAssetData.isReduction) {
@@ -63,9 +63,26 @@ const getPercentageAndIcon = (
   return `<span style="${noWrapStyle}">${percentage} ${icon}</span>`;
 };
 
+const shouldAtMention = (
+  reportData: ReportData,
+  atMentionThreshold: number
+) => {
+  return reportData.assets.some((reportAssetData) =>{
+    if (reportAssetData.isRemoved) {
+      return false;
+    }
+    const refSize = reportAssetData.size - reportAssetData.diff;
+    const percentage = (100 / refSize) * Math.abs(reportAssetData.diff);
+  
+    return percentage >= atMentionThreshold;
+  });
+  
+}
+
 export function createDetailedReport(
   reportData: ReportData,
-  minimumIncrease: number
+  minimumIncrease: number,
+  atMentionThreshold: number
 ): string {
   if (reportData.totalDiff === 0) {
     return "";
@@ -74,14 +91,19 @@ export function createDetailedReport(
   const comparisonLink = reportData.comparisonToolUrl
     ? `<a target="_blank" rel="noopener noreferrer" href="${reportData.comparisonToolUrl}">🔍</a>`
     : "";
+    const percentageChange = Math.floor((100 / reportData.totalSize) * Math.abs(reportData.totalDiff));
   const deltaSizeMessage = `${getReducedOrIncreased(
-    reportData.totalDiff,
-    minimumIncrease
-  )} total size by ${formatBytes(Math.abs(reportData.totalDiff))}`;
-  const totalSizeMessage = `Total size: ${formatBytes(reportData.totalSize)}`;
-  const prefix = `<summary><span style="font-size: 16px">${reportData.name} ${comparisonLink}</span><br><ul><li>${deltaSizeMessage}</li><li>${totalSizeMessage}</li></summary>`;
+    reportData.totalDiff
+  )} by <b>${percentageChange}%</b>(${formatBytes(Math.abs(reportData.totalDiff))})`;
+  const totalSizeMessage = `${formatBytes(reportData.totalSize)}`;
+  const ownersMessage = reportData.ownedBy?.map((owner) => `@${owner}`).join(" ") || "";
 
-  const header = "\n| Asset name | Size | Diff | |";
+  const prefix = `<summary><span style="font-size: 16px">  ${comparisonLink} ${reportData.name} ${deltaSizeMessage} to ${totalSizeMessage} ${shouldAtMention(reportData,atMentionThreshold) ? `${ownersMessage}` : ``}</span> </summary>`;
+  
+  
+  const shouldTableBeExpanded = percentageChange >= 5;
+
+  const header = "\n| Asset name | Size | Diff | Percentage change | ";
   const headerSeparator = "|---|---|---|---|";
 
   const rows = reportData.assets.map((reportAssetData) => {
@@ -94,7 +116,7 @@ export function createDetailedReport(
   });
 
   return `
-  <details>${[prefix, header, headerSeparator, ...rows].join(
+  <details ${shouldTableBeExpanded ? "open" : ""}>${[prefix, header, headerSeparator, ...rows].join(
     "\n"
   )}\n</details>`;
 }
@@ -127,12 +149,11 @@ export function createNoChangeReport(reportData: ReportData[]): string {
 }
 
 function getReducedOrIncreased(
-  diffSize: number,
-  minimumIncrease: number
+  diffSize: number
 ): string {
   return diffSize > 0
-    ? (diffSize > minimumIncrease ? "🔺&nbsp;" : "") + "Increased"
-    : "✅&nbsp;Reduced";
+    ? "increased"
+    : "reduced";
 }
 
 function formatBytes(bytes: number, decimals: number = 2): string {

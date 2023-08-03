@@ -2,6 +2,44 @@
   "name": "@microsoft/webpack-stats-report",
   "entries": [
     {
+      "date": "Tue, 01 Aug 2023 12:24:50 GMT",
+      "tag": "@microsoft/webpack-stats-report_v1.1.1",
+      "version": "1.1.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Improved report formatting",
+            "author": "71752651+unpervertedkid@users.noreply.github.com",
+            "commit": "8268c757c53463af2640040ccbc948fdc6e9219f",
+            "package": "@microsoft/webpack-stats-report"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 05 Jul 2023 15:39:16 GMT",
+      "tag": "@microsoft/webpack-stats-report_v1.1.0",
+      "version": "1.1.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "at mention asset owners if chunk sizes increase above a certain threshold",
+            "author": "lkiniu@microsoft.com",
+            "commit": "587b2a0c6e83453a62b6ce058c900d4f22121d07",
+            "package": "@microsoft/webpack-stats-report"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @microsoft/webpack-stats-differ to v1.1.0",
+            "author": "lkiniu@microsoft.com",
+            "commit": "587b2a0c6e83453a62b6ce058c900d4f22121d07",
+            "package": "@microsoft/webpack-stats-report"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 08 May 2023 08:05:08 GMT",
       "tag": "@microsoft/webpack-stats-report_v1.0.3",
       "version": "1.0.3",

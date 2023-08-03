@@ -66,6 +66,7 @@ export const getFileDiffResult = async ({
         result: {
           name: pair.name,
           diffStats: diffResult,
+          ownedBy: pair.ownedBy
         },
       };
     } catch (e) {
@@ -81,6 +82,7 @@ export const getFileDiffResult = async ({
       result: {
         name: pair.name,
         diffStats: diffAssets({ assets: [] }, parsedFile, filter),
+        ownedBy: pair.ownedBy
       },
     };
   } else if (pair.baseline) {

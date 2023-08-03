@@ -20,6 +20,7 @@ export interface FileToDiffDescriptor {
 export interface FileDiffResult {
   name: string;
   diffStats: DiffStats;
+  ownedBy?: string[];
 }
 
 export type FileDiffResultWithComparisonToolUrl = FileDiffResult & {

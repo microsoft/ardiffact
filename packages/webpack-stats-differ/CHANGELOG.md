@@ -1,8 +1,16 @@
 # Change Log - @microsoft/webpack-stats-differ
 
-This log was last generated on Mon, 08 May 2023 08:05:08 GMT and should not be manually modified.
+This log was last generated on Wed, 05 Jul 2023 15:39:16 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.1.0
+
+Wed, 05 Jul 2023 15:39:16 GMT
+
+### Minor changes
+
+- at mention asset owners if chunk sizes increase above a certain threshold (lkiniu@microsoft.com)
 
 ## 1.0.3
 
