@@ -1,12 +1,13 @@
 import {
-  diffAssets,
   FileDiffResult,
   FileDiffResults,
+  FileDiffResultWithComparisonToolUrl,
   FileToDiffDescriptor,
-  WebpackStatsJson,
 } from "./diffAssets";
+import { Worker } from "worker_threads";
 import { FilePair, pairFiles, pairRemoteArtifacts } from "./pairFiles";
 import * as fs from "fs";
+import * as os from "os";
 import globby from "globby";
 import { RemoteArtifact } from "@microsoft/azure-artifact-storage";
 export {
@@ -14,7 +15,11 @@ export {
   FileDiffResults,
 } from "./diffAssets";
 import { generateComparisonAddress } from "./comparisonAddress";
-import { customJsonParser } from "./customJsonParser";
+import {
+  GenerateDiffAsyncResult,
+  GetFileDiffOptions,
+  getFileDiffResult,
+} from "./generateDiffsAsync";
 
 /**
  * Calculates the diff between two sets of bundle stats
@@ -39,7 +44,8 @@ export async function diff(
     candidate: string | RemoteArtifact[];
     hostUrl: string;
   },
-  bundleStatsOwners?:Map<string, string[]>
+  bundleStatsOwners?:Map<string, string[]> | undefined,
+  useWorkers?: boolean
 ): Promise<FileDiffResults> {
   const [filesA, filesB] = await Promise.all(
     [baselineDir, candidateDir].map(
@@ -52,7 +58,7 @@ export async function diff(
   );
 
   const paired = pairFiles(filesA, filesB, bundleStatsOwners);
-  const diffs = await generateDiffs(paired, filter);
+  const diffs = await generateDiffs(paired, filter, useWorkers);
   if (remoteArtifactManifests) {
     const remoteArtifactA = instanceOfRemoteArtifact(
       remoteArtifactManifests.baseline
@@ -83,88 +89,62 @@ export async function diff(
 
 const generateDiffs = async (
   filePairs: FilePair[],
-  filter?: string[] | string
+  filter?: string[] | string,
+  useWorkers?: boolean
 ): Promise<FileDiffResults> => {
-  const withDiffs: {
-    base: string;
-    candidate: string;
-    name: string;
-    ownedBy?: string[];
-  }[] = new Array<{ base: string; candidate: string; name: string, ownedBy?: string[] }>();
-  const removedFiles: { removed: string; name: string }[] = new Array<{
-    removed: string;
-    name: string;
-  }>();
-  const newFiles: { newFile: string; name: string, ownedBy?: string[] }[] = new Array<{
-    newFile: string;
-    name: string;
-    ownedBy?: string[];
-  }>();
-  filePairs.forEach((pair) => {
-    if (pair.baseline && pair.candidate) {
-      let withDiff: {
-        base: string;
-        candidate: string;
-        name: string;
-        ownedBy?: string[];
-      } = {
-        base: pair.baseline,
-        candidate: pair.candidate,
-        name: pair.name,
-      }
-      if(pair.ownedBy){
-        withDiff.ownedBy = pair.ownedBy
-      }
-      withDiffs.push(withDiff);
-    } else if (pair.candidate) {
-      let withDiff: {
-        newFile: string;
-        name: string;
-        ownedBy?: string[];
-      } = {newFile: pair.candidate, name: pair.name }
-      if(pair.ownedBy){
-        withDiff.ownedBy = pair.ownedBy
-      }
-      newFiles.push(withDiff);
-    } else if (pair.baseline) {
-      removedFiles.push({ removed: pair.baseline, name: pair.name });
-    }
-  });
-  const diffs = new Array<FileDiffResult>();
-  for (const wd of withDiffs) {
-    try {
-      const [parsedBase, parsedCandidate] = await Promise.all(
-        [wd.base, wd.candidate].map(getWebpackStatJSON)
-      );
-      diffs.push({
-        diffStats: diffAssets(parsedBase, parsedCandidate, filter),
-        name: wd.name,
-        ownedBy: wd.ownedBy
-      });
-    } catch (e: unknown) {
-      console.log(e);
-    }
-  }
-  const added = new Array<FileDiffResult>();
-  for (const nw of newFiles) {
-    try {
-      const parsedFile = await getWebpackStatJSON(nw.newFile);
-      added.push({
-        diffStats: diffAssets({ assets: [] }, parsedFile, filter),
-        name: nw.name,
-        ownedBy: nw.ownedBy
-      });
-    } catch (e: unknown) {
-      console.log(e);
-    }
-  }
-  const removed = removedFiles.map(
-    (f): FileToDiffDescriptor => ({ name: f.name, baselinePath: f.removed })
+  let results: GenerateDiffAsyncResult[] = [];
+  const numOfCpus = os.cpus().length;
+  const numOfWorkers = useWorkers ? Math.ceil(numOfCpus * 0.75) : 1;
+  const start = Date.now();
+  console.log(
+    `Started diffing for ${filePairs.length} bundle pairs using ${numOfWorkers} workers`
   );
+  if (numOfWorkers <= 1) {
+    for (const pair of filePairs) {
+      const result = await getFileDiffResult({ pair, filter });
+      results.push(result);
+    }
+  } else {
+    let pairIndex = 0;
+    const diffImageWorker = async () => {
+      const worker = new Worker(`${__dirname}/generateDiffsAsync.js`);
+
+      const generateDiffOptions: GetFileDiffOptions = {
+        pair: null,
+        filter,
+      };
+
+      while ((generateDiffOptions.pair = filePairs[pairIndex++])) {
+        await new Promise((resolve) => {
+          worker.once("message", (result: GenerateDiffAsyncResult) => {
+            results.push(result);
+            resolve(undefined);
+          });
+
+          worker.postMessage(generateDiffOptions);
+        });
+      }
+
+      worker.terminate();
+      return;
+    };
+
+    const buckets = new Array(numOfWorkers).fill(1);
+    await Promise.all(buckets.map(diffImageWorker));
+  }
+  console.log(`Diffing done in ${Date.now() - start} ms`);
   return {
-    withDifferences: diffs,
-    removedFiles: removed,
-    newFiles: added,
+    withDifferences: results
+      .filter((pairResult) => pairResult.type === "changed")
+      .map(
+        (pairResult) => pairResult.result as FileDiffResultWithComparisonToolUrl
+      ),
+    newFiles: results
+      .filter((pairResult) => pairResult.type === "added")
+      .map((pairResult) => pairResult.result as FileDiffResult),
+    removedFiles: results
+      .filter((pairResult) => pairResult.type === "removed")
+      .map((pairResult) => pairResult.result as FileToDiffDescriptor),
   };
 };
 
@@ -177,17 +157,6 @@ const getRemoteArtifactsManifest = async (
     return parsed;
   } catch (e: unknown) {
     throw new Error(`Cannot parse remote artifact manifest ${filePath}: ${e}`);
-  }
-};
-
-const getWebpackStatJSON = async (
-  filePath: string
-): Promise<WebpackStatsJson> => {
-  try {
-    const parsed: WebpackStatsJson = customJsonParser(filePath) as unknown as WebpackStatsJson;
-    return parsed;
-  } catch (e: unknown) {
-    throw new Error(`Cannot parse webpack state file ${filePath}: ${e}`);
   }
 };
 
