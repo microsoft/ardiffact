@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add support for using workers for parallelization",
-  "packageName": "@microsoft/webpack-stats-differ",
-  "email": "ronakjain.public@gmail.com",
-  "dependentChangeType": "patch"
-}

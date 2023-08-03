@@ -1,8 +1,16 @@
 # Change Log - @microsoft/webpack-stats-differ
 
-This log was last generated on Wed, 05 Jul 2023 15:39:16 GMT and should not be manually modified.
+This log was last generated on Thu, 03 Aug 2023 12:27:24 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.2.0
+
+Thu, 03 Aug 2023 12:27:24 GMT
+
+### Minor changes
+
+- Add support for using workers for parallelization (ronakjain.public@gmail.com)
 
 ## 1.1.0
 

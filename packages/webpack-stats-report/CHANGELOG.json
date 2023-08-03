@@ -2,6 +2,21 @@
   "name": "@microsoft/webpack-stats-report",
   "entries": [
     {
+      "date": "Thu, 03 Aug 2023 12:27:24 GMT",
+      "tag": "@microsoft/webpack-stats-report_v1.1.2",
+      "version": "1.1.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @microsoft/webpack-stats-differ to v1.2.0",
+            "author": "ronakjain.public@gmail.com",
+            "commit": "33414abd4cc3b3487c4fb64554501d480f3442cb",
+            "package": "@microsoft/webpack-stats-report"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 01 Aug 2023 12:24:50 GMT",
       "tag": "@microsoft/webpack-stats-report_v1.1.1",
       "version": "1.1.1",
