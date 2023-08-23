@@ -91,7 +91,9 @@ export function createDetailedReport(
   const comparisonLink = reportData.comparisonToolUrl
     ? `<a target="_blank" rel="noopener noreferrer" href="${reportData.comparisonToolUrl}">🔍</a>`
     : "";
-    const percentageChange = Math.floor((100 / reportData.totalSize) * Math.abs(reportData.totalDiff));
+    
+    const percentageChange = parseFloat(((Math.abs(reportData.totalDiff) / reportData.totalSize) * 100).toFixed(2));
+
   const deltaSizeMessage = `${getReducedOrIncreased(
     reportData.totalDiff
   )} by <b>${percentageChange}%</b>(${formatBytes(Math.abs(reportData.totalDiff))})`;
