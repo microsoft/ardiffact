@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix reporting of changes below 1%",
+  "packageName": "@microsoft/webpack-stats-report",
+  "email": "71752651+unpervertedkid@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}
