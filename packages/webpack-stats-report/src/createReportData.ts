@@ -7,9 +7,10 @@ export interface ReportData {
   name: string;
   totalDiff: number;
   totalSize: number;
+  baselineSize: number;
   assets: ReportAssetData[];
   comparisonToolUrl?: string;
-  ownedBy?: string[]
+  ownedBy?: string[];
 }
 
 export interface ReportAssetData {
@@ -26,7 +27,7 @@ export const createReportData = ({
   name,
   diffStats,
   comparisonToolUrl,
-  ownedBy
+  ownedBy,
 }: FileDiffResultWithComparisonToolUrl): ReportData => {
   const largestDiffFirst = (a: { diff: number }, b: { diff: number }) =>
     b.diff - a.diff;
@@ -35,6 +36,7 @@ export const createReportData = ({
     .map((asset) => ({
       name: asset.assetName,
       size: asset.candidateAssetSize,
+      baselineSize: asset.baselineAssetSize,
       diff: asset.sizeDiff,
       isIncrease: asset.isSizeIncrease,
       isReduction: asset.isSizeReduction,
@@ -50,6 +52,7 @@ export const createReportData = ({
     .map((asset) => ({
       name: asset.assetName,
       size: asset.candidateAssetSize,
+      baselineSize: asset.baselineAssetSize,
       diff: asset.sizeDiff,
       isIncrease: asset.isSizeIncrease,
       isReduction: asset.isSizeReduction,
@@ -62,6 +65,7 @@ export const createReportData = ({
     .map((asset) => ({
       name: asset.assetName,
       size: asset.candidateAssetSize,
+      baselineSize: asset.baselineAssetSize,
       diff: asset.sizeDiff,
       isIncrease: asset.isSizeIncrease,
       isReduction: asset.isSizeReduction,
@@ -72,12 +76,13 @@ export const createReportData = ({
 
   const unchanged = diffStats.unchangedStats.map((asset) => ({
     size: asset.candidateAssetSize,
+    baselineSize: asset.baselineAssetSize,
     diff: asset.sizeDiff,
   }));
 
   const assets = concat(added, changed, removed);
 
-  return {
+  const report = {
     name: getAppName(name),
     assets,
     totalDiff: assets.reduce(
@@ -87,9 +92,13 @@ export const createReportData = ({
     totalSize: unchanged
       .concat(assets)
       .reduce((totalSize, asset) => (totalSize += asset.size), 0),
+    baselineSize: unchanged
+      .concat(assets)
+      .reduce((totalSize, asset) => (totalSize += asset.baselineSize), 0),
     comparisonToolUrl,
-    ownedBy
+    ownedBy,
   };
+  return report;
 };
 
 function uppercaseFirst(appName: string): string {
