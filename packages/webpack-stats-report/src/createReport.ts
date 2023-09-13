@@ -87,20 +87,24 @@ export function createDetailedReport(
     ? `<a target="_blank" rel="noopener noreferrer" href="${reportData.comparisonToolUrl}">🔍</a>`
     : "";
 
-  const percentageChange = reportData.baselineSize === 0 ? 100 : parseFloat(
-    ((Math.abs(reportData.totalDiff) / reportData.baselineSize) * 100).toFixed(2)
-  );
+  const percentageChange =
+    reportData.baselineSize === 0
+      ? 100
+      : parseFloat(
+          (
+            (Math.abs(reportData.totalDiff) / reportData.baselineSize) *
+            100
+          ).toFixed(2)
+        );
 
-  const diffSign = getReducedOrIncreased(
-    reportData.totalDiff
-  );
+  const diffSign = getReducedOrIncreased(reportData.totalDiff);
 
-  const diffFormatBytes = formatBytes(
-    Math.abs(reportData.totalDiff)
-  )
+  const diffFormatBytes = formatBytes(Math.abs(reportData.totalDiff));
 
-  const emoji = getEmojiForTotalAssetChange(reportData.totalDiff > 0);
-  const color = getTextColorForTotalAssetChange(reportData.totalDiff > 0);
+  const isIncrease = reportData.totalDiff > 0;
+
+  const emoji = getEmojiForTotalAssetChange(isIncrease);
+  const color = getTextColorForTotalAssetChange(isIncrease);
 
   const deltaSizeMessage = `<span style="font-weight:bold;color:${color}">(${diffSign}${diffFormatBytes} | ${diffSign}${percentageChange}%)</span>`;
   const totalSizeMessage = `${formatBytes(reportData.totalSize)}`;
@@ -113,8 +117,8 @@ export function createDetailedReport(
     shouldAtMention(reportData, atMentionThreshold) ? `${ownersMessage}` : ``
   }</span> </summary>`;
 
-
-  const header = "\n| Asset&nbsp;name | Size | Diff | Percentage&nbsp;change | ";
+  const header =
+    "\n| Asset&nbsp;name | Size | Diff | Percentage&nbsp;change | ";
   const headerSeparator = "|---|---|---|---|";
 
   const rows = reportData.assets.map((reportAssetData) => {
@@ -127,12 +131,9 @@ export function createDetailedReport(
   });
 
   return `
-  <details>${[
-    prefix,
-    header,
-    headerSeparator,
-    ...rows,
-  ].join("\n")}\n</details>`;
+  <details>${[prefix, header, headerSeparator, ...rows].join(
+    "\n"
+  )}\n</details>`;
 }
 
 export function createNoChangeReport(reportData: ReportData[]): string {
@@ -201,4 +202,3 @@ function getTextColorForTotalAssetChange(isIncrease: boolean): string {
     return "#00A36C";
   }
 }
-

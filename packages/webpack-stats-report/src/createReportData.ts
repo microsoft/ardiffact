@@ -82,7 +82,7 @@ export const createReportData = ({
 
   const assets = concat(added, changed, removed);
 
-  const report = {
+  return {
     name: getAppName(name),
     assets,
     totalDiff: assets.reduce(
@@ -98,7 +98,6 @@ export const createReportData = ({
     comparisonToolUrl,
     ownedBy,
   };
-  return report;
 };
 
 function uppercaseFirst(appName: string): string {
