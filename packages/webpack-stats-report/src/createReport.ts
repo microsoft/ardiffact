@@ -109,9 +109,9 @@ export function createDetailedReport(
   const ownersMessage =
     reportData.ownedBy?.map((owner) => `@${owner}`).join(" ") || "";
 
-  const prefix = `<summary><span style="font-size: 16px">${emoji} ${comparisonLink} ${
+  const prefix = `<summary><span style="font-size: 16px">${emoji} ${
     reportData.name
-  } - ${totalSizeMessage} ${deltaSizeMessage} ${
+  } - ${totalSizeMessage} ${deltaSizeMessage} ${comparisonLink} ${
     shouldAtMention(reportData, atMentionThreshold) ? `${ownersMessage}` : ``
   }</span> </summary>`;
 
