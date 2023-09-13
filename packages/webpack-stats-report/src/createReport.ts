@@ -98,9 +98,7 @@ export function createDetailedReport(
         );
 
   const diffSign = getReducedOrIncreased(reportData.totalDiff);
-
   const diffFormatBytes = formatBytes(Math.abs(reportData.totalDiff));
-
   const isIncrease = reportData.totalDiff > 0;
 
   const emoji = getEmojiForTotalAssetChange(isIncrease);
