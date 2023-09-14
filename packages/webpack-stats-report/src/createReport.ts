@@ -1,17 +1,11 @@
 import { ReportAssetData, ReportData } from "./createReportData";
 
-const noWrapStyle = "white-space: nowrap;";
-const removedFileNameStyle = "text-decoration: line-through;";
-
-const getFileNameStyle = (reportAssetData: { isRemoved: boolean }) =>
-  reportAssetData.isRemoved ? removedFileNameStyle : "";
-
 const getFileName = (reportAssetData: ReportAssetData) => {
   const name = reportAssetData.isAdded
     ? `🆕  ${reportAssetData.name}`
     : reportAssetData.name;
 
-  return `<span style="${getFileNameStyle(reportAssetData)}">${name}</span>`;
+  return reportAssetData.isRemoved ? `~~${name}~~` : `${name}`;
 };
 
 const getPercentage = (reportAssetData: ReportAssetData) => {
@@ -23,7 +17,9 @@ const getPercentage = (reportAssetData: ReportAssetData) => {
   const percentage = (100 / refSize) * Math.abs(reportAssetData.diff);
 
   if (reportAssetData.isIncrease) {
-    return percentage > 5 ? `<b>+${percentage.toFixed(2)}%</b>` : `+${percentage.toFixed(2)}%`;
+    return percentage > 5
+      ? `<b>+${percentage.toFixed(2)}%</b>`
+      : `+${percentage.toFixed(2)}%`;
   }
 
   if (reportAssetData.isReduction) {
@@ -40,7 +36,7 @@ const getSize = (reportAssetData: ReportAssetData) => {
       : reportAssetData.size
   );
 
-  return `<span style="${noWrapStyle}">${size}</span>`;
+  return `${size}`;
 };
 
 const getDiff = (reportAssetData: ReportAssetData) => {
@@ -50,7 +46,7 @@ const getDiff = (reportAssetData: ReportAssetData) => {
 
   const formattedDiff = formatBytes(diff);
 
-  return `<span style="${noWrapStyle}">${formattedDiff}</span>`;
+  return `${formattedDiff}`;
 };
 
 const getPercentageAndIcon = (
@@ -60,24 +56,23 @@ const getPercentageAndIcon = (
   const percentage = getPercentage(reportAssetData);
   const icon = getEmoji(reportAssetData, minimumIncrease);
 
-  return `<span style="${noWrapStyle}">${percentage} ${icon}</span>`;
+  return `${percentage} ${icon}`;
 };
 
 const shouldAtMention = (
   reportData: ReportData,
   atMentionThreshold: number
 ) => {
-  return reportData.assets.some((reportAssetData) =>{
+  return reportData.assets.some((reportAssetData) => {
     if (reportAssetData.isRemoved) {
       return false;
     }
     const refSize = reportAssetData.size - reportAssetData.diff;
     const percentage = (100 / refSize) * Math.abs(reportAssetData.diff);
-  
+
     return percentage >= atMentionThreshold;
   });
-  
-}
+};
 
 export function createDetailedReport(
   reportData: ReportData,
@@ -91,21 +86,31 @@ export function createDetailedReport(
   const comparisonLink = reportData.comparisonToolUrl
     ? `<a target="_blank" rel="noopener noreferrer" href="${reportData.comparisonToolUrl}">🔍</a>`
     : "";
-    
-    const percentageChange = parseFloat(((Math.abs(reportData.totalDiff) / reportData.totalSize) * 100).toFixed(2));
 
-  const deltaSizeMessage = `${getReducedOrIncreased(
-    reportData.totalDiff
-  )} by <b>${percentageChange}%</b>(${formatBytes(Math.abs(reportData.totalDiff))})`;
+  const percentageChange =
+    (reportData.baselineSize === 0
+      ? 100 : (Math.abs(reportData.totalDiff) / reportData.baselineSize) * 100).toFixed(2);
+
+  const diffSign = getReducedOrIncreased(reportData.totalDiff);
+  const diffFormatBytes = formatBytes(Math.abs(reportData.totalDiff));
+  const isIncrease = reportData.totalDiff > 0;
+
+  const emoji = getEmojiForTotalAssetChange(isIncrease);
+  const color = getTextColorForTotalAssetChange(isIncrease);
+
+  const deltaSizeMessage = `<span style="font-weight:bold;color:${color}">(${diffSign}${diffFormatBytes} | ${diffSign}${percentageChange}%)</span>`;
   const totalSizeMessage = `${formatBytes(reportData.totalSize)}`;
-  const ownersMessage = reportData.ownedBy?.map((owner) => `@${owner}`).join(" ") || "";
+  const ownersMessage =
+    reportData.ownedBy?.map((owner) => `@${owner}`).join(" ") || "";
 
-  const prefix = `<summary><span style="font-size: 16px">  ${comparisonLink} ${reportData.name} ${deltaSizeMessage} to ${totalSizeMessage} ${shouldAtMention(reportData,atMentionThreshold) ? `${ownersMessage}` : ``}</span> </summary>`;
-  
-  
-  const shouldTableBeExpanded = percentageChange >= 5;
+  const prefix = `<summary><span style="font-size: 16px">${emoji} ${
+    reportData.name
+  } - ${totalSizeMessage} ${deltaSizeMessage} ${comparisonLink} ${
+    shouldAtMention(reportData, atMentionThreshold) ? `${ownersMessage}` : ``
+  }</span> </summary>`;
 
-  const header = "\n| Asset name | Size | Diff | Percentage change | ";
+  const header =
+    "\n| Asset&nbsp;name | Size | Diff | Percentage&nbsp;change | ";
   const headerSeparator = "|---|---|---|---|";
 
   const rows = reportData.assets.map((reportAssetData) => {
@@ -118,7 +123,7 @@ export function createDetailedReport(
   });
 
   return `
-  <details ${shouldTableBeExpanded ? "open" : ""}>${[prefix, header, headerSeparator, ...rows].join(
+  <details>${[prefix, header, headerSeparator, ...rows].join(
     "\n"
   )}\n</details>`;
 }
@@ -150,20 +155,17 @@ export function createNoChangeReport(reportData: ReportData[]): string {
   )}\n</details>`;
 }
 
-function getReducedOrIncreased(
-  diffSize: number
-): string {
-  return diffSize > 0
-    ? "increased"
-    : "reduced";
+function getReducedOrIncreased(diffSize: number): string {
+  return diffSize > 0 ? "+" : "-";
 }
 
 function formatBytes(bytes: number, decimals: number = 2): string {
-  const inKb = bytes / 1000;
-  if (inKb > 1000) {
-    return (inKb / 1000).toFixed(decimals) + " MB";
+  const inKb = bytes / 1024;
+  // &nbsp; instead of space to avoid line wrapping in table
+  if (inKb > 1024) {
+    return (inKb / 1024).toFixed(decimals) + "&nbsp;MB";
   }
-  return inKb.toFixed(decimals) + " KB";
+  return inKb.toFixed(decimals) + "&nbsp;KB";
 }
 
 function getEmoji(
@@ -174,4 +176,21 @@ function getEmoji(
     return "";
   }
   return reportAssetData.diff > minimumIncrease ? "🔺" : "✅";
+}
+
+function getEmojiForTotalAssetChange(isIncrease: boolean): string {
+  if (isIncrease) {
+    return "⚠️";
+  } else {
+    return "🎉";
+  }
+}
+
+function getTextColorForTotalAssetChange(isIncrease: boolean): string {
+  if (isIncrease) {
+    return "orangered";
+  } else {
+    // this is jade green - it gives reasonable contrast for both light and dark themes
+    return "#00A36C";
+  }
 }
