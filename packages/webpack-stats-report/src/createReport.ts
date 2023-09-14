@@ -88,14 +88,8 @@ export function createDetailedReport(
     : "";
 
   const percentageChange =
-    reportData.baselineSize === 0
-      ? 100
-      : parseFloat(
-          (
-            (Math.abs(reportData.totalDiff) / reportData.baselineSize) *
-            100
-          ).toFixed(2)
-        );
+    (reportData.baselineSize === 0
+      ? 100 : (Math.abs(reportData.totalDiff) / reportData.baselineSize) * 100).toFixed(2);
 
   const diffSign = getReducedOrIncreased(reportData.totalDiff);
   const diffFormatBytes = formatBytes(Math.abs(reportData.totalDiff));
@@ -104,9 +98,7 @@ export function createDetailedReport(
   const emoji = getEmojiForTotalAssetChange(isIncrease);
   const color = getTextColorForTotalAssetChange(isIncrease);
 
-  const deltaSizeMessage = `<span style="font-weight:bold;color:${color}">(${diffSign}${diffFormatBytes} | ${diffSign}${percentageChange.toFixed(
-    2
-  )}%)</span>`;
+  const deltaSizeMessage = `<span style="font-weight:bold;color:${color}">(${diffSign}${diffFormatBytes} | ${diffSign}${percentageChange}%)</span>`;
   const totalSizeMessage = `${formatBytes(reportData.totalSize)}`;
   const ownersMessage =
     reportData.ownedBy?.map((owner) => `@${owner}`).join(" ") || "";
