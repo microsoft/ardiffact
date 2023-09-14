@@ -104,7 +104,9 @@ export function createDetailedReport(
   const emoji = getEmojiForTotalAssetChange(isIncrease);
   const color = getTextColorForTotalAssetChange(isIncrease);
 
-  const deltaSizeMessage = `<span style="font-weight:bold;color:${color}">(${diffSign}${diffFormatBytes} | ${diffSign}${percentageChange}%)</span>`;
+  const deltaSizeMessage = `<span style="font-weight:bold;color:${color}">(${diffSign}${diffFormatBytes} | ${diffSign}${percentageChange.toFixed(
+    2
+  )}%)</span>`;
   const totalSizeMessage = `${formatBytes(reportData.totalSize)}`;
   const ownersMessage =
     reportData.ownedBy?.map((owner) => `@${owner}`).join(" ") || "";
@@ -166,10 +168,10 @@ function getReducedOrIncreased(diffSize: number): string {
 }
 
 function formatBytes(bytes: number, decimals: number = 2): string {
-  const inKb = bytes / 1000;
+  const inKb = bytes / 1024;
   // &nbsp; instead of space to avoid line wrapping in table
-  if (inKb > 1000) {
-    return (inKb / 1000).toFixed(decimals) + "&nbsp;MB";
+  if (inKb > 1024) {
+    return (inKb / 1024).toFixed(decimals) + "&nbsp;MB";
   }
   return inKb.toFixed(decimals) + "&nbsp;KB";
 }
