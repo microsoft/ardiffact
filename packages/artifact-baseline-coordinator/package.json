@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc --build --watch --preserveWatchOutput",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "docs": "api-extractor run --local --verbose"
   },
   "files": [
