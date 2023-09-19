@@ -1,0 +1,7 @@
+{
+  "type": "major",
+  "comment": "Create artifact baseline coordinator package",
+  "packageName": "@microsoft/artifact-baseline-coordinator",
+  "email": "ronakjain.public@gmail.com",
+  "dependentChangeType": "patch"
+}
