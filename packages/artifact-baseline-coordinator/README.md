@@ -87,7 +87,12 @@ getBaselineCommitsForAdo: (workingDirectory?: string | undefined, adoContextOver
 
 ```
 
-Check Usage section
+Check Usage section for the functions below
+
+Tips -
+- You can use any string value for candidate or baseline. For eg if you have multiple
+  types of artifacts you can make the candidate as `${candidateCommitId}-${artifactType}` and similar
+  for baseline
 ```ts
 type BaselineTableConfig = {
     accountName: string;
@@ -95,11 +100,11 @@ type BaselineTableConfig = {
     tableName: string;
 };
 
-insertPendingCandidateForBaseline: (config: BaselineTableConfig, candidateId: string, baselineCommit: string, artifactType: string) => Promise<void>
+insertPendingCandidateForBaseline: (config: BaselineTableConfig, candidateId: string, baselineId: string, artifactType: string) => Promise<void>
 
-getPendingCandidatesForBaseline: (config: BaselineTableConfig, baselineCommit: string) => Promise<string[]>
+getPendingCandidatesForBaseline: (config: BaselineTableConfig, baselineId: string) => Promise<string[]>
 
-markCandidatesAsComplete: (config: BaselineTableConfig, candidateId: string, baselineCommit: string, artifactType: string) => Promise<void>
+markCandidateAsComplete: (config: BaselineTableConfig, candidateId: string, baselineId: string, artifactType: string) => Promise<void>
 ```
 
 # Contributing
