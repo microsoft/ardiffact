@@ -1,0 +1,20 @@
+{
+  "name": "@microsoft/artifact-baseline-coordinator",
+  "entries": [
+    {
+      "date": "Thu, 21 Sep 2023 05:16:04 GMT",
+      "tag": "@microsoft/artifact-baseline-coordinator_v2.0.0",
+      "version": "2.0.0",
+      "comments": {
+        "major": [
+          {
+            "comment": "Create artifact baseline coordinator package",
+            "author": "ronakjain.public@gmail.com",
+            "commit": "504d3756453c239fd6c854de3814f4fab7e229aa",
+            "package": "@microsoft/artifact-baseline-coordinator"
+          }
+        ]
+      }
+    }
+  ]
+}
