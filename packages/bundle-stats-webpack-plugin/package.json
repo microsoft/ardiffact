@@ -1,40 +1,35 @@
 {
-  "name": "@microsoft/webpack-stats-differ",
-  "version": "1.2.0",
+  "name": "@microsoft/bundle-stats-webpack-plugin",
+  "version": "1.0.0",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/ardiffact.git",
-    "directory": "packages/webpack-stats-differ"
+    "directory": "packages/bundle-stats-webpack-plugin"
   },
   "license": "MIT",
   "scripts": {
     "build": "tsc",
     "watch": "tsc --build --watch --preserveWatchOutput",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "docs": "api-extractor run --local --verbose"
   },
   "files": [
     "lib/**/*.js",
     "lib/**/*.d.ts"
   ],
+  "peerDependencies": {
+    "webpack": ">4"
+  },
   "dependencies": {
-    "@microsoft/azure-artifact-storage": "*",
-    "@mixer/webpack-bundle-compare": "^0.1.0",
-    "globby": "^11.0.2",
-    "lodash": "^4.17.21",
-    "matcher": "^3.0.0",
-    "multimatch": "^5.0.0",
-    "stream-chain": "^2.2.5",
-    "stream-json": "^1.7.5"
+    "@azure/data-tables": "^13.2.2",
+    "azure-devops-node-api": "^12.1.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-typescript": "^7.12.1",
     "@types/jest": "^26.0.15",
-    "@types/stream-chain": "^2.0.1",
-    "@types/stream-json": "^1.7.3",
     "jest": "^26.6.3",
     "typescript": "^5.1.5",
     "webpack": "^5.88.2"

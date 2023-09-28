@@ -2,7 +2,7 @@ import { Stats } from "webpack";
 import { WebpackAssetStat } from "./diffAssets";
 import { hashRegex } from "./matchesPattern";
 
-export type Asset = Exclude<Stats.ToJsonOutput["assets"], undefined>[number];
+export type Asset = Exclude<ReturnType<Stats['toJson']>["assets"], undefined>[number];
 
 export const getFriendlyAsset = (
   asset: WebpackAssetStat

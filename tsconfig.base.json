@@ -12,6 +12,7 @@
     "declarationMap": true,
 
     /* Strict Type-Checking Options */
+    "skipLibCheck": true,
     "strict": true /* Enable all strict type-checking options. */,
 
     /* Additional Checks */
