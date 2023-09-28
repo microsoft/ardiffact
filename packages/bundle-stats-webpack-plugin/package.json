@@ -22,10 +22,6 @@
   "peerDependencies": {
     "webpack": ">4"
   },
-  "dependencies": {
-    "@azure/data-tables": "^13.2.2",
-    "azure-devops-node-api": "^12.1.0"
-  },
   "devDependencies": {
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-typescript": "^7.12.1",
