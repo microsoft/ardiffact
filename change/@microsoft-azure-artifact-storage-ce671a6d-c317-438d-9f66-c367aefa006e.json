@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Update to typescript 5.1",
+  "packageName": "@microsoft/azure-artifact-storage",
+  "email": "ronakjain.public@gmail.com",
+  "dependentChangeType": "patch"
+}
