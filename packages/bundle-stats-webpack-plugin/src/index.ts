@@ -50,21 +50,19 @@ export class BundleStatsPlugin {
           "outputPath",
         ] as const;
 
-        // assets are used by the midgard size bot.
         const assetsFilter = ["name", "size", "chunks", "chunkNames"] as const;
 
-        // modules are used by mixer and TPN generation
+        // modules are used by mixer 
         const modulesFilter = [
           "identifier", // Used by mixer
-          "name", // Used by mixer and TPN generation. The names can probably be trimmed to serialize less data?
+          "name", // Used by mixer. The names can probably be trimmed to serialize less data?
           "size", // Used by mixer
-          "modules", // Used by mixer and TPN generation
+          "modules", // Used by mixer
           "issuerPath", // Used by mixer
           "id", // Used by mixer
           "chunks", // Used by mixer
           "reasons", // Used by mixer
-          "providedExports", // Used by TPN generation, it only checks for non-nul l values so this can be optimize to produce less data
-          "usedExports", // Used by TPN generation and mixer
+          "usedExports", // Used by mixer
         ] as const;
 
         // issuers are used by mixer
