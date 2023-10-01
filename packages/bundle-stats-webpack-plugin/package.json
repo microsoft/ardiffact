@@ -20,7 +20,7 @@
     "lib/**/*.d.ts"
   ],
   "peerDependencies": {
-    "webpack": ">4"
+    "webpack": ">=4 <6"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.12.1",
