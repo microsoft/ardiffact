@@ -51,12 +51,12 @@ interface AssetStats {
   sizeDiff: number;
 }
 type WebpackAssetStats = Exclude<
-  WebpackStats.ToJsonOutput["assets"],
+  ReturnType<WebpackStats['toJson']>["assets"],
   undefined
 >;
 
 export type WebpackAssetStat = WebpackAssetStats[0];
-export type WebpackStatsJson = WebpackStats.ToJsonOutput;
+export type WebpackStatsJson = ReturnType<WebpackStats['toJson']>;
 
 export const diffAssets = (
   a: Pick<WebpackStatsJson, "assets">,

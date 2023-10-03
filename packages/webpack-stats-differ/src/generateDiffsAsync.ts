@@ -7,15 +7,12 @@ import type {
 } from "./diffAssets";
 import { diffAssets } from "./diffAssets";
 import { FilePair } from "./pairFiles";
-import { customJsonParser } from "./customJsonParser";
 
 const getWebpackStatJSON = async (
   filePath: string
 ): Promise<WebpackStatsJson> => {
   try {
-    const parsed: WebpackStatsJson = (customJsonParser(
-      filePath
-    ) as unknown) as WebpackStatsJson;
+    const parsed: WebpackStatsJson = JSON.parse(filePath);
     return parsed;
   } catch (e: unknown) {
     throw new Error(`Cannot parse webpack state file ${filePath}: ${e}`);
