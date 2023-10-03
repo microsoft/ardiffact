@@ -1,8 +1,20 @@
 # Change Log - @microsoft/webpack-stats-differ
 
-This log was last generated on Thu, 03 Aug 2023 12:27:24 GMT and should not be manually modified.
+This log was last generated on Tue, 03 Oct 2023 10:09:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.3.0
+
+Tue, 03 Oct 2023 10:09:43 GMT
+
+### Minor changes
+
+- Remove async JSON parser (ronakjain.public@gmail.com)
+
+### Patches
+
+- Bump @microsoft/azure-artifact-storage to v1.1.0 (ronakjain.public@gmail.com)
 
 ## 1.2.0
 

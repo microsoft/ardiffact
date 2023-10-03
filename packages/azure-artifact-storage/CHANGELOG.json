@@ -2,6 +2,21 @@
   "name": "@microsoft/azure-artifact-storage",
   "entries": [
     {
+      "date": "Tue, 03 Oct 2023 10:09:43 GMT",
+      "tag": "@microsoft/azure-artifact-storage_v1.1.0",
+      "version": "1.1.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update to typescript 5.1",
+            "author": "ronakjain.public@gmail.com",
+            "commit": "e05a64695b52c5a7350cac36f41add59fea15640",
+            "package": "@microsoft/azure-artifact-storage"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 27 Aug 2021 11:13:57 GMT",
       "tag": "@microsoft/azure-artifact-storage_v1.0.1",
       "version": "1.0.1",

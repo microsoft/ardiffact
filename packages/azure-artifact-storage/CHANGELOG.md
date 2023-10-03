@@ -1,8 +1,16 @@
 # Change Log - @microsoft/azure-artifact-storage
 
-This log was last generated on Fri, 27 Aug 2021 11:13:57 GMT and should not be manually modified.
+This log was last generated on Tue, 03 Oct 2023 10:09:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.1.0
+
+Tue, 03 Oct 2023 10:09:43 GMT
+
+### Minor changes
+
+- Update to typescript 5.1 (ronakjain.public@gmail.com)
 
 ## 1.0.1
 

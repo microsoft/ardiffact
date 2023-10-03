@@ -2,6 +2,21 @@
   "name": "@microsoft/artifact-baseline-coordinator",
   "entries": [
     {
+      "date": "Tue, 03 Oct 2023 10:09:43 GMT",
+      "tag": "@microsoft/artifact-baseline-coordinator_v2.1.0",
+      "version": "2.1.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update to typescript 5.1",
+            "author": "ronakjain.public@gmail.com",
+            "commit": "e05a64695b52c5a7350cac36f41add59fea15640",
+            "package": "@microsoft/artifact-baseline-coordinator"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 21 Sep 2023 05:16:04 GMT",
       "tag": "@microsoft/artifact-baseline-coordinator_v2.0.0",
       "version": "2.0.0",

@@ -1,8 +1,20 @@
 # Change Log - @microsoft/webpack-stats-report
 
-This log was last generated on Thu, 14 Sep 2023 03:48:47 GMT and should not be manually modified.
+This log was last generated on Tue, 03 Oct 2023 10:09:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.2.0
+
+Tue, 03 Oct 2023 10:09:43 GMT
+
+### Minor changes
+
+- Update to typescript 5.1 (ronakjain.public@gmail.com)
+
+### Patches
+
+- Bump @microsoft/webpack-stats-differ to v1.3.0 (ronakjain.public@gmail.com)
 
 ## 1.1.4
 

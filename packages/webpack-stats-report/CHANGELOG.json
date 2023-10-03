@@ -2,6 +2,29 @@
   "name": "@microsoft/webpack-stats-report",
   "entries": [
     {
+      "date": "Tue, 03 Oct 2023 10:09:43 GMT",
+      "tag": "@microsoft/webpack-stats-report_v1.2.0",
+      "version": "1.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update to typescript 5.1",
+            "author": "ronakjain.public@gmail.com",
+            "commit": "e05a64695b52c5a7350cac36f41add59fea15640",
+            "package": "@microsoft/webpack-stats-report"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @microsoft/webpack-stats-differ to v1.3.0",
+            "author": "ronakjain.public@gmail.com",
+            "commit": "e05a64695b52c5a7350cac36f41add59fea15640",
+            "package": "@microsoft/webpack-stats-report"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 14 Sep 2023 03:48:47 GMT",
       "tag": "@microsoft/webpack-stats-report_v1.1.4",
       "version": "1.1.4",

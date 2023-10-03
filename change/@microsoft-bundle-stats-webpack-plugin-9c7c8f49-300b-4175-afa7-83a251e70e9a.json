@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add plugin",
-  "packageName": "@microsoft/bundle-stats-webpack-plugin",
-  "email": "ronakjain.public@gmail.com",
-  "dependentChangeType": "patch"
-}

@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Remove async JSON parser",
-  "packageName": "@microsoft/webpack-stats-differ",
-  "email": "ronakjain.public@gmail.com",
-  "dependentChangeType": "patch"
-}

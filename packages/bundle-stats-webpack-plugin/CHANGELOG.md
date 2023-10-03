@@ -1,8 +1,16 @@
-# Change Log - @microsoft/artifact-baseline-coordinator
+# Change Log - @microsoft/bundle-stats-webpack-plugin
 
-This log was last generated on Thu, 21 Sep 2023 05:16:04 GMT and should not be manually modified.
+This log was last generated on Tue, 03 Oct 2023 10:09:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.1.0
+
+Tue, 03 Oct 2023 10:09:43 GMT
+
+### Minor changes
+
+- Add plugin (ronakjain.public@gmail.com)
 
 ## 2.0.0
 
