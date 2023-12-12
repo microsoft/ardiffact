@@ -1,8 +1,16 @@
 # Change Log - @microsoft/webpack-stats-differ
 
-This log was last generated on Tue, 03 Oct 2023 10:09:43 GMT and should not be manually modified.
+This log was last generated on Tue, 12 Dec 2023 05:23:52 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.3.1
+
+Tue, 12 Dec 2023 05:23:52 GMT
+
+### Patches
+
+- Fix diffing (ronakjain.public@gmail.com)
 
 ## 1.3.0
 
