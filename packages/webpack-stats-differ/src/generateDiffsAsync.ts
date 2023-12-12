@@ -7,12 +7,13 @@ import type {
 } from "./diffAssets";
 import { diffAssets } from "./diffAssets";
 import { FilePair } from "./pairFiles";
+import * as fs from "fs";
 
 const getWebpackStatJSON = async (
   filePath: string
 ): Promise<WebpackStatsJson> => {
   try {
-    const parsed: WebpackStatsJson = JSON.parse(filePath);
+    const parsed: WebpackStatsJson = JSON.parse(await fs.promises.readFile(filePath, { encoding: "utf-8" }));
     return parsed;
   } catch (e: unknown) {
     throw new Error(`Cannot parse webpack state file ${filePath}: ${e}`);
@@ -26,21 +27,21 @@ export type GetFileDiffOptions = {
 
 export type GenerateDiffAsyncResult =
   | {
-      type: "changed";
-      result: FileDiffResultWithComparisonToolUrl;
-    }
+    type: "changed";
+    result: FileDiffResultWithComparisonToolUrl;
+  }
   | {
-      type: "added";
-      result: FileDiffResult;
-    }
+    type: "added";
+    result: FileDiffResult;
+  }
   | {
-      type: "removed";
-      result: FileToDiffDescriptor;
-    }
+    type: "removed";
+    result: FileToDiffDescriptor;
+  }
   | {
-      type: "error";
-      result: string;
-    };
+    type: "error";
+    result: string;
+  };
 
 export const getFileDiffResult = async ({
   pair,
