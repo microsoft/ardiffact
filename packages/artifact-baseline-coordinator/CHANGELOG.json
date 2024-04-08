@@ -2,6 +2,21 @@
   "name": "@microsoft/artifact-baseline-coordinator",
   "entries": [
     {
+      "date": "Mon, 08 Apr 2024 09:39:01 GMT",
+      "version": "2.1.1",
+      "tag": "@microsoft/artifact-baseline-coordinator_v2.1.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ronakjain.public@gmail.com",
+            "package": "@microsoft/artifact-baseline-coordinator",
+            "commit": "b0e8b5c590ce7274e33ead8662e5a4af187b84cc",
+            "comment": "Add retries to ADO APIs"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 03 Oct 2023 10:09:43 GMT",
       "tag": "@microsoft/artifact-baseline-coordinator_v2.1.0",
       "version": "2.1.0",

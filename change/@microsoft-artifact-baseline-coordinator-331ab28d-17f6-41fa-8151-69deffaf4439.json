@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add retries to ADO APIs",
-  "packageName": "@microsoft/artifact-baseline-coordinator",
-  "email": "ronakjain.public@gmail.com",
-  "dependentChangeType": "patch"
-}
