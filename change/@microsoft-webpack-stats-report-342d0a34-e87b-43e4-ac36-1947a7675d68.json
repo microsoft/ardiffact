@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Update deps",
+  "packageName": "@microsoft/webpack-stats-report",
+  "email": "ronakjain.public@gmail.com",
+  "dependentChangeType": "patch"
+}

@@ -13,7 +13,6 @@ import {
   ContainerClient,
   generateBlobSASQueryParameters,
 } from "@azure/storage-blob";
-import { AbortController } from "@azure/abort-controller";
 
 /**
  * Azure Blob Storage artifacts interface
@@ -168,7 +167,7 @@ const getTargetArtifactNames = async (
     const blobNames = await getArtifactPaths(
       client,
       prefix,
-      AbortController.timeout(TIMEOUT)
+      AbortSignal.timeout(TIMEOUT)
     );
     const targetNames = matchFilter(filter, blobNames);
     return targetNames;

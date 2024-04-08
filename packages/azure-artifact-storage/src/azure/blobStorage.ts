@@ -12,7 +12,6 @@ import { promisify } from "util";
 import { dirname } from "path";
 import { WritableStream } from "memory-streams";
 import { AzureBlobStorageConfig } from "../config";
-import { AbortSignal } from "@azure/abort-controller";
 
 const pipelineAsync = promisify(stream.pipeline);
 

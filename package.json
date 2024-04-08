@@ -23,7 +23,7 @@
     "prettier": "^2.1.2",
     "beachball": "^2.41.0",
     "rimraf": "^3.0.2",
-    "@microsoft/api-extractor": "^7.18.6",
-    "@microsoft/api-documenter": "^7.12.11"
+    "@microsoft/api-extractor": "^7.43.0",
+    "@microsoft/api-documenter": "^7.24.1"
   }
 }
