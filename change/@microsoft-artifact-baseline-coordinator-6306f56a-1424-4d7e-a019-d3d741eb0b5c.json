@@ -1,6 +1,6 @@
 {
   "type": "none",
-  "comment": "Dev dependency update",
+  "comment": "update jest",
   "packageName": "@microsoft/artifact-baseline-coordinator",
   "email": "ronakjain.public@gmail.com",
   "dependentChangeType": "none"
