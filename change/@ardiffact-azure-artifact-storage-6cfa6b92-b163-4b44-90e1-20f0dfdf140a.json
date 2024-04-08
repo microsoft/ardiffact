@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Document azure-artifact-storage APIs and interfaces",
-  "packageName": "@ardiffact/azure-artifact-storage",
-  "email": "lkiniu@microsoft.com",
-  "dependentChangeType": "patch"
-}

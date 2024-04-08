@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "add documentation for getFriendlyAssetName method",
-  "packageName": "@ardiffact/bundle-size-differ",
-  "email": "lkiniu@microsoft.com",
-  "dependentChangeType": "patch"
-}
