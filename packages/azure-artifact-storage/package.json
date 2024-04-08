@@ -20,8 +20,8 @@
     "lib/**/*.d.ts"
   ],
   "dependencies": {
-    "@azure/storage-blob": "^12.4.1",
-    "@azure/abort-controller": "^1.0.2",
+    "@azure/storage-blob": "^12.17.0",
+    "@azure/abort-controller": "^2.1.1",
     "multimatch": "^5.0.0",
     "memory-streams": "^0.1.3"
   },
