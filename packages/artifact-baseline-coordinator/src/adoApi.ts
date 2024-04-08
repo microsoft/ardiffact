@@ -6,6 +6,9 @@ export const getGitApi = (adoContext: AdoContext) => {
     throw new Error("Access token or apiUrl is undefined");
   }
   const handler = getHandlerFromToken(adoContext.accessToken);
-  const connection = new WebApi(adoContext.apiUrl, handler);
+  const connection = new WebApi(adoContext.apiUrl, handler, {
+    allowRetries: true,
+    maxRetries: 3
+  });
   return connection.getGitApi();
 };

@@ -19,9 +19,9 @@
     ]
   },
   "devDependencies": {
-    "lage": "^0.28.0",
+    "lage": "^2.7.13",
     "prettier": "^2.1.2",
-    "beachball": "^1.52.0",
+    "beachball": "^2.41.0",
     "rimraf": "^3.0.2",
     "@microsoft/api-extractor": "^7.18.6",
     "@microsoft/api-documenter": "^7.12.11"
