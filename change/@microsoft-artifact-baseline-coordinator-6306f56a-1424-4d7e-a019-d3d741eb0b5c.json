@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Dev dependency update",
+  "packageName": "@microsoft/artifact-baseline-coordinator",
+  "email": "ronakjain.public@gmail.com",
+  "dependentChangeType": "none"
+}
