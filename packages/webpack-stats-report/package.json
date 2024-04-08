@@ -24,9 +24,9 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.15",
+    "@types/jest": "^29.5.12",
     "@types/lodash": "^4.14.165",
-    "jest": "^26.6.3",
+    "jest": "^29.7.0",
     "typescript": "^5.1.5"
   }
 }
