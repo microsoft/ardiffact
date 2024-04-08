@@ -2,6 +2,21 @@
   "name": "@microsoft/azure-artifact-storage",
   "entries": [
     {
+      "date": "Mon, 08 Apr 2024 09:50:59 GMT",
+      "version": "1.1.0",
+      "tag": "@microsoft/azure-artifact-storage_v1.1.0",
+      "comments": {
+        "none": [
+          {
+            "author": "ronakjain.public@gmail.com",
+            "package": "@microsoft/azure-artifact-storage",
+            "commit": "15a7ee65704887de70faece99978806e4b1722f4",
+            "comment": "update jest"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 03 Oct 2023 10:09:43 GMT",
       "tag": "@microsoft/azure-artifact-storage_v1.1.0",
       "version": "1.1.0",

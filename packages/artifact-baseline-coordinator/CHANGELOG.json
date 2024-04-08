@@ -2,6 +2,21 @@
   "name": "@microsoft/artifact-baseline-coordinator",
   "entries": [
     {
+      "date": "Mon, 08 Apr 2024 09:50:59 GMT",
+      "version": "2.1.1",
+      "tag": "@microsoft/artifact-baseline-coordinator_v2.1.1",
+      "comments": {
+        "none": [
+          {
+            "author": "ronakjain.public@gmail.com",
+            "package": "@microsoft/artifact-baseline-coordinator",
+            "commit": "15a7ee65704887de70faece99978806e4b1722f4",
+            "comment": "update jest"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 08 Apr 2024 09:39:01 GMT",
       "version": "2.1.1",
       "tag": "@microsoft/artifact-baseline-coordinator_v2.1.1",

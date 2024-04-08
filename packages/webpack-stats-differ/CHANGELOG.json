@@ -2,6 +2,21 @@
   "name": "@microsoft/webpack-stats-differ",
   "entries": [
     {
+      "date": "Mon, 08 Apr 2024 09:50:59 GMT",
+      "version": "1.3.1",
+      "tag": "@microsoft/webpack-stats-differ_v1.3.1",
+      "comments": {
+        "none": [
+          {
+            "author": "ronakjain.public@gmail.com",
+            "package": "@microsoft/webpack-stats-differ",
+            "commit": "15a7ee65704887de70faece99978806e4b1722f4",
+            "comment": "update jest"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 12 Dec 2023 05:23:52 GMT",
       "tag": "@microsoft/webpack-stats-differ_v1.3.1",
       "version": "1.3.1",
