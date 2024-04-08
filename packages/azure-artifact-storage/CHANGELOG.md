@@ -1,8 +1,16 @@
 # Change Log - @microsoft/azure-artifact-storage
 
-This log was last generated on Tue, 03 Oct 2023 10:09:43 GMT and should not be manually modified.
+This log was last generated on Mon, 08 Apr 2024 10:14:56 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.1.1
+
+Mon, 08 Apr 2024 10:14:56 GMT
+
+### Patches
+
+- update dependencies to resolve CG alerts (ronakjain.public@gmail.com)
 
 ## 1.1.0
 

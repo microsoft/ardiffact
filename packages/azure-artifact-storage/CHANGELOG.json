@@ -2,6 +2,21 @@
   "name": "@microsoft/azure-artifact-storage",
   "entries": [
     {
+      "date": "Mon, 08 Apr 2024 10:14:56 GMT",
+      "version": "1.1.1",
+      "tag": "@microsoft/azure-artifact-storage_v1.1.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ronakjain.public@gmail.com",
+            "package": "@microsoft/azure-artifact-storage",
+            "commit": "14caf709372918b12feec6f1d7828d3107811a13",
+            "comment": "update dependencies to resolve CG alerts"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 08 Apr 2024 09:50:59 GMT",
       "version": "1.1.0",
       "tag": "@microsoft/azure-artifact-storage_v1.1.0",

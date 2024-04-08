@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update deps",
-  "packageName": "@microsoft/artifact-baseline-coordinator",
-  "email": "ronakjain.public@gmail.com",
-  "dependentChangeType": "patch"
-}

@@ -2,6 +2,21 @@
   "name": "@microsoft/webpack-stats-report",
   "entries": [
     {
+      "date": "Mon, 08 Apr 2024 10:14:56 GMT",
+      "version": "1.2.2",
+      "tag": "@microsoft/webpack-stats-report_v1.2.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "ronakjain.public@gmail.com",
+            "package": "@microsoft/webpack-stats-report",
+            "commit": "14caf709372918b12feec6f1d7828d3107811a13",
+            "comment": "Update deps"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 08 Apr 2024 09:50:59 GMT",
       "version": "1.2.1",
       "tag": "@microsoft/webpack-stats-report_v1.2.1",

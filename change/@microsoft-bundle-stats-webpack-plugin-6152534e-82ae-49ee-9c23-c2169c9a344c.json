@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update deps",
-  "packageName": "@microsoft/bundle-stats-webpack-plugin",
-  "email": "ronakjain.public@gmail.com",
-  "dependentChangeType": "patch"
-}
