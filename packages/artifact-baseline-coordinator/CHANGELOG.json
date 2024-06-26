@@ -2,6 +2,21 @@
   "name": "@microsoft/artifact-baseline-coordinator",
   "entries": [
     {
+      "date": "Wed, 26 Jun 2024 06:24:54 GMT",
+      "version": "2.2.0",
+      "tag": "@microsoft/artifact-baseline-coordinator_v2.2.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ronakjain.public@gmail.com",
+            "package": "@microsoft/artifact-baseline-coordinator",
+            "commit": "d587c4a2fd9e4eeacd054c9b1f87e2c81026c787",
+            "comment": "Add support for DefaultCredentialClass"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 08 Apr 2024 10:14:56 GMT",
       "version": "2.1.2",
       "tag": "@microsoft/artifact-baseline-coordinator_v2.1.2",

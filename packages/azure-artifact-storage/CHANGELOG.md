@@ -1,8 +1,16 @@
 # Change Log - @microsoft/azure-artifact-storage
 
-This log was last generated on Mon, 08 Apr 2024 10:14:56 GMT and should not be manually modified.
+This log was last generated on Wed, 26 Jun 2024 06:24:54 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.2.0
+
+Wed, 26 Jun 2024 06:24:54 GMT
+
+### Minor changes
+
+- Add support for DefaultCredentialClass (ronakjain.public@gmail.com)
 
 ## 1.1.1
 
