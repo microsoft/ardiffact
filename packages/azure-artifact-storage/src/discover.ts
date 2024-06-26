@@ -11,6 +11,8 @@ import * as path from "path";
 import {
   BlobSASPermissions,
   ContainerClient,
+  ServiceGetUserDelegationKeyResponse,
+  StorageSharedKeyCredential,
   generateBlobSASQueryParameters,
 } from "@azure/storage-blob";
 
@@ -58,7 +60,10 @@ async function generateArtifactSasTokens(
   const startsOn = new Date();
   const duration = 60 * 24 * 60 * 60 * 1000;
   const expires = new Date(startsOn.getTime() + duration);
-  const userDelegationKey = await getUserDelegationKey(config, startsOn, expires);
+  let userDelegationKey: ServiceGetUserDelegationKeyResponse | undefined;
+  if (!config.storageKey) {
+    userDelegationKey = await getUserDelegationKey(config, startsOn, expires);
+  }
   const targetNames = await getTargetArtifactNames(
     containerClient,
     prefix,
@@ -71,16 +76,25 @@ async function generateArtifactSasTokens(
         name,
         url: [
           containerClient.getBlobClient(name).url,
-          generateBlobSASQueryParameters(
-            {
-              containerName: containerClient.containerName,
-              blobName: name,
-              permissions: BlobSASPermissions.parse("r"),
-              expiresOn: expires,
-            },
-            userDelegationKey,
-            config.accountName
-          ).toString(),
+          userDelegationKey ?
+            generateBlobSASQueryParameters(
+              {
+                containerName: containerClient.containerName,
+                blobName: name,
+                permissions: BlobSASPermissions.parse("r"),
+                expiresOn: expires,
+              },
+              userDelegationKey,
+              config.accountName
+            ).toString() : generateBlobSASQueryParameters(
+              {
+                containerName: containerClient.containerName,
+                blobName: name,
+                permissions: BlobSASPermissions.parse("r"),
+                expiresOn: expires,
+              },
+              new StorageSharedKeyCredential(config.accountName, config.storageKey as string),
+            ).toString(),
         ].join("?"),
       })
     )
