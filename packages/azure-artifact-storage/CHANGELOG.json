@@ -2,6 +2,21 @@
   "name": "@microsoft/azure-artifact-storage",
   "entries": [
     {
+      "date": "Wed, 26 Jun 2024 15:42:38 GMT",
+      "version": "1.2.2",
+      "tag": "@microsoft/azure-artifact-storage_v1.2.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "ronakjain.public@gmail.com",
+            "package": "@microsoft/azure-artifact-storage",
+            "commit": "114efc0a71e798f177db6a3c7b5a1e9fc05c2173",
+            "comment": "Update max expiry to 7 days"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 26 Jun 2024 12:33:29 GMT",
       "version": "1.2.1",
       "tag": "@microsoft/azure-artifact-storage_v1.2.1",

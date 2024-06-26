@@ -1,6 +1,6 @@
 {
   "name": "@microsoft/webpack-stats-report",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "repository": {
