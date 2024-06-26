@@ -3,7 +3,7 @@ import {
   ContainerClient,
   StorageSharedKeyCredential,
 } from "@azure/storage-blob";
-import { DefaultAzureCredential } from "@azure/identity";
+import { DefaultAzureCredential, AzurePipelinesCredential, ChainedTokenCredential } from "@azure/identity";
 import { encodeHash } from "../checksum";
 import * as fs from "fs";
 import * as stream from "stream";
@@ -13,6 +13,23 @@ import { promisify } from "util";
 import { dirname } from "path";
 import { WritableStream } from "memory-streams";
 import { AzureBlobStorageConfig } from "../config";
+
+const getCredentialProvider = () => {
+  const clientId = process.env.AZURESUBSCRIPTION_CLIENT_ID;
+  const tenantId = process.env.AZURESUBSCRIPTION_TENANT_ID;
+  const serviceConnectionId = process.env.AZURESUBSCRIPTION_SERVICE_CONNECTION_ID;
+  const systemAccessToken = process.env.SYSTEM_ACCESSTOKEN;
+  if (clientId && tenantId && serviceConnectionId && systemAccessToken) {
+    return new ChainedTokenCredential(new AzurePipelinesCredential(
+      tenantId,
+      clientId,
+      serviceConnectionId,
+      systemAccessToken,
+    ), new DefaultAzureCredential());
+  } else {
+    return new DefaultAzureCredential();
+  }
+};
 
 const pipelineAsync = promisify(stream.pipeline);
 
@@ -48,7 +65,7 @@ const createBlobServiceClient = (config: {
 }) =>
   new BlobServiceClient(
     `https://${config.accountName}.blob.core.windows.net`,
-    config.storageKey ? new StorageSharedKeyCredential(config.accountName, config.storageKey) : new DefaultAzureCredential()
+    config.storageKey ? new StorageSharedKeyCredential(config.accountName, config.storageKey) : getCredentialProvider()
   );
 
 export const downloadToBuffer = async (
