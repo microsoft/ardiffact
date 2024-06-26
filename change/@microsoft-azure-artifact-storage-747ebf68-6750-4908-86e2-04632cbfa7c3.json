@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add az pipelines credential",
-  "packageName": "@microsoft/azure-artifact-storage",
-  "email": "ronakjain.public@gmail.com",
-  "dependentChangeType": "patch"
-}

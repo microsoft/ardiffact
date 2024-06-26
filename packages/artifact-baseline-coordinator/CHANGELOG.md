@@ -1,8 +1,16 @@
 # Change Log - @microsoft/artifact-baseline-coordinator
 
-This log was last generated on Wed, 26 Jun 2024 06:24:54 GMT and should not be manually modified.
+This log was last generated on Wed, 26 Jun 2024 12:33:29 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.2.1
+
+Wed, 26 Jun 2024 12:33:29 GMT
+
+### Patches
+
+- Add support for az pipelines credential (ronakjain.public@gmail.com)
 
 ## 2.2.0
 

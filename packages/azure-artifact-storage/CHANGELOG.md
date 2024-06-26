@@ -1,8 +1,16 @@
 # Change Log - @microsoft/azure-artifact-storage
 
-This log was last generated on Wed, 26 Jun 2024 06:24:54 GMT and should not be manually modified.
+This log was last generated on Wed, 26 Jun 2024 12:33:29 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.2.1
+
+Wed, 26 Jun 2024 12:33:29 GMT
+
+### Patches
+
+- Add az pipelines credential (ronakjain.public@gmail.com)
 
 ## 1.2.0
 

@@ -2,6 +2,21 @@
   "name": "@microsoft/artifact-baseline-coordinator",
   "entries": [
     {
+      "date": "Wed, 26 Jun 2024 12:33:29 GMT",
+      "version": "2.2.1",
+      "tag": "@microsoft/artifact-baseline-coordinator_v2.2.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ronakjain.public@gmail.com",
+            "package": "@microsoft/artifact-baseline-coordinator",
+            "commit": "fc5a8be66cfead1028dad4efc732f48bce400b7e",
+            "comment": "Add support for az pipelines credential"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 26 Jun 2024 06:24:54 GMT",
       "version": "2.2.0",
       "tag": "@microsoft/artifact-baseline-coordinator_v2.2.0",

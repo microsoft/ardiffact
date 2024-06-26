@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add support for az pipelines credential",
-  "packageName": "@microsoft/artifact-baseline-coordinator",
-  "email": "ronakjain.public@gmail.com",
-  "dependentChangeType": "patch"
-}

@@ -2,6 +2,21 @@
   "name": "@microsoft/azure-artifact-storage",
   "entries": [
     {
+      "date": "Wed, 26 Jun 2024 12:33:29 GMT",
+      "version": "1.2.1",
+      "tag": "@microsoft/azure-artifact-storage_v1.2.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ronakjain.public@gmail.com",
+            "package": "@microsoft/azure-artifact-storage",
+            "commit": "fc5a8be66cfead1028dad4efc732f48bce400b7e",
+            "comment": "Add az pipelines credential"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 26 Jun 2024 06:24:54 GMT",
       "version": "1.2.0",
       "tag": "@microsoft/azure-artifact-storage_v1.2.0",
