@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Update max expiry to 7 days",
+  "packageName": "@microsoft/azure-artifact-storage",
+  "email": "ronakjain.public@gmail.com",
+  "dependentChangeType": "patch"
+}
