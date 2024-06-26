@@ -1,6 +1,24 @@
 import { TableClient, AzureNamedKeyCredential } from "@azure/data-tables";
-import { DefaultAzureCredential } from "@azure/identity";
+import { DefaultAzureCredential, ChainedTokenCredential, AzurePipelinesCredential } from "@azure/identity";
 import { BaselineTableConfig } from "./types";
+
+const getCredentialProvider = () => {
+  const clientId = process.env.AZURESUBSCRIPTION_CLIENT_ID;
+  const tenantId = process.env.AZURESUBSCRIPTION_TENANT_ID;
+  const serviceConnectionId = process.env.AZURESUBSCRIPTION_SERVICE_CONNECTION_ID;
+  const systemAccessToken = process.env.SYSTEM_ACCESSTOKEN;
+  if (clientId && tenantId && serviceConnectionId && systemAccessToken) {
+    return new ChainedTokenCredential(new AzurePipelinesCredential(
+      tenantId,
+      clientId,
+      serviceConnectionId,
+      systemAccessToken,
+    ), new DefaultAzureCredential());
+  } else {
+    return new DefaultAzureCredential();
+  }
+};
+
 
 const getTableClient = async (config: BaselineTableConfig) => {
   const { accountName, storageKey, tableName } = config;
@@ -21,7 +39,7 @@ const getTableClient = async (config: BaselineTableConfig) => {
     tableClient = new TableClient(
       `https://${accountName}.table.core.windows.net`,
       tableName,
-      new DefaultAzureCredential()
+      getCredentialProvider()
     )
   }
   await tableClient.createTable();
