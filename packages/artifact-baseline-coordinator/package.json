@@ -21,6 +21,7 @@
   ],
   "dependencies": {
     "@azure/data-tables": "^13.2.2",
+    "@azure/identity": "^4.3.0",
     "azure-devops-node-api": "^12.1.0"
   },
   "devDependencies": {

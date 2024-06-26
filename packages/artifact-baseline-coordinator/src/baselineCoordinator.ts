@@ -1,18 +1,28 @@
 import { TableClient, AzureNamedKeyCredential } from "@azure/data-tables";
+import { DefaultAzureCredential } from "@azure/identity";
 import { BaselineTableConfig } from "./types";
 
 const getTableClient = async (config: BaselineTableConfig) => {
   const { accountName, storageKey, tableName } = config;
-  let tableClient = new TableClient(
-    `https://${accountName}.table.core.windows.net`,
-    tableName,
-    new AzureNamedKeyCredential(accountName, storageKey)
-  );
-  if (process.env.USE_DEV_STORAGE) {
+  let tableClient;
+  if (storageKey) {
+    tableClient = new TableClient(
+      `https://${accountName}.table.core.windows.net`,
+      tableName,
+      new AzureNamedKeyCredential(accountName, storageKey)
+    )
+  }
+  else if (process.env.USE_DEV_STORAGE) {
     tableClient = TableClient.fromConnectionString(
       "UseDevelopmentStorage=true",
       tableName
     );
+  } else {
+    tableClient = new TableClient(
+      `https://${accountName}.table.core.windows.net`,
+      tableName,
+      new DefaultAzureCredential()
+    )
   }
   await tableClient.createTable();
   return tableClient;

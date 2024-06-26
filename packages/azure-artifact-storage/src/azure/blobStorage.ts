@@ -3,6 +3,7 @@ import {
   ContainerClient,
   StorageSharedKeyCredential,
 } from "@azure/storage-blob";
+import { DefaultAzureCredential } from "@azure/identity";
 import { encodeHash } from "../checksum";
 import * as fs from "fs";
 import * as stream from "stream";
@@ -36,19 +37,19 @@ export const createContainerClient = (config: AzureBlobStorageConfig) =>
     storageKey: config.storageKey,
   }).getContainerClient(config.container);
 
+export const getUserDelegationKey = (config: AzureBlobStorageConfig, startsOn: Date, expiresOn: Date) => {
+  const blobClient = createBlobServiceClient(config);
+  return blobClient.getUserDelegationKey(startsOn, expiresOn);
+};
+
 const createBlobServiceClient = (config: {
   accountName: string;
-  storageKey: string;
+  storageKey?: string;
 }) =>
   new BlobServiceClient(
     `https://${config.accountName}.blob.core.windows.net`,
-    createStorageSharedKeyCredential(config)
+    config.storageKey ? new StorageSharedKeyCredential(config.accountName, config.storageKey) : new DefaultAzureCredential()
   );
-
-export const createStorageSharedKeyCredential = (config: {
-  accountName: string;
-  storageKey: string;
-}) => new StorageSharedKeyCredential(config.accountName, config.storageKey);
 
 export const downloadToBuffer = async (
   containerClient: ContainerClient,

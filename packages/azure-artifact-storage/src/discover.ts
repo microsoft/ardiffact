@@ -1,16 +1,18 @@
 import { AzureBlobStorageConfig } from "./config";
 import {
   createContainerClient,
-  createStorageSharedKeyCredential,
   downloadToBuffer,
   downloadToFile,
   getArtifactPaths,
+  getUserDelegationKey,
 } from "./azure/blobStorage";
 import { matchFilter } from "./filter";
 import * as path from "path";
 import {
   BlobSASPermissions,
   ContainerClient,
+  ServiceGetUserDelegationKeyResponse,
+  StorageSharedKeyCredential,
   generateBlobSASQueryParameters,
 } from "@azure/storage-blob";
 
@@ -55,28 +57,44 @@ async function generateArtifactSasTokens(
   filter?: string | string[]
 ): Promise<RemoteArtifact[]> {
   const containerClient = createContainerClient(config);
+  const startsOn = new Date();
+  const duration = 60 * 24 * 60 * 60 * 1000;
+  const expires = new Date(startsOn.getTime() + duration);
+  let userDelegationKey: ServiceGetUserDelegationKeyResponse | undefined;
+  if (!config.storageKey) {
+    userDelegationKey = await getUserDelegationKey(config, startsOn, expires);
+  }
   const targetNames = await getTargetArtifactNames(
     containerClient,
     prefix,
     filter
   );
 
-  const duration = 60 * 24 * 60 * 60 * 1000;
   const urls = await Promise.all(
     targetNames.map(
       async (name): Promise<RemoteArtifact> => ({
         name,
         url: [
           containerClient.getBlobClient(name).url,
-          await generateBlobSASQueryParameters(
-            {
-              containerName: containerClient.containerName,
-              blobName: name,
-              permissions: BlobSASPermissions.parse("r"),
-              expiresOn: new Date(Date.now() + duration),
-            },
-            createStorageSharedKeyCredential(config)
-          ).toString(),
+          userDelegationKey ?
+            generateBlobSASQueryParameters(
+              {
+                containerName: containerClient.containerName,
+                blobName: name,
+                permissions: BlobSASPermissions.parse("r"),
+                expiresOn: expires,
+              },
+              userDelegationKey,
+              config.accountName
+            ).toString() : generateBlobSASQueryParameters(
+              {
+                containerName: containerClient.containerName,
+                blobName: name,
+                permissions: BlobSASPermissions.parse("r"),
+                expiresOn: expires,
+              },
+              new StorageSharedKeyCredential(config.accountName, config.storageKey as string),
+            ).toString(),
         ].join("?"),
       })
     )

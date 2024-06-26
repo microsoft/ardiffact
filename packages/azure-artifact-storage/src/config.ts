@@ -3,6 +3,6 @@
  */
 export interface AzureBlobStorageConfig {
   accountName: string;
-  storageKey: string;
+  storageKey?: string;
   container: string;
 }

@@ -22,6 +22,7 @@
   "dependencies": {
     "@azure/storage-blob": "^12.17.0",
     "@azure/abort-controller": "^2.1.1",
+    "@azure/identity": "^4.3.0",
     "multimatch": "^5.0.0",
     "memory-streams": "^0.1.3"
   },
