@@ -58,7 +58,7 @@ async function generateArtifactSasTokens(
 ): Promise<RemoteArtifact[]> {
   const containerClient = createContainerClient(config);
   const startsOn = new Date();
-  const duration = 60 * 24 * 60 * 60 * 1000;
+  const duration = 6.99 * 24 * 60 * 60 * 1000; // 7 days - max timespan allowed
   const expires = new Date(startsOn.getTime() + duration);
   let userDelegationKey: ServiceGetUserDelegationKeyResponse | undefined;
   if (!config.storageKey) {
