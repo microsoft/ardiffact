@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Add support for DefaultCredentialClass",
+  "packageName": "@microsoft/azure-artifact-storage",
+  "email": "ronakjain.public@gmail.com",
+  "dependentChangeType": "patch"
+}
