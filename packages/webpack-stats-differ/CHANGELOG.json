@@ -2,6 +2,21 @@
   "name": "@microsoft/webpack-stats-differ",
   "entries": [
     {
+      "date": "Thu, 20 Mar 2025 14:40:02 GMT",
+      "version": "1.3.6",
+      "tag": "@microsoft/webpack-stats-differ_v1.3.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "cheruiyotbryan@gmail.com",
+            "package": "@microsoft/webpack-stats-differ",
+            "commit": "1fc1ea1be928a247ebe008b9281e22981e5fff87",
+            "comment": "fix: Implement streaming JSON parser to prevent heap memory errors"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 08 Apr 2024 10:14:56 GMT",
       "version": "1.3.2",
       "tag": "@microsoft/webpack-stats-differ_v1.3.2",

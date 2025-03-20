@@ -1,8 +1,16 @@
 # Change Log - @microsoft/webpack-stats-differ
 
-This log was last generated on Mon, 08 Apr 2024 10:14:56 GMT and should not be manually modified.
+This log was last generated on Thu, 20 Mar 2025 14:40:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.3.6
+
+Thu, 20 Mar 2025 14:40:02 GMT
+
+### Patches
+
+- fix: Implement streaming JSON parser to prevent heap memory errors (cheruiyotbryan@gmail.com)
 
 ## 1.3.2
 
