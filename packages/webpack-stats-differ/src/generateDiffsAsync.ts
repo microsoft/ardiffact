@@ -8,16 +8,61 @@ import type {
 import { diffAssets } from "./diffAssets";
 import { FilePair } from "./pairFiles";
 import * as fs from "fs";
+import { createReadStream } from "fs";
+import { chain } from "stream-chain";
+import { parser } from "stream-json";
+import { streamObject } from "stream-json/streamers/StreamObject";
 
 const getWebpackStatJSON = async (
   filePath: string
 ): Promise<WebpackStatsJson> => {
   try {
-    const parsed: WebpackStatsJson = JSON.parse(await fs.promises.readFile(filePath, { encoding: "utf-8" }));
-    return parsed;
-  } catch (e: unknown) {
-    throw new Error(`Cannot parse webpack state file ${filePath}: ${e}`);
+    await fs.promises.access(filePath, fs.constants.R_OK);
+  } catch (e) {
+    throw new Error(`Cannot access webpack stats file at ${filePath}: ${e}`);
   }
+
+  // Get file size
+  const stats = await fs.promises.stat(filePath);
+  const fileSizeInMB = stats.size / (1024 * 1024);
+
+  // For small files, use the regular JSON.parse method
+  if (fileSizeInMB < 100) {
+    // Adjust threshold as needed
+    try {
+      const parsed: WebpackStatsJson = JSON.parse(
+        await fs.promises.readFile(filePath, { encoding: "utf-8" })
+      );
+      return parsed;
+    } catch (e: unknown) {
+      throw new Error(`Cannot parse webpack state file ${filePath}: ${e}`);
+    }
+  }
+
+  // For large files, use streaming approach
+  return new Promise<WebpackStatsJson>((resolve, reject) => {
+    const result: WebpackStatsJson = {} as WebpackStatsJson;
+
+    const pipeline = chain([
+      createReadStream(filePath, { encoding: "utf8" }),
+      parser(),
+      streamObject(),
+    ]);
+
+    pipeline.on("data", ({ key, value }) => {
+      result[key] = value;
+    });
+
+    pipeline.on("end", () => {
+      resolve(result);
+    });
+
+    pipeline.on("error", (err) => {
+      reject(
+        new Error(`Error streaming webpack stats file ${filePath}: ${err}`)
+      );
+    });
+  });
 };
 
 export type GetFileDiffOptions = {
@@ -27,21 +72,21 @@ export type GetFileDiffOptions = {
 
 export type GenerateDiffAsyncResult =
   | {
-    type: "changed";
-    result: FileDiffResultWithComparisonToolUrl;
-  }
+      type: "changed";
+      result: FileDiffResultWithComparisonToolUrl;
+    }
   | {
-    type: "added";
-    result: FileDiffResult;
-  }
+      type: "added";
+      result: FileDiffResult;
+    }
   | {
-    type: "removed";
-    result: FileToDiffDescriptor;
-  }
+      type: "removed";
+      result: FileToDiffDescriptor;
+    }
   | {
-    type: "error";
-    result: string;
-  };
+      type: "error";
+      result: string;
+    };
 
 export const getFileDiffResult = async ({
   pair,
@@ -64,7 +109,7 @@ export const getFileDiffResult = async ({
         result: {
           name: pair.name,
           diffStats: diffResult,
-          ownedBy: pair.ownedBy
+          ownedBy: pair.ownedBy,
         },
       };
     } catch (e) {
@@ -80,7 +125,7 @@ export const getFileDiffResult = async ({
       result: {
         name: pair.name,
         diffStats: diffAssets({ assets: [] }, parsedFile, filter),
-        ownedBy: pair.ownedBy
+        ownedBy: pair.ownedBy,
       },
     };
   } else if (pair.baseline) {
