@@ -8,3 +8,4 @@ export {
   FileDiffResultWithComparisonToolUrl,
 } from "./diff";
 export { getFriendlyAssetName } from "./getFriendlyAssetName";
+export { getWebpackStatJSON } from "./generateDiffsAsync";

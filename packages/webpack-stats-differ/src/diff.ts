@@ -19,6 +19,7 @@ import {
   GenerateDiffAsyncResult,
   GetFileDiffOptions,
   getFileDiffResult,
+  processPairsInBatches,
 } from "./generateDiffsAsync";
 
 /**
@@ -44,7 +45,7 @@ export async function diff(
     candidate: string | RemoteArtifact[];
     hostUrl: string;
   },
-  bundleStatsOwners?:Map<string, string[]> | undefined,
+  bundleStatsOwners?: Map<string, string[]> | undefined,
   useWorkers?: boolean
 ): Promise<FileDiffResults> {
   const [filesA, filesB] = await Promise.all(
@@ -94,44 +95,53 @@ const generateDiffs = async (
 ): Promise<FileDiffResults> => {
   let results: GenerateDiffAsyncResult[] = [];
   const numOfCpus = os.cpus().length;
-  const numOfWorkers = useWorkers ? Math.ceil(numOfCpus * 0.75) : 1;
+  // Limit workers to prevent memory issues
+  const numOfWorkers = useWorkers ? Math.min(8, Math.ceil(numOfCpus * 0.5)) : 1;
   const start = Date.now();
-  console.log(
-    `Started diffing for ${filePairs.length} bundle pairs using ${numOfWorkers} workers`
-  );
+  
   if (numOfWorkers <= 1) {
-    for (const pair of filePairs) {
-      const result = await getFileDiffResult({ pair, filter });
-      results.push(result);
-    }
+    console.log(`Processing ${filePairs.length} bundle pairs in batches without workers`);
+    results = await processPairsInBatches(filePairs, filter);
   } else {
-    let pairIndex = 0;
-    const diffImageWorker = async () => {
+    console.log(`Processing ${filePairs.length} bundle pairs in batches using ${numOfWorkers} workers`);
+    
+    // Split pairs into batches for each worker
+    const batchesPerWorker = Math.ceil(filePairs.length / numOfWorkers);
+    const workerBatches = Array.from({ length: numOfWorkers }, (_, i) => 
+      filePairs.slice(i * batchesPerWorker, (i + 1) * batchesPerWorker)
+    ).filter(batch => batch.length > 0);
+
+    const diffWorker = async (workerPairs: FilePair[]) => {
       const worker = new Worker(`${__dirname}/generateDiffsAsync.js`);
+      const workerResults: GenerateDiffAsyncResult[] = [];
 
-      const generateDiffOptions: GetFileDiffOptions = {
-        pair: null,
-        filter,
-      };
-
-      while ((generateDiffOptions.pair = filePairs[pairIndex++])) {
-        await new Promise((resolve) => {
-          worker.once("message", (result: GenerateDiffAsyncResult) => {
-            results.push(result);
-            resolve(undefined);
+      for (let i = 0; i < workerPairs.length; i += 10) {
+        const batch = workerPairs.slice(i, i + 10);
+        console.log(`Worker processing batch ${Math.floor(i/10) + 1} of ${Math.ceil(workerPairs.length/10)} (${batch.length} pairs)`);
+        
+        for (const pair of batch) {
+          const generateDiffOptions: GetFileDiffOptions = { pair, filter };
+          const result = await new Promise<GenerateDiffAsyncResult>((resolve) => {
+            worker.once("message", (result: GenerateDiffAsyncResult) => {
+              resolve(result);
+            });
+            worker.postMessage(generateDiffOptions);
           });
-
-          worker.postMessage(generateDiffOptions);
-        });
+          workerResults.push(result);
+        }
+        
+        // Small delay between batches to allow for GC
+        await new Promise(resolve => setTimeout(resolve, 100));
       }
 
       worker.terminate();
-      return;
+      return workerResults;
     };
 
-    const buckets = new Array(numOfWorkers).fill(1);
-    await Promise.all(buckets.map(diffImageWorker));
+    const workerResults = await Promise.all(workerBatches.map(diffWorker));
+    results = workerResults.flat();
   }
+  
   console.log(`Diffing done in ${Date.now() - start} ms`);
   return {
     withDifferences: results
