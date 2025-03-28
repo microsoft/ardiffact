@@ -21,6 +21,10 @@ import {
   getFileDiffResult,
   processPairsInBatches,
 } from "./generateDiffsAsync";
+import { parser } from "stream-json";
+import { streamArray } from "stream-json/streamers/StreamArray";
+import { chain } from "stream-chain";
+import { createReadStream } from "fs";
 
 /**
  * Calculates the diff between two sets of bundle stats
@@ -161,13 +165,28 @@ const generateDiffs = async (
 const getRemoteArtifactsManifest = async (
   filePath: string
 ): Promise<RemoteArtifact[]> => {
-  const data = await fs.promises.readFile(filePath, { encoding: "utf-8" });
-  try {
-    const parsed: RemoteArtifact[] = JSON.parse(data);
-    return parsed;
-  } catch (e: unknown) {
-    throw new Error(`Cannot parse remote artifact manifest ${filePath}: ${e}`);
-  }
+  return new Promise((resolve, reject) => {
+    const artifacts: RemoteArtifact[] = [];
+    const pipeline = chain([
+      createReadStream(filePath, { encoding: "utf8" }),
+      parser(),
+      streamArray(),
+    ]);
+
+    pipeline.on("data", (data) => {
+      artifacts.push(data.value);
+    });
+
+    pipeline.on("end", () => {
+      resolve(artifacts);
+    });
+
+    pipeline.on("error", (err) => {
+      reject(
+        new Error(`Cannot parse remote artifact manifest ${filePath}: ${err}`)
+      );
+    });
+  });
 };
 
 const instanceOfRemoteArtifact = (obj: any): obj is RemoteArtifact[] =>
