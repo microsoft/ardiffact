@@ -13,7 +13,7 @@ import { chain } from "stream-chain";
 import { parser } from "stream-json";
 import { streamObject } from "stream-json/streamers/StreamObject";
 
-const getWebpackStatJSON = async (
+export const getWebpackStatJSON = async (
   filePath: string
 ): Promise<WebpackStatsJson> => {
   try {
@@ -22,24 +22,7 @@ const getWebpackStatJSON = async (
     throw new Error(`Cannot access webpack stats file at ${filePath}: ${e}`);
   }
 
-  // Get file size
-  const stats = await fs.promises.stat(filePath);
-  const fileSizeInMB = stats.size / (1024 * 1024);
-
-  // For small files, use the regular JSON.parse method
-  if (fileSizeInMB < 100) {
-    // Adjust threshold as needed
-    try {
-      const parsed: WebpackStatsJson = JSON.parse(
-        await fs.promises.readFile(filePath, { encoding: "utf-8" })
-      );
-      return parsed;
-    } catch (e: unknown) {
-      throw new Error(`Cannot parse webpack state file ${filePath}: ${e}`);
-    }
-  }
-
-  // For large files, use streaming approach
+  // Always use streaming approach for webpack stats files since they can be very large
   return new Promise<WebpackStatsJson>((resolve, reject) => {
     const result: WebpackStatsJson = {} as WebpackStatsJson;
 
@@ -139,6 +122,43 @@ export const getFileDiffResult = async ({
       result: "baseline and candidate not found",
     };
   }
+};
+
+// Add batch processing utilities
+const BATCH_SIZE = 10; // Process 10 pairs at a time
+const MAX_WORKERS = 8; // Limit number of workers to prevent memory issues
+
+export const processBatch = async (
+  pairs: FilePair[],
+  filter?: string | string[]
+): Promise<GenerateDiffAsyncResult[]> => {
+  const results: GenerateDiffAsyncResult[] = [];
+  for (const pair of pairs) {
+    const result = await getFileDiffResult({ pair, filter });
+    results.push(result);
+  }
+  return results;
+};
+
+export const processPairsInBatches = async (
+  pairs: FilePair[],
+  filter?: string | string[]
+): Promise<GenerateDiffAsyncResult[]> => {
+  const results: GenerateDiffAsyncResult[] = [];
+  
+  for (let i = 0; i < pairs.length; i += BATCH_SIZE) {
+    const batch = pairs.slice(i, i + BATCH_SIZE);
+    console.log(`Processing batch ${Math.floor(i/BATCH_SIZE) + 1} of ${Math.ceil(pairs.length/BATCH_SIZE)} (${batch.length} pairs)`);
+    const batchResults = await processBatch(batch, filter);
+    results.push(...batchResults);
+    
+    // Force garbage collection between batches if available
+    if (global.gc) {
+      global.gc();
+    }
+  }
+  
+  return results;
 };
 
 if (!isMainThread) {

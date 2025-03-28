@@ -19,7 +19,12 @@ import {
   GenerateDiffAsyncResult,
   GetFileDiffOptions,
   getFileDiffResult,
+  processPairsInBatches,
 } from "./generateDiffsAsync";
+import { parser } from "stream-json";
+import { streamArray } from "stream-json/streamers/StreamArray";
+import { chain } from "stream-chain";
+import { createReadStream } from "fs";
 
 /**
  * Calculates the diff between two sets of bundle stats
@@ -44,7 +49,7 @@ export async function diff(
     candidate: string | RemoteArtifact[];
     hostUrl: string;
   },
-  bundleStatsOwners?:Map<string, string[]> | undefined,
+  bundleStatsOwners?: Map<string, string[]> | undefined,
   useWorkers?: boolean
 ): Promise<FileDiffResults> {
   const [filesA, filesB] = await Promise.all(
@@ -94,44 +99,53 @@ const generateDiffs = async (
 ): Promise<FileDiffResults> => {
   let results: GenerateDiffAsyncResult[] = [];
   const numOfCpus = os.cpus().length;
-  const numOfWorkers = useWorkers ? Math.ceil(numOfCpus * 0.75) : 1;
+  // Limit workers to prevent memory issues
+  const numOfWorkers = useWorkers ? Math.min(8, Math.ceil(numOfCpus * 0.5)) : 1;
   const start = Date.now();
-  console.log(
-    `Started diffing for ${filePairs.length} bundle pairs using ${numOfWorkers} workers`
-  );
+  
   if (numOfWorkers <= 1) {
-    for (const pair of filePairs) {
-      const result = await getFileDiffResult({ pair, filter });
-      results.push(result);
-    }
+    console.log(`Processing ${filePairs.length} bundle pairs in batches without workers`);
+    results = await processPairsInBatches(filePairs, filter);
   } else {
-    let pairIndex = 0;
-    const diffImageWorker = async () => {
+    console.log(`Processing ${filePairs.length} bundle pairs in batches using ${numOfWorkers} workers`);
+    
+    // Split pairs into batches for each worker
+    const batchesPerWorker = Math.ceil(filePairs.length / numOfWorkers);
+    const workerBatches = Array.from({ length: numOfWorkers }, (_, i) => 
+      filePairs.slice(i * batchesPerWorker, (i + 1) * batchesPerWorker)
+    ).filter(batch => batch.length > 0);
+
+    const diffWorker = async (workerPairs: FilePair[]) => {
       const worker = new Worker(`${__dirname}/generateDiffsAsync.js`);
+      const workerResults: GenerateDiffAsyncResult[] = [];
 
-      const generateDiffOptions: GetFileDiffOptions = {
-        pair: null,
-        filter,
-      };
-
-      while ((generateDiffOptions.pair = filePairs[pairIndex++])) {
-        await new Promise((resolve) => {
-          worker.once("message", (result: GenerateDiffAsyncResult) => {
-            results.push(result);
-            resolve(undefined);
+      for (let i = 0; i < workerPairs.length; i += 10) {
+        const batch = workerPairs.slice(i, i + 10);
+        console.log(`Worker processing batch ${Math.floor(i/10) + 1} of ${Math.ceil(workerPairs.length/10)} (${batch.length} pairs)`);
+        
+        for (const pair of batch) {
+          const generateDiffOptions: GetFileDiffOptions = { pair, filter };
+          const result = await new Promise<GenerateDiffAsyncResult>((resolve) => {
+            worker.once("message", (result: GenerateDiffAsyncResult) => {
+              resolve(result);
+            });
+            worker.postMessage(generateDiffOptions);
           });
-
-          worker.postMessage(generateDiffOptions);
-        });
+          workerResults.push(result);
+        }
+        
+        // Small delay between batches to allow for GC
+        await new Promise(resolve => setTimeout(resolve, 100));
       }
 
       worker.terminate();
-      return;
+      return workerResults;
     };
 
-    const buckets = new Array(numOfWorkers).fill(1);
-    await Promise.all(buckets.map(diffImageWorker));
+    const workerResults = await Promise.all(workerBatches.map(diffWorker));
+    results = workerResults.flat();
   }
+  
   console.log(`Diffing done in ${Date.now() - start} ms`);
   return {
     withDifferences: results
@@ -151,13 +165,28 @@ const generateDiffs = async (
 const getRemoteArtifactsManifest = async (
   filePath: string
 ): Promise<RemoteArtifact[]> => {
-  const data = await fs.promises.readFile(filePath, { encoding: "utf-8" });
-  try {
-    const parsed: RemoteArtifact[] = JSON.parse(data);
-    return parsed;
-  } catch (e: unknown) {
-    throw new Error(`Cannot parse remote artifact manifest ${filePath}: ${e}`);
-  }
+  return new Promise((resolve, reject) => {
+    const artifacts: RemoteArtifact[] = [];
+    const pipeline = chain([
+      createReadStream(filePath, { encoding: "utf8" }),
+      parser(),
+      streamArray(),
+    ]);
+
+    pipeline.on("data", (data) => {
+      artifacts.push(data.value);
+    });
+
+    pipeline.on("end", () => {
+      resolve(artifacts);
+    });
+
+    pipeline.on("error", (err) => {
+      reject(
+        new Error(`Cannot parse remote artifact manifest ${filePath}: ${err}`)
+      );
+    });
+  });
 };
 
 const instanceOfRemoteArtifact = (obj: any): obj is RemoteArtifact[] =>
