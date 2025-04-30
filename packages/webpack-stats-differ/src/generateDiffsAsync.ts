@@ -27,7 +27,7 @@ const getWebpackStatJSON = async (
   const fileSizeInMB = stats.size / (1024 * 1024);
 
   // For small files, use the regular JSON.parse method
-  if (fileSizeInMB < 100) {
+  if (fileSizeInMB < 10) {
     // Adjust threshold as needed
     try {
       const parsed: WebpackStatsJson = JSON.parse(
