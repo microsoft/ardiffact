@@ -1,8 +1,16 @@
 # Change Log - @microsoft/webpack-stats-differ
 
-This log was last generated on Thu, 20 Mar 2025 14:40:02 GMT and should not be manually modified.
+This log was last generated on Wed, 30 Apr 2025 15:35:35 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.3.7
+
+Wed, 30 Apr 2025 15:35:35 GMT
+
+### Patches
+
+- reduce json parse threshold to 10MB (cheruiyotbryan@gmail.com)
 
 ## 1.3.6
 

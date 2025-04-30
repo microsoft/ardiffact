@@ -2,6 +2,21 @@
   "name": "@microsoft/webpack-stats-differ",
   "entries": [
     {
+      "date": "Wed, 30 Apr 2025 15:35:35 GMT",
+      "version": "1.3.7",
+      "tag": "@microsoft/webpack-stats-differ_v1.3.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "cheruiyotbryan@gmail.com",
+            "package": "@microsoft/webpack-stats-differ",
+            "commit": "2f23efbf0ff73c72d93390580c228ac007334b11",
+            "comment": "reduce json parse threshold to 10MB"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 20 Mar 2025 14:40:02 GMT",
       "version": "1.3.6",
       "tag": "@microsoft/webpack-stats-differ_v1.3.6",
