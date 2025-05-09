@@ -101,13 +101,15 @@ export function createDetailedReport(
   const deltaSizeMessage = `<strong style="color:${color}">(${diffSign}${diffFormatBytes} | ${diffSign}${percentageChange}%)</strong>`;
   const totalSizeMessage = `${formatBytes(reportData.totalSize)}`;
   const ownersMessage =
-    reportData.ownedBy?.map((owner) => `@${owner}`).join(" ") || "";
+    (shouldAtMention(reportData, atMentionThreshold) && reportData.ownedBy?.map((owner) => `@${owner}`).join(" ")) || "";
 
-  const prefix = `<summary style="font-size: 16px">${emoji} ${
+  const isKeyAssetReport = !reportData.name.endsWith(" All assets");
+  const requiredReviewers = ownersMessage && isKeyAssetReport ?
+  `data-requiredReviewers="${ownersMessage}"` : "";
+  
+  const prefix = `<summary style="font-size: 16px" ${requiredReviewers}>${emoji} ${
     reportData.name
-  } = ${totalSizeMessage} ${deltaSizeMessage} ${comparisonLink} ${
-    shouldAtMention(reportData, atMentionThreshold) ? `${ownersMessage}` : ``
-  }</summary>`;
+  } = ${totalSizeMessage} ${deltaSizeMessage} ${comparisonLink} ${ownersMessage}</summary>`;
 
   const header =
     "\n| Asset&nbsp;name | Size | Diff | Percentage&nbsp;change | ";
