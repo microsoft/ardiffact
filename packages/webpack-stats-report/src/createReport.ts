@@ -98,16 +98,16 @@ export function createDetailedReport(
   const emoji = getEmojiForTotalAssetChange(isIncrease);
   const color = getTextColorForTotalAssetChange(isIncrease);
 
-  const deltaSizeMessage = `<span style="font-weight:bold;color:${color}">(${diffSign}${diffFormatBytes} | ${diffSign}${percentageChange}%)</span>`;
+  const deltaSizeMessage = `<strong style="color:${color}">(${diffSign}${diffFormatBytes} | ${diffSign}${percentageChange}%)</strong>`;
   const totalSizeMessage = `${formatBytes(reportData.totalSize)}`;
   const ownersMessage =
     reportData.ownedBy?.map((owner) => `@${owner}`).join(" ") || "";
 
-  const prefix = `<summary><span style="font-size: 16px">${emoji} ${
+  const prefix = `<summary style="font-size: 16px">${emoji} ${
     reportData.name
-  } - ${totalSizeMessage} ${deltaSizeMessage} ${comparisonLink} ${
+  } = ${totalSizeMessage} ${deltaSizeMessage} ${comparisonLink} ${
     shouldAtMention(reportData, atMentionThreshold) ? `${ownersMessage}` : ``
-  }</span> </summary>`;
+  }</summary>`;
 
   const header =
     "\n| Asset&nbsp;name | Size | Diff | Percentage&nbsp;change | ";
