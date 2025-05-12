@@ -115,7 +115,7 @@ export function createDetailedReport(
     (diffAttentionLevel !== "comment" && reportData.ownedBy?.map((owner) => `@${owner}`).join(" ")) || "";
 
  
-  const prefix = `<summary style="font-size: 16px data-level="${diffAttentionLevel}">${emoji} ${
+  const prefix = `<summary style="font-size:16px" data-level="${diffAttentionLevel}" data-owners="${ownersMessage}">${emoji} ${
     reportData.name
   } = ${totalSizeMessage} ${deltaSizeMessage} ${comparisonLink} ${ownersMessage}</summary>`;
 
