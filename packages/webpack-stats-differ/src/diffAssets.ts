@@ -42,6 +42,7 @@ interface ChangedStats {
 
 interface AssetStats {
   assetName: string;
+  isKeyAsset: boolean,
   candidateAssetSize: number;
   baselineAssetSize: number;
   isSizeReduction: boolean;
@@ -131,24 +132,16 @@ const diffWebpackAssets = ({ name, a, b }: Paired): AssetStats => {
   const isSizeIncrease = sizeDiff > 0;
   const isAssetRemoved = sizeB === 0;
   const isAssetAdded = sizeA === 0;
-  return isSignificantDifference(sizeDiff)
-    ? {
+  const isKeyAsset = b?.chunkNames?.join("").includes("⭐") || false;
+
+  return {
         assetName: name,
-        sizeDiff,
+        isKeyAsset,
+        sizeDiff: isSignificantDifference(sizeDiff) ? sizeDiff : 0,
         candidateAssetSize: sizeB,
         baselineAssetSize: sizeA,
         isSizeIncrease,
         isSizeReduction,
-        isAdded: isAssetAdded,
-        isRemoved: isAssetRemoved,
-      }
-    : {
-        assetName: name,
-        sizeDiff: 0,
-        candidateAssetSize: sizeB,
-        baselineAssetSize: sizeA,
-        isSizeIncrease: false,
-        isSizeReduction: false,
         isAdded: isAssetAdded,
         isRemoved: isAssetRemoved,
       };
