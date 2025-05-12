@@ -1,0 +1,7 @@
+{
+  "type": "major",
+  "comment": "Adjust the 'attention level' for normal and key assets in the report",
+  "packageName": "@microsoft/webpack-stats-report",
+  "email": "mathieu@p01.org",
+  "dependentChangeType": "patch"
+}
