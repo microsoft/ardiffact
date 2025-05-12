@@ -59,25 +59,35 @@ const getPercentageAndIcon = (
   return `${percentage} ${icon}`;
 };
 
-const shouldAtMention = (
+type DiffAttentionLevel = "comment" | "mention" | "review";
+
+const getDiffAttentionLevel = (
   reportData: ReportData,
   atMentionThreshold: number
-) => {
-  return reportData.assets.some((reportAssetData) => {
+): DiffAttentionLevel => {
+  let diffAttentionLevel: DiffAttentionLevel = "comment";
+  for (let reportAssetData of reportData.assets) {
     if (reportAssetData.isRemoved) {
-      return false;
+      continue;
     }
     const refSize = reportAssetData.size - reportAssetData.diff;
     const percentage = (100 / refSize) * Math.abs(reportAssetData.diff);
-
-    return percentage >= atMentionThreshold;
-  });
+    if (percentage >= atMentionThreshold) {
+      if (reportAssetData.isKeyAsset) {
+        diffAttentionLevel = "review";
+        break;
+      } else {
+        diffAttentionLevel = "mention";
+      }
+    }
+  }
+  return diffAttentionLevel;
 };
 
 export function createDetailedReport(
   reportData: ReportData,
   minimumIncrease: number,
-  atMentionThreshold: number
+  diffAttentionThreshold: number
 ): string {
   if (reportData.totalDiff === 0) {
     return "";
@@ -100,14 +110,12 @@ export function createDetailedReport(
 
   const deltaSizeMessage = `<strong style="color:${color}">(${diffSign}${diffFormatBytes} | ${diffSign}${percentageChange}%)</strong>`;
   const totalSizeMessage = `${formatBytes(reportData.totalSize)}`;
+  const diffAttentionLevel = getDiffAttentionLevel(reportData, diffAttentionThreshold);
   const ownersMessage =
-    (shouldAtMention(reportData, atMentionThreshold) && reportData.ownedBy?.map((owner) => `@${owner}`).join(" ")) || "";
+    (diffAttentionLevel !== "comment" && reportData.ownedBy?.map((owner) => `@${owner}`).join(" ")) || "";
 
-  const isKeyAssetReport = !reportData.name.endsWith(" All assets");
-  const requiredReviewers = ownersMessage && isKeyAssetReport ?
-  `data-requiredReviewers="${ownersMessage}"` : "";
-  
-  const prefix = `<summary style="font-size: 16px" ${requiredReviewers}>${emoji} ${
+ 
+  const prefix = `<summary style="font-size: 16px data-level="${diffAttentionLevel}">${emoji} ${
     reportData.name
   } = ${totalSizeMessage} ${deltaSizeMessage} ${comparisonLink} ${ownersMessage}</summary>`;
 
@@ -116,16 +124,17 @@ export function createDetailedReport(
   const headerSeparator = "|---|---|---|---|";
 
   const rows = reportData.assets.map((reportAssetData) => {
+    const assetEmoji = reportAssetData.isKeyAsset ? "⭐" : "";
     const fileName = getFileName(reportAssetData);
     const size = getSize(reportAssetData);
     const diff = getDiff(reportAssetData);
     const percentage = getPercentageAndIcon(reportAssetData, minimumIncrease);
 
-    return `| ${fileName} | ${size} | ${diff} | ${percentage} |`;
+    return `| ${assetEmoji}${fileName} | ${size} | ${diff} | ${percentage} |`;
   });
 
   return `
-  <details>${[prefix, header, headerSeparator, ...rows].join(
+  <details ${diffAttentionLevel == "review" ? " open": ""}>${[prefix, header, headerSeparator, ...rows].join(
     "\n"
   )}\n</details>`;
 }
