@@ -1,8 +1,16 @@
 # Change Log - @microsoft/webpack-stats-differ
 
-This log was last generated on Wed, 30 Apr 2025 15:35:35 GMT and should not be manually modified.
+This log was last generated on Wed, 21 May 2025 11:47:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.0.0
+
+Wed, 21 May 2025 11:47:25 GMT
+
+### Major changes
+
+- Expose if an asset is 'key' in the AssetStats (mathieu@p01.org)
 
 ## 1.3.7
 

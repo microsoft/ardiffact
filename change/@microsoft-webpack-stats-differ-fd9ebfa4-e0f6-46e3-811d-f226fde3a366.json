@@ -1,7 +1,0 @@
-{
-  "type": "major",
-  "comment": "Expose if an asset is 'key' in the AssetStats",
-  "packageName": "@microsoft/webpack-stats-differ",
-  "email": "mathieu@p01.org",
-  "dependentChangeType": "patch"
-}

@@ -2,6 +2,21 @@
   "name": "@microsoft/webpack-stats-report",
   "entries": [
     {
+      "date": "Wed, 21 May 2025 11:47:25 GMT",
+      "version": "2.0.0",
+      "tag": "@microsoft/webpack-stats-report_v2.0.0",
+      "comments": {
+        "major": [
+          {
+            "author": "mathieu@p01.org",
+            "package": "@microsoft/webpack-stats-report",
+            "commit": "cb8709817d88d54f792fb27f38b5df4151e8a037",
+            "comment": "Adjust the 'attention level' for normal and key assets in the report"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 08 Apr 2024 10:14:56 GMT",
       "version": "1.2.2",
       "tag": "@microsoft/webpack-stats-report_v1.2.2",

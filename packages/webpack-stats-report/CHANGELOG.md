@@ -1,8 +1,16 @@
 # Change Log - @microsoft/webpack-stats-report
 
-This log was last generated on Mon, 08 Apr 2024 10:14:56 GMT and should not be manually modified.
+This log was last generated on Wed, 21 May 2025 11:47:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.0.0
+
+Wed, 21 May 2025 11:47:25 GMT
+
+### Major changes
+
+- Adjust the 'attention level' for normal and key assets in the report (mathieu@p01.org)
 
 ## 1.2.2
 
