@@ -43,6 +43,7 @@ interface ChangedStats {
 interface AssetStats {
   assetName: string;
   isKeyAsset: boolean,
+  hasTarget: boolean,
   candidateAssetSize: number;
   baselineAssetSize: number;
   isSizeReduction: boolean;
@@ -129,9 +130,8 @@ const diffWebpackAssets = ({ name, a, b }: Paired): AssetStats => {
   const isKeyAsset = flatternChunkNames.includes("⭐");
   // The format for key assets is
   // " ⭐ asseName" or " ⭐ assetName target threshold"
-  const [sizeA, threshold] = flatternChunkNames.replace(/^.*⭐ [^ ]+/, "").replace(/\n.*/, "").split(" ") ?? [a?.size ?? 0, SIGNIFICANT_CHANGE_THRESHOLD];
-
-//  const sizeA = a?.size ?? 0;
+  const [target, threshold] = flatternChunkNames.replace(/^.*⭐ [^ ]+/, "").replace(/\n.*/, "").split(" ").map(v => parseInt(v, 10)) ?? [undefined, SIGNIFICANT_CHANGE_THRESHOLD]; 
+  const sizeA = target !== undefined ? target : (a?.size ?? 0);
   const sizeB = b?.size ?? 0;
   const sizeDiff = sizeB - sizeA;
   const isSizeReduction = sizeDiff < 0;
@@ -142,6 +142,7 @@ const diffWebpackAssets = ({ name, a, b }: Paired): AssetStats => {
   return {
         assetName: name,
         isKeyAsset,
+        hasTarget: target !== undefined,
         sizeDiff: isSignificantDifference(sizeDiff, threshold) ? sizeDiff : 0,
         candidateAssetSize: sizeB,
         baselineAssetSize: sizeA,
