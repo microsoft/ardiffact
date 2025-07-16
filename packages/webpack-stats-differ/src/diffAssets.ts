@@ -3,7 +3,7 @@ import { areUnique, getDuplicates } from "./unique";
 import { getFriendlyAsset } from "./getFriendlyAssetName";
 import { matchesPattern } from "./matchesPattern";
 
-const SIGNIFICANT_CHANGE_THRESHOLD: 30 = 30;
+const SIGNIFICANT_CHANGE_THRESHOLD = 30;
 
 export type FileDiffResults = {
   withDifferences: FileDiffResultWithComparisonToolUrl[];
@@ -126,12 +126,25 @@ type Paired = {
 };
 
 const diffWebpackAssets = ({ name, a, b }: Paired): AssetStats => {
-  const flatternChunkNames = b?.chunkNames?.join("\n") || "";
-  const isKeyAsset = flatternChunkNames.includes("⭐");
-  // The format for key assets is
-  // " ⭐ asseName" or " ⭐ assetName target threshold"
-  const [target, threshold] = flatternChunkNames.replace(/^.*⭐ [^ ]+/, "").replace(/\n.*/, "").split(" ").map(v => parseInt(v, 10)) ?? [undefined, SIGNIFICANT_CHANGE_THRESHOLD]; 
-  const sizeA = target !== undefined ? target : (a?.size ?? 0);
+  let isKeyAsset = false;
+  let target = a?.size ?? 0;
+  let threshold = SIGNIFICANT_CHANGE_THRESHOLD;
+  let hasTarget = false;
+  for (const chunkName of (b?.chunkNames || [])) {
+    // The format for key assets is
+    // "⭐ asseName" or "⭐ assetName target threshold"
+    if (typeof chunkName === "string" && chunkName.startsWith("⭐ ")) {
+      isKeyAsset = true;
+      const splitChunkName = chunkName.split(" ");
+      if (splitChunkName.length == 4) {
+        target = parseInt(splitChunkName[2], 10);
+        threshold = parseInt(splitChunkName[3], 10);
+        hasTarget = true;
+      }
+      break;
+    }
+  }
+  const sizeA = target;
   const sizeB = b?.size ?? 0;
   const sizeDiff = sizeB - sizeA;
   const isSizeReduction = sizeDiff < 0;
@@ -142,7 +155,7 @@ const diffWebpackAssets = ({ name, a, b }: Paired): AssetStats => {
   return {
         assetName: name,
         isKeyAsset,
-        hasTarget: target !== undefined,
+        hasTarget,
         sizeDiff: isSignificantDifference(sizeDiff, threshold) ? sizeDiff : 0,
         candidateAssetSize: sizeB,
         baselineAssetSize: sizeA,
