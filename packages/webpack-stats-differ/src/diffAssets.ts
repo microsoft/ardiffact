@@ -125,19 +125,24 @@ type Paired = {
 };
 
 const diffWebpackAssets = ({ name, a, b }: Paired): AssetStats => {
-  const sizeA = a?.size ?? 0;
+  const flatternChunkNames = b?.chunkNames?.join("\n") || "";
+  const isKeyAsset = flatternChunkNames.includes("⭐");
+  // The format for key assets is
+  // " ⭐ asseName" or " ⭐ assetName target threshold"
+  const [sizeA, threshold] = flatternChunkNames.replace(/^.*⭐ [^ ]+/, "").replace(/\n.*/, "").split(" ") ?? [a?.size ?? 0, SIGNIFICANT_CHANGE_THRESHOLD];
+
+//  const sizeA = a?.size ?? 0;
   const sizeB = b?.size ?? 0;
   const sizeDiff = sizeB - sizeA;
   const isSizeReduction = sizeDiff < 0;
   const isSizeIncrease = sizeDiff > 0;
   const isAssetRemoved = sizeB === 0;
   const isAssetAdded = sizeA === 0;
-  const isKeyAsset = b?.chunkNames?.join("").includes("⭐") || false;
 
   return {
         assetName: name,
         isKeyAsset,
-        sizeDiff: isSignificantDifference(sizeDiff) ? sizeDiff : 0,
+        sizeDiff: isSignificantDifference(sizeDiff, threshold) ? sizeDiff : 0,
         candidateAssetSize: sizeB,
         baselineAssetSize: sizeA,
         isSizeIncrease,
@@ -168,5 +173,5 @@ const transformAsset: (
   stat: WebpackAssetStat
 ) => WebpackAssetStat = getFriendlyAsset;
 
-const isSignificantDifference = (sizeDiff: number) =>
-  Math.abs(sizeDiff) > SIGNIFICANT_CHANGE_THRESHOLD;
+const isSignificantDifference = (sizeDiff: number, threshold: number = SIGNIFICANT_CHANGE_THRESHOLD) =>
+  Math.abs(sizeDiff) > threshold;
