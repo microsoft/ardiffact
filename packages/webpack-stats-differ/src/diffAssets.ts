@@ -3,7 +3,7 @@ import { areUnique, getDuplicates } from "./unique";
 import { getFriendlyAsset } from "./getFriendlyAssetName";
 import { matchesPattern } from "./matchesPattern";
 
-const SIGNIFICANT_CHANGE_THRESHOLD: 30 = 30;
+const SIGNIFICANT_CHANGE_THRESHOLD = 30;
 
 export type FileDiffResults = {
   withDifferences: FileDiffResultWithComparisonToolUrl[];
@@ -43,6 +43,7 @@ interface ChangedStats {
 interface AssetStats {
   assetName: string;
   isKeyAsset: boolean,
+  hasTarget: boolean,
   candidateAssetSize: number;
   baselineAssetSize: number;
   isSizeReduction: boolean;
@@ -125,19 +126,37 @@ type Paired = {
 };
 
 const diffWebpackAssets = ({ name, a, b }: Paired): AssetStats => {
-  const sizeA = a?.size ?? 0;
+  let isKeyAsset = false;
+  let target = a?.size ?? 0;
+  let threshold = SIGNIFICANT_CHANGE_THRESHOLD;
+  let hasTarget = false;
+  for (const chunkName of (b?.chunkNames || [])) {
+    // The format for key assets is
+    // "⭐ assetName" or "⭐ assetName target threshold"
+    if (typeof chunkName === "string" && chunkName.startsWith("⭐ ")) {
+      isKeyAsset = true;
+      const splitChunkName = chunkName.split(" ");
+      if (splitChunkName.length == 4) {
+        target = parseInt(splitChunkName[2], 10);
+        threshold = parseInt(splitChunkName[3], 10);
+        hasTarget = true;
+      }
+      break;
+    }
+  }
+  const sizeA = target;
   const sizeB = b?.size ?? 0;
   const sizeDiff = sizeB - sizeA;
   const isSizeReduction = sizeDiff < 0;
   const isSizeIncrease = sizeDiff > 0;
   const isAssetRemoved = sizeB === 0;
   const isAssetAdded = sizeA === 0;
-  const isKeyAsset = b?.chunkNames?.join("").includes("⭐") || false;
 
   return {
         assetName: name,
         isKeyAsset,
-        sizeDiff: isSignificantDifference(sizeDiff) ? sizeDiff : 0,
+        hasTarget,
+        sizeDiff: isSignificantDifference(sizeDiff, threshold) ? sizeDiff : 0,
         candidateAssetSize: sizeB,
         baselineAssetSize: sizeA,
         isSizeIncrease,
@@ -168,5 +187,5 @@ const transformAsset: (
   stat: WebpackAssetStat
 ) => WebpackAssetStat = getFriendlyAsset;
 
-const isSignificantDifference = (sizeDiff: number) =>
-  Math.abs(sizeDiff) > SIGNIFICANT_CHANGE_THRESHOLD;
+const isSignificantDifference = (sizeDiff: number, threshold: number = SIGNIFICANT_CHANGE_THRESHOLD) =>
+  Math.abs(sizeDiff) > threshold;

@@ -16,6 +16,7 @@ export interface ReportData {
 export interface ReportAssetData {
   name: string;
   isKeyAsset: boolean;
+  hasTarget: boolean;
   size: number;
   diff: number;
   isIncrease: boolean;
@@ -37,6 +38,7 @@ export const createReportData = ({
     .map((asset) => ({
       name: asset.assetName,
       isKeyAsset: asset.isKeyAsset,
+      hasTarget: asset.hasTarget,
       size: asset.candidateAssetSize,
       baselineSize: asset.baselineAssetSize,
       diff: asset.sizeDiff,
@@ -54,6 +56,7 @@ export const createReportData = ({
     .map((asset) => ({
       name: asset.assetName,
       isKeyAsset: asset.isKeyAsset,
+      hasTarget: asset.hasTarget,
       size: asset.candidateAssetSize,
       baselineSize: asset.baselineAssetSize,
       diff: asset.sizeDiff,
@@ -68,6 +71,7 @@ export const createReportData = ({
     .map((asset) => ({
       name: asset.assetName,
       isKeyAsset: asset.isKeyAsset,
+      hasTarget: asset.hasTarget,
       size: asset.candidateAssetSize,
       baselineSize: asset.baselineAssetSize,
       diff: asset.sizeDiff,
