@@ -2,6 +2,21 @@
   "name": "@microsoft/webpack-stats-report",
   "entries": [
     {
+      "date": "Thu, 17 Jul 2025 08:20:32 GMT",
+      "version": "2.2.0",
+      "tag": "@microsoft/webpack-stats-report_v2.2.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "mathieu@p01.org",
+            "package": "@microsoft/webpack-stats-report",
+            "commit": "78ffe9469d769f3e71213eecdadf9aeb1ca3e760",
+            "comment": "Enable target size and threshold for key assets"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 21 May 2025 11:47:25 GMT",
       "version": "2.0.0",
       "tag": "@microsoft/webpack-stats-report_v2.0.0",

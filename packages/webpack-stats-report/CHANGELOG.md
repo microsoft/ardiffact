@@ -1,8 +1,16 @@
 # Change Log - @microsoft/webpack-stats-report
 
-This log was last generated on Wed, 21 May 2025 11:47:25 GMT and should not be manually modified.
+This log was last generated on Thu, 17 Jul 2025 08:20:32 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.2.0
+
+Thu, 17 Jul 2025 08:20:32 GMT
+
+### Minor changes
+
+- Enable target size and threshold for key assets (mathieu@p01.org)
 
 ## 2.0.0
 

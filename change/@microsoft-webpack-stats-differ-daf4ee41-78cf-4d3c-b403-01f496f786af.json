@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Enable target size and threshold for key assets",
-  "packageName": "@microsoft/webpack-stats-differ",
-  "email": "mathieu@p01.org",
-  "dependentChangeType": "patch"
-}
