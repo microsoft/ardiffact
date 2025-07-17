@@ -132,7 +132,7 @@ const diffWebpackAssets = ({ name, a, b }: Paired): AssetStats => {
   let hasTarget = false;
   for (const chunkName of (b?.chunkNames || [])) {
     // The format for key assets is
-    // "⭐ asseName" or "⭐ assetName target threshold"
+    // "⭐ assetName" or "⭐ assetName target threshold"
     if (typeof chunkName === "string" && chunkName.startsWith("⭐ ")) {
       isKeyAsset = true;
       const splitChunkName = chunkName.split(" ");
