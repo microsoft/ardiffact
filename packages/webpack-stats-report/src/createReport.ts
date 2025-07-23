@@ -72,7 +72,7 @@ const getDiffAttentionLevel = (
     }
     const refSize = reportAssetData.size - reportAssetData.diff;
     const percentage = (100 / refSize) * Math.abs(reportAssetData.diff);
-    if (percentage >= atMentionThreshold || (reportAssetData.hasTarget && reportAssetData.diff !== 0)) {
+    if (percentage >= atMentionThreshold || ((reportAssetData.hasTarget || reportAssetData.hasThreshold) && reportAssetData.diff !== 0)) {
       if (reportAssetData.isKeyAsset) {
         diffAttentionLevel = "review";
         break;
