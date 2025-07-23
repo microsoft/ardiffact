@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Make explicit target and thershold optional",
+  "packageName": "@microsoft/webpack-stats-differ",
+  "email": "mathieu@p01.org",
+  "dependentChangeType": "patch"
+}

@@ -17,6 +17,7 @@ export interface ReportAssetData {
   name: string;
   isKeyAsset: boolean;
   hasTarget: boolean;
+  hasThreshold: boolean;
   size: number;
   diff: number;
   isIncrease: boolean;
@@ -39,6 +40,7 @@ export const createReportData = ({
       name: asset.assetName,
       isKeyAsset: asset.isKeyAsset,
       hasTarget: asset.hasTarget,
+      hasThreshold: asset.hasThreshold,
       size: asset.candidateAssetSize,
       baselineSize: asset.baselineAssetSize,
       diff: asset.sizeDiff,
@@ -57,6 +59,7 @@ export const createReportData = ({
       name: asset.assetName,
       isKeyAsset: asset.isKeyAsset,
       hasTarget: asset.hasTarget,
+      hasThreshold: asset.hasThreshold,
       size: asset.candidateAssetSize,
       baselineSize: asset.baselineAssetSize,
       diff: asset.sizeDiff,
@@ -72,6 +75,7 @@ export const createReportData = ({
       name: asset.assetName,
       isKeyAsset: asset.isKeyAsset,
       hasTarget: asset.hasTarget,
+      hasThreshold: asset.hasThreshold,
       size: asset.candidateAssetSize,
       baselineSize: asset.baselineAssetSize,
       diff: asset.sizeDiff,
