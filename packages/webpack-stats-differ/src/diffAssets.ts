@@ -44,6 +44,7 @@ interface AssetStats {
   assetName: string;
   isKeyAsset: boolean,
   hasTarget: boolean,
+  hasThreshold: boolean,
   candidateAssetSize: number;
   baselineAssetSize: number;
   isSizeReduction: boolean;
@@ -129,7 +130,8 @@ const diffWebpackAssets = ({ name, a, b }: Paired): AssetStats => {
   let isKeyAsset = false;
   let target = a?.size ?? 0;
   let threshold = SIGNIFICANT_CHANGE_THRESHOLD;
-  let hasTarget = false;
+  let hasExplicitTarget = false;
+  let hasExplicitThreshold = false;
   for (const chunkName of (b?.chunkNames || [])) {
     // The format for key assets is
     // "⭐ assetName" or "⭐ assetName target threshold"
@@ -137,32 +139,49 @@ const diffWebpackAssets = ({ name, a, b }: Paired): AssetStats => {
       isKeyAsset = true;
       const splitChunkName = chunkName.split(" ");
       if (splitChunkName.length == 4) {
-        target = parseInt(splitChunkName[2], 10);
-        threshold = parseInt(splitChunkName[3], 10);
-        hasTarget = true;
+        const possibleTarget = Number(splitChunkName[2]);
+        if (!isNaN(possibleTarget)) {
+          target = possibleTarget;
+          hasExplicitTarget = true;
+        }
+        const possibleThreshold = Number(splitChunkName[3]);
+        if (!isNaN(possibleThreshold)) {
+          threshold = possibleThreshold;
+          hasExplicitThreshold = true;
+        }
       }
       break;
     }
   }
   const sizeA = target;
   const sizeB = b?.size ?? 0;
-  const sizeDiff = sizeB - sizeA;
-  const isSizeReduction = sizeDiff < 0;
-  const isSizeIncrease = sizeDiff > 0;
-  const isAssetRemoved = sizeB === 0;
-  const isAssetAdded = sizeA === 0;
+  let sizeDiff = sizeB - sizeA;
 
+  const isSignificantSizeDiff = 
+    // Explicit target, and no explicit threshold -> Ensure the candidate is below th explicit target
+    hasExplicitTarget && !hasExplicitThreshold
+    ? sizeDiff > 0
+    // Explicit target, and explicit threshold -> Ensure the candidate is within the explicit threshold and explicit target
+    // No explicit target, but explicit threshold -> Ensure the candidate is within the explicit threshold and baseline target
+    // No explicit target, or explicit threshold -> Ensure the candidate is within the default threshold and baseline target
+    : Math.abs(sizeDiff) > threshold;
+
+  if (!isSignificantSizeDiff) {
+    sizeDiff = 0;
+  }
+  
   return {
         assetName: name,
         isKeyAsset,
-        hasTarget,
-        sizeDiff: isSignificantDifference(sizeDiff, threshold) ? sizeDiff : 0,
+        hasTarget: hasExplicitTarget,
+        hasThreshold: hasExplicitThreshold,
+        sizeDiff,
         candidateAssetSize: sizeB,
         baselineAssetSize: sizeA,
-        isSizeIncrease,
-        isSizeReduction,
-        isAdded: isAssetAdded,
-        isRemoved: isAssetRemoved,
+        isSizeIncrease: sizeDiff > 0,
+        isSizeReduction: sizeDiff < 0,
+        isAdded: sizeA === 0,
+        isRemoved: sizeB === 0,
       };
 };
 
@@ -186,6 +205,3 @@ const pairUpAssetsByName = (
 const transformAsset: (
   stat: WebpackAssetStat
 ) => WebpackAssetStat = getFriendlyAsset;
-
-const isSignificantDifference = (sizeDiff: number, threshold: number = SIGNIFICANT_CHANGE_THRESHOLD) =>
-  Math.abs(sizeDiff) > threshold;
