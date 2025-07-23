@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Make explicit target and thershold optional",
-  "packageName": "@microsoft/webpack-stats-report",
-  "email": "mathieu@p01.org",
-  "dependentChangeType": "patch"
-}

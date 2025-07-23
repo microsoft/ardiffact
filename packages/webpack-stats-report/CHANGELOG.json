@@ -2,6 +2,21 @@
   "name": "@microsoft/webpack-stats-report",
   "entries": [
     {
+      "date": "Wed, 23 Jul 2025 23:18:58 GMT",
+      "version": "2.3.0",
+      "tag": "@microsoft/webpack-stats-report_v2.3.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "mathieu@p01.org",
+            "package": "@microsoft/webpack-stats-report",
+            "commit": "8612dcb275186a44d07b893ba351aedae61abb9c",
+            "comment": "Make explicit target and thershold optional"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 17 Jul 2025 08:20:32 GMT",
       "version": "2.2.0",
       "tag": "@microsoft/webpack-stats-report_v2.2.0",
