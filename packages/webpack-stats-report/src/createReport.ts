@@ -72,12 +72,10 @@ const getDiffAttentionLevel = (
     }
     const refSize = reportAssetData.size - reportAssetData.diff;
     const percentage = (100 / refSize) * Math.abs(reportAssetData.diff);
-    if (percentage >= atMentionThreshold || ((reportAssetData.hasTarget || reportAssetData.hasThreshold) && reportAssetData.diff !== 0)) {
-      if (reportAssetData.isKeyAsset) {
+    if (percentage >= atMentionThreshold || reportAssetData.hasTarget || reportAssetData.hasThreshold) {
+      diffAttentionLevel = "mention";
+      if (reportAssetData.isKeyAsset && reportAssetData.diff !== 0) {
         diffAttentionLevel = "review";
-        break;
-      } else {
-        diffAttentionLevel = "mention";
       }
     }
   }
@@ -134,7 +132,7 @@ export function createDetailedReport(
   });
 
   return `
-  <details ${diffAttentionLevel == "review" ? " open": ""}>${[prefix, header, headerSeparator, ...rows].join(
+  <details ${diffAttentionLevel == "review" && rows.length < 20 ? "open": ""}>${[prefix, header, headerSeparator, ...rows].join(
     "\n"
   )}\n</details>`;
 }
@@ -175,8 +173,10 @@ function formatBytes(bytes: number, decimals: number = 2): string {
   // &nbsp; instead of space to avoid line wrapping in table
   if (inKb > 1024) {
     return (inKb / 1024).toFixed(decimals) + "&nbsp;MB";
+  } else if (inKb >= 1) {
+    return inKb.toFixed(decimals) + "&nbsp;KB";
   }
-  return inKb.toFixed(decimals) + "&nbsp;KB";
+  return bytes + "&nbsp;B";
 }
 
 function getEmoji(
