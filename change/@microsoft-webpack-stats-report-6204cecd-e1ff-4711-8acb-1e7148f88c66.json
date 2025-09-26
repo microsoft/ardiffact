@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Update createReport.ts",
-  "packageName": "@microsoft/webpack-stats-report",
-  "email": "mathieu@p01.org",
-  "dependentChangeType": "patch"
-}

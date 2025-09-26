@@ -1,8 +1,16 @@
 # Change Log - @microsoft/webpack-stats-report
 
-This log was last generated on Wed, 23 Jul 2025 23:18:58 GMT and should not be manually modified.
+This log was last generated on Fri, 26 Sep 2025 16:50:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.4.0
+
+Fri, 26 Sep 2025 16:50:57 GMT
+
+### Minor changes
+
+- Update createReport.ts (mathieu@p01.org)
 
 ## 2.3.0
 

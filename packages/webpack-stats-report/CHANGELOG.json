@@ -2,6 +2,21 @@
   "name": "@microsoft/webpack-stats-report",
   "entries": [
     {
+      "date": "Fri, 26 Sep 2025 16:50:57 GMT",
+      "version": "2.4.0",
+      "tag": "@microsoft/webpack-stats-report_v2.4.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "mathieu@p01.org",
+            "package": "@microsoft/webpack-stats-report",
+            "commit": "fefad9b099de0e7205e70357ef5228f3fa8d5255",
+            "comment": "Update createReport.ts"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 23 Jul 2025 23:18:58 GMT",
       "version": "2.3.0",
       "tag": "@microsoft/webpack-stats-report_v2.3.0",

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add 16 chars variant to the hashRegex",
-  "packageName": "@microsoft/webpack-stats-differ",
-  "email": "mathieu@p01.org",
-  "dependentChangeType": "patch"
-}
