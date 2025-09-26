@@ -5,4 +5,4 @@ export const matchesPattern = (
   input: string
 ) => (filter ? isMatch(input, filter) : true);
 
-export const hashRegex = /^.*[\/]|([_.][a-z0-9]{20})(?:\b)/g;
+export const hashRegex = /^.*[\/]|([_.][a-z0-9]{20}|[_.][a-z0-9]{16})(?:\b)/g;
