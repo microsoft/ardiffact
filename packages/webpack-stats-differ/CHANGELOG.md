@@ -1,8 +1,16 @@
 # Change Log - @microsoft/webpack-stats-differ
 
-This log was last generated on Fri, 26 Sep 2025 16:50:57 GMT and should not be manually modified.
+This log was last generated on Mon, 29 Sep 2025 20:28:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 2.3.2
+
+Mon, 29 Sep 2025 20:28:41 GMT
+
+### Patches
+
+- Set numOfWorkers to use all available CPUs (mathieu@p01.org)
 
 ## 2.3.1
 

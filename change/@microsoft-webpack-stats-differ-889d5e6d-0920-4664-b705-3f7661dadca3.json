@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Set numOfWorkers to use all available CPUs",
-  "packageName": "@microsoft/webpack-stats-differ",
-  "email": "mathieu@p01.org",
-  "dependentChangeType": "patch"
-}

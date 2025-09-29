@@ -2,6 +2,21 @@
   "name": "@microsoft/webpack-stats-differ",
   "entries": [
     {
+      "date": "Mon, 29 Sep 2025 20:28:41 GMT",
+      "version": "2.3.2",
+      "tag": "@microsoft/webpack-stats-differ_v2.3.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "mathieu@p01.org",
+            "package": "@microsoft/webpack-stats-differ",
+            "commit": "828513362f27f483f9a112160737647c3879b290",
+            "comment": "Set numOfWorkers to use all available CPUs"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 26 Sep 2025 16:50:57 GMT",
       "version": "2.3.1",
       "tag": "@microsoft/webpack-stats-differ_v2.3.1",
