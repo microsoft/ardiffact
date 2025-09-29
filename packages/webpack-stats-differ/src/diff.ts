@@ -94,7 +94,7 @@ const generateDiffs = async (
 ): Promise<FileDiffResults> => {
   let results: GenerateDiffAsyncResult[] = [];
   const numOfCpus = os.cpus().length;
-  const numOfWorkers = useWorkers ? Math.ceil(numOfCpus * 0.75) : 1;
+  const numOfWorkers = useWorkers ? Math.ceil(numOfCpus * 1.0) : 1;
   const start = Date.now();
   console.log(
     `Started diffing for ${filePairs.length} bundle pairs using ${numOfWorkers} workers`
