@@ -23,7 +23,7 @@
     "@microsoft/azure-artifact-storage": "*",
     "@mixer/webpack-bundle-compare": "^0.1.0",
     "globby": "^11.0.2",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "matcher": "^3.0.0",
     "multimatch": "^5.0.0",
     "stream-chain": "^2.2.5",
