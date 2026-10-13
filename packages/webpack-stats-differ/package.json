@@ -27,7 +27,7 @@
     "matcher": "^3.0.0",
     "multimatch": "^5.0.0",
     "stream-chain": "^2.2.5",
-    "stream-json": "^1.7.5"
+    "stream-json": "^3.6.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.12.1",
